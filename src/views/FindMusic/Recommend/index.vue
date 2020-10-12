@@ -1,5 +1,7 @@
 <template>
-  <div class="content">推荐页</div>
+  <div class="content">
+    推荐页 <svg-icon icon-class="产品" class-name="card-panel-icon" />
+  </div>
 </template>
 
 

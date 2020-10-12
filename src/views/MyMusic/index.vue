@@ -7,10 +7,7 @@
       <el-container>
         <el-aside width="130px"><elaside /></el-aside>
         <el-main
-          ><div class="header">
-            <elmain />
-          </div>
-          <div class="main">
+          ><div class="main">
             <transition name="fade-transform" mode="out-in">
               <router-view></router-view>
             </transition></div
@@ -22,11 +19,11 @@
 </template>
 
 <script>
-import elheader from "./header";
-import elmain from "./main";
-import elfooter from "./footer";
+import elheader from "../Home/header";
+import elmain from "../Home/main";
+import elfooter from "../Home/footer";
 
-import elaside from "./aside";
+import elaside from "../Home/aside";
 
 export default {
   name: "Home",
