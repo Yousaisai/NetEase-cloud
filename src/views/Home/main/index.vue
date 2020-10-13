@@ -10,7 +10,7 @@
     <el-menu-item index="Leaderboard">排行榜</el-menu-item>
     <el-menu-item index="SongList">歌单</el-menu-item>
     <el-menu-item index="RadioAnchor">主播电台</el-menu-item>
-    <el-menu-item index="singer">歌手</el-menu-item>
+    <el-menu-item index="Singer">歌手</el-menu-item>
     <el-menu-item index="AddedNewAlbum">新碟上架</el-menu-item>
   </el-menu>
 </template>

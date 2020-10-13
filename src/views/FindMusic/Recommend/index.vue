@@ -1,6 +1,17 @@
 <template>
   <div class="content">
-    推荐页 <svg-icon icon-class="产品" class-name="card-panel-icon" />
+    <div class="content_carousel">
+      <el-carousel>
+        <el-carousel-item
+          v-for="(item, index) in bannerImgs"
+          :key="index"
+          :style="bannerStyle(item)"
+        >
+          <img :src="item.imageUrl" />
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <div class="content_song"><play-list></play-list></div>
   </div>
 </template>
 
@@ -9,14 +20,48 @@
 
 
 <script>
+import { banner } from "@/api/index";
+import playList from "./playList";
 export default {
-  data() {
-    return {};
+  components: {
+    playList,
   },
-  methods: {},
+  data() {
+    return {
+      //轮播图
+      bannerImgs: [],
+    };
+  },
+  computed: {},
+  mounted() {
+    this.requireBanner();
+  },
+  methods: {
+    bannerStyle(val) {
+      return {
+        "background-image": `url(${val.imageUrl + "?imageView&blur=40x20"})`,
+        "background-size": "6000px",
+        "background-position": "center center",
+      };
+    },
+    async requireBanner() {
+      var res = await banner();
+      this.bannerImgs = res.banners;
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 .content {
+  text-align: center;
+  .el-carousel {
+  }
+  .content_song {
+    margin: 0 auto;
+    text-align: center;
+    background-color: #ffffff;
+    width: 74%;
+    height: 100%;
+  }
 }
 </style>

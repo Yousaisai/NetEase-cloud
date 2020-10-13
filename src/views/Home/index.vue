@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <el-container>
-      <el-header style="height: 80px">
+      <el-header style="height: 60px">
         <elheader />
       </el-header>
       <el-container>
@@ -16,7 +16,7 @@
             </transition></div
         ></el-main>
       </el-container>
-      <el-footer style="height: 40px"><elfooter /></el-footer>
+      <el-footer style="height: 60px"><elfooter /></el-footer>
     </el-container>
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
     color: #333;
   }
   .el-footer {
-    // background-color: #9B0909;
+    background-color: #2d2c2c;
     color: #333;
   }
   .el-aside {
@@ -53,16 +53,20 @@ export default {
   }
 
   .el-main {
-    background-color: #e9eef3;
+    background-color: #f5f5f5;
     color: #333;
     padding: 0px;
     height: calc(100vh - 120px);
     display: flex;
+    z-index: 2;
     flex-direction: column;
     .header {
       display: flex;
       background-color: #fff;
       justify-content: center;
+      z-index: 10;
+      position: sticky;
+      top: 0;
     }
   }
 }
