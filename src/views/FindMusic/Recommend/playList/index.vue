@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <!-- 热门推荐开始 -->
     <div class="content_sort">
       <el-row type="flex">
         <el-col :span="24"
@@ -7,7 +8,7 @@
           <span style="font-size: 25px; padding-right: 5px"> 热门推荐</span>
           <span>华语</span>| <span>流行</span>| <span>摇滚</span>|
           <span>民谣</span>| <span>电子</span>
-          <span style="float: right; font-size: 12px"
+          <span class="more" style="float: right; font-size: 12px"
             >更多 <svg-icon icon-class="前进" /></span
         ></el-col>
       </el-row>
@@ -17,30 +18,35 @@
 
     <div class="content_item">
       <div class="item_img" v-for="(item, index) in playlists" :key="index">
-        <div class="image">
-          <img :src="item.coverImgUrl" :alt="item.name" />
-          <div class="imglove">
-            <div class="playcount">
-              <svg-icon icon-class="收听量" style="padding-right: 5px" />{{
-                item.playCount > 100000
-                  ? parseInt(item.playCount / 10000) + "W"
-                  : item.playCount
-              }}<svg-icon icon-class="播放" style="float: right" />
-            </div>
-            <div class="player"></div>
-          </div>
-        </div>
+        <router-link :to="{ name: 'Playlist', query: { id: item.id } }">
+          <div class="image">
+            <img :src="item.coverImgUrl" :alt="item.name" />
+            <div class="imglove">
+              <div class="playcount">
+                <svg-icon icon-class="收听量" style="padding-right: 5px" />{{
+                  item.playCount > 100000
+                    ? parseInt(item.playCount / 10000) + "W"
+                    : item.playCount
+                }}<svg-icon icon-class="播放" style="float: right" />
+              </div>
+              <div class="player"></div>
+            </div></div
+        ></router-link>
+
         <div class="titledetail">
           <span>{{ item.name }}</span>
         </div>
       </div>
     </div>
+    <!-- 热门推荐结束 -->
+
+    <!-- 新碟上架开始 -->
     <div class="content_sort">
       <el-row type="flex">
         <el-col :span="24"
           ><svg-icon style="font-size: 20px" icon-class="碟片" />
           <span style="font-size: 25px; padding-right: 5px">新碟上架</span>
-          <span style="float: right; font-size: 12px"
+          <span class="more" style="float: right; font-size: 12px"
             >更多 <svg-icon icon-class="前进"
           /></span>
         </el-col>
@@ -56,12 +62,15 @@
         })"
         :key="index"
       >
-        <div class="image">
-          <img :src="item.picUrl" :alt="item.name" />
-          <div class="imglove">
-            <svg-icon icon-class="播放" style="float: right" />
-          </div>
-        </div>
+        <!-- <router-link :to="{ name: 'Playlist', query: { id: item.id } }"> -->
+          <div class="image">
+            <img :src="item.picUrl" :alt="item.name" />
+            <div class="imglove">
+              <svg-icon icon-class="播放" style="float: right" />
+            </div></div
+        >
+        <!-- </router-link> -->
+
         <div class="titledetail">
           <span>{{ item.name }}</span
           ><br />
@@ -70,12 +79,15 @@
       </div>
       <svg-icon class="icon" icon-class="右" @click="albums(1)" />
     </div>
+    <!-- 新碟上架结束 -->
+
+    <!-- 榜单开始 -->
     <div class="content_sort">
       <el-row type="flex">
         <el-col :span="24"
           ><svg-icon style="font-size: 20px" icon-class="碟片" />
           <span style="font-size: 25px; padding-right: 5px">榜单</span>
-          <span style="float: right; font-size: 12px"
+          <span class="more" style="float: right; font-size: 12px"
             >更多 <svg-icon icon-class="前进"
           /></span>
         </el-col>
@@ -83,108 +95,62 @@
     </div>
     <el-divider></el-divider>
     <div class="toplist" v-if="topList.length != 0">
-      <div class="topone">
+      <div class="topone" v-for="(item, TopItem) in 4" :key="TopItem">
         <div class="img">
           <el-image
-            :src="topList[0].coverImgUrl"
+            :src="topList[TopItem].coverImgUrl"
             style="width: 100px; height: 100px; float: left"
             fit="fill"
             :lazy="true"
           ></el-image>
-          <br />
-          <span class="span">{{ topList[0].name }}</span>
-        </div>
-        <div class="rank">
-          <ul class="list">
-            <li
-              :key="index"
-              v-for="(item, index) in topListDetail[0]"
-              v-show="index < 10"
-              :class="index % 2 == 0 ? 'cor1' : 'cor2'"
-            >
-              <span :class="index < 3 ? 'active' : null">{{ index + 1 }}</span>
-              <span>{{ item.name }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="topone">
-        <div class="img">
-          <el-image
-            :src="topList[1].coverImgUrl"
-            style="width: 100px; height: 100px; float: left"
-            fit="fill"
-            :lazy="true"
-          ></el-image>
-          <br />
-          <span class="span">{{ topList[1].name }}</span>
-        </div>
-        <div class="rank">
-          <ul class="list">
-            <li
-              :key="index"
-              v-for="(item, index) in topListDetail[1]"
-              v-show="index < 10"
-              :class="index % 2 == 0 ? 'cor1' : 'cor2'"
-            >
-              <span :class="index < 3 ? 'active' : null">{{ index + 1 }}</span>
-              <span>{{ item.name }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="topone">
-        <div class="img">
-          <el-image
-            :src="topList[2].coverImgUrl"
-            style="width: 100px; height: 100px; float: left"
-            fit="fill"
-            :lazy="true"
-          ></el-image>
-          <br />
-          <span class="span">{{ topList[2].name }}</span>
-        </div>
-        <div class="rank">
-          <ul class="list">
-            <li
-              :key="index"
-              v-for="(item, index) in topListDetail[2]"
-              v-show="index < 10"
-              :class="index % 2 == 0 ? 'cor1' : 'cor2'"
-            >
-              <span :class="index < 3 ? 'active' : null">{{ index + 1 }}</span>
-              <span>{{ item.name }}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="topone">
-        <div class="img">
-          <el-image
-            :src="topList[3].coverImgUrl"
-            style="width: 100px; height: 100px; float: left"
-            fit="fill"
-            :lazy="true"
-          ></el-image>
-          <br />
-          <span class="span">{{ topList[3].name }}</span>
-        </div>
+          <div class="imgtitle">
+            <div class="span">
+              <span>{{ topList[TopItem].name }}</span>
+            </div>
+            <div class="svg">
+              <span>
+                <svg-icon style="padding:0 10px" icon-class="收听量" />{{
+                   topList[TopItem].playCount>10000?parseInt (topList[TopItem].playCount/10000)+"万":"topList[TopItem].playCount"
+                }}</span
+              >
+            </div>
+          </div>
 
+          <br />
+        </div>
         <div class="rank">
           <ul class="list">
             <li
               :key="index"
-              v-for="(item, index) in topListDetail[3]"
+              v-for="(item, index) in topListDetail[TopItem]"
               v-show="index < 10"
               :class="index % 2 == 0 ? 'cor1' : 'cor2'"
             >
-              <span :class="index < 3 ? 'active' : null">{{ index + 1 }}</span>
-              <span>{{ item.name }}</span>
+              <div class="spanhide">
+                <span :class="index < 3 ? 'active' : null">{{
+                  index + 1
+                }}</span>
+                <span>{{ item.name }}</span>
+              </div>
+
+              <div class="svghide">
+                <svg-icon style="padding: 0 5px" icon-class="播放 (6)" />
+                <svg-icon style="padding: 0 5px" icon-class="加好 2-01" />
+                <svg-icon style="padding: 0 5px" icon-class="心 爱心 (2)" />
+                <svg-icon style="padding: 0 5px" icon-class="下载 (1)" />
+              </div>
             </li>
+            <span
+              class="more"
+              style="font-size: 12px; padding: 10px; float: right"
+            >
+              更多 <svg-icon icon-class="前进" />
+            </span>
           </ul>
         </div>
       </div>
     </div>
+    <!-- 榜单结束 -->
   </div>
 </template>
 
@@ -213,14 +179,7 @@ export default {
       topList: [],
       //   榜单
       topListDetail: {},
-      //   //榜单1
-      //   topListOne: [],
-      //   //榜单2
-      //   topListTwo: [],
-      //   //榜单3
-      //   topListThree: [],
-      //   //榜单4
-      //   topListFour: [],
+
       payloadNewAlbums: {
         limit: 5,
       },
@@ -264,23 +223,27 @@ export default {
     async getTopList() {
       var res = await topList();
       this.topList = res.list;
+      console.log(res.list);
       this.getPlayListDetail();
     },
     async getPlayListDetail() {
       if (this.topList.length != 0) {
         for (let index = 0; index < 4; index++) {
-          var res = await playlistDetail(this.topList[index].id);
+          var res = await playlistDetail({ id: this.topList[index].id });
           //   this.topListDetail[index] = res.playlist.tracks;
           this.$set(this.topListDetail, index, res.playlist.tracks);
         }
       }
-      console.log(this.topListDetail);
     },
   },
 };
 </script>
 <style lang="scss" scoped>
 .content {
+  .more:hover {
+    font-weight: bold;
+    cursor: pointer;
+  }
   padding: 15px;
   .content_sort {
     display: flex;
@@ -416,8 +379,6 @@ export default {
     .topone {
       background-color: #f4f4f4;
       flex: 1;
-      //   padding: 15px;
-      //   margin: 1px;
       border: 2px solid #f5f5f5;
       .span {
         font-weight: bold;
@@ -425,6 +386,26 @@ export default {
       .img {
         height: 100px;
         padding: 10px;
+
+        .imgtitle {
+          display: flex;
+          flex-direction: column;
+          // position: relative;
+            //  align-items: end;
+             justify-content: space-between;
+  align-items: center;
+          .span {
+          }
+          .svg {
+            align-items: end;
+            // position: absolute;
+            // top: 4em;
+            // left: 2em;
+            font-size: 12px;
+            padding: 50px 10px;
+          }
+        }
+        // flex-direction: column;
       }
       .rank {
         padding: 0px 0px 0px;
@@ -437,12 +418,18 @@ export default {
           li {
             padding: 5px;
             width: 15vw;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+            display: flex;
+            .spanhide {
+              // width: 15vw;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+            .svghide {
+              display: none;
+            }
             span {
               color: #666;
-
               font-size: 12px;
               line-height: 22px;
 
@@ -472,14 +459,23 @@ export default {
           background-color: #e8e8e8;
         }
         li:hover {
-          background-color: #FCFCFC;
+          .svghide {
+            display: flex;
+          }
+          .spanhide {
+            width: 15vw;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          background-color: #fcfcfc;
           span {
             color: #666;
-            font-size: 15px;
+            font-size: 12px;
             line-height: 22px;
             &:first-child {
               background-color: #f5f5f5;
-              border-radius: 20px;
+              // border-radius: 20px;
               display: inline-block;
               font-size: 15px;
               font-weight: 600;

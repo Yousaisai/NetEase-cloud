@@ -54,7 +54,17 @@ export function playlistDetail(payload) {
         url: "/playlist/detail",
         method: 'get',
         params: {
-            "id":payload
+            ...payload
         }
     })
+}
+
+
+//毫秒边分钟
+export function millisToMinutesAndSeconds(millis) {
+    
+   var hours=Math.floor(millis / (60000*60))
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return (hours >0 ? minutes : '') +(minutes < 10 ? '0'+minutes : minutes) + ":" + (seconds < 10 ? '0' : '') + seconds;
 }

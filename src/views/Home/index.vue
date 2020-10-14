@@ -16,7 +16,7 @@
             </transition></div
         ></el-main>
       </el-container>
-      <el-footer style="height: 60px"><elfooter /></el-footer>
+      <el-footer style="height: 50px"><elfooter /></el-footer>
     </el-container>
   </div>
 </template>
@@ -49,14 +49,14 @@ export default {
     background-color: #ffffff;
     color: #333;
 
-    height: calc(100vh - 120px);
+    height: calc(100vh - 110px);
   }
 
   .el-main {
     background-color: #f5f5f5;
     color: #333;
     padding: 0px;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 110px);
     display: flex;
     z-index: 2;
     flex-direction: column;
@@ -64,7 +64,7 @@ export default {
       display: flex;
       background-color: #fff;
       justify-content: center;
-      z-index: 10;
+      z-index: 100;
       position: sticky;
       top: 0;
     }

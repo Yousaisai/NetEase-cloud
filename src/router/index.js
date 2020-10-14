@@ -11,43 +11,56 @@ const routes = [{
   meta: {
     title: '推荐'
   },
-  children: [{
-    path: '/Recommend',
-    component: () => import('../views/FindMusic/Recommend/index.vue'),
-    meta: {
-      title: '推荐'
+  children: [
+    /*导航栏开始 */
+    {
+      path: '/Recommend',
+      component: () => import('../views/FindMusic/Recommend/index.vue'),
+      meta: {
+        title: '推荐'
+      },
+    }, {
+      path: '/Leaderboard',
+      component: () => import('../views/FindMusic/Leaderboard/index.vue'),
+      meta: {
+        title: '排行榜'
+      },
+    }, {
+      path: '/SongList',
+      component: () => import('../views/FindMusic/SongList/index.vue'),
+      meta: {
+        title: '歌单'
+      },
+    }, {
+      path: '/RadioAnchor',
+      component: () => import('../views/FindMusic/RadioAnchor/index.vue'),
+      meta: {
+        title: '主播电台'
+      },
+    }, {
+      path: '/Singer',
+      component: () => import('../views/FindMusic/singer/index.vue'),
+      meta: {
+        title: '歌手'
+      },
+    }, {
+      path: '/AddedNewAlbum',
+      component: () => import('../views/FindMusic/AddedNewAlbum/index.vue'),
+      meta: {
+        title: '新碟上架'
+      },
     },
-  }, {
-    path: '/Leaderboard',
-    component: () => import('../views/FindMusic/Leaderboard/index.vue'),
-    meta: {
-      title: '排行榜'
+    /*导航栏结束 */
+    /*其他路由，存在导航栏 */
+    {
+      path: '/PlayList',
+      name: 'Playlist',
+      component: () => import('../views/PlayListDetail/index.vue'),
+      meta: {
+        title: '歌单'
+      },
     },
-  }, {
-    path: '/SongList',
-    component: () => import('../views/FindMusic/SongList/index.vue'),
-    meta: {
-      title: '歌单'
-    },
-  }, {
-    path: '/RadioAnchor',
-    component: () => import('../views/FindMusic/RadioAnchor/index.vue'),
-    meta: {
-      title: '主播电台'
-    },
-  }, {
-    path: '/Singer',
-    component: () => import('../views/FindMusic/singer/index.vue'),
-    meta: {
-      title: '歌手'
-    },
-  }, {
-    path: '/AddedNewAlbum',
-    component: () => import('../views/FindMusic/AddedNewAlbum/index.vue'),
-    meta: {
-      title: '新碟上架'
-    },
-  }, ]
+  ]
 }, {
   path: '/',
   name: 'Mymuisc',
