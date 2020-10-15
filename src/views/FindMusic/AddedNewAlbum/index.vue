@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 新碟上架导航栏
+ * @Author: Mr.You
+ * @Date: 2020-10-12 16:06:59
+ * @LastEditTime: 2020-10-15 09:09:45
+-->
+
+
 <template>
   <div class="content">
     新碟上架

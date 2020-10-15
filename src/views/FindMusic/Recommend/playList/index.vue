@@ -1,3 +1,9 @@
+<!--
+ * @Descripttion: 推荐详情
+ * @Author: Mr.You
+ * @Date: 2020-10-13 09:53:41
+ * @LastEditTime: 2020-10-15 15:51:44
+-->
 <template>
   <div class="content">
     <!-- 热门推荐开始 -->
@@ -6,8 +12,19 @@
         <el-col :span="24"
           ><svg-icon style="font-size: 20px" icon-class="碟片" />
           <span style="font-size: 25px; padding-right: 5px"> 热门推荐</span>
-          <span>华语</span>| <span>流行</span>| <span>摇滚</span>|
-          <span>民谣</span>| <span>电子</span>
+          <span
+            v-for="(item, index) in ['华语', '流行', '摇滚', '民谣', '电子']"
+            :key="index"
+          >
+            <router-link
+              style="text-decoration: none"
+              :to="{ path: '/SongList', query: { cat: item } }"
+            >
+              <span class="more" style="color:#666;font-size: 13px"
+                >{{ item }}
+              </span> </router-link
+            ><span style="padding: 0 0 0 5px">|</span>
+          </span>
           <span class="more" style="float: right; font-size: 12px"
             >更多 <svg-icon icon-class="前进" /></span
         ></el-col>
@@ -62,14 +79,14 @@
         })"
         :key="index"
       >
-        <!-- <router-link :to="{ name: 'Playlist', query: { id: item.id } }"> -->
+        <router-link :to="{ name: 'Newalbum', query: { id: item.id } }">
           <div class="image">
             <img :src="item.picUrl" :alt="item.name" />
             <div class="imglove">
               <svg-icon icon-class="播放" style="float: right" />
-            </div></div
-        >
-        <!-- </router-link> -->
+            </div>
+          </div>
+        </router-link>
 
         <div class="titledetail">
           <span>{{ item.name }}</span
@@ -109,8 +126,10 @@
             </div>
             <div class="svg">
               <span>
-                <svg-icon style="padding:0 10px" icon-class="收听量" />{{
-                   topList[TopItem].playCount>10000?parseInt (topList[TopItem].playCount/10000)+"万":"topList[TopItem].playCount"
+                <svg-icon style="padding: 0 10px" icon-class="收听量" />{{
+                  topList[TopItem].playCount > 10000
+                    ? parseInt(topList[TopItem].playCount / 10000) + "万"
+                    : "topList[TopItem].playCount"
                 }}</span
               >
             </div>
@@ -140,12 +159,15 @@
                 <svg-icon style="padding: 0 5px" icon-class="下载 (1)" />
               </div>
             </li>
-            <span
-              class="more"
-              style="font-size: 12px; padding: 10px; float: right"
+            <router-link
+              :to="{ path: '/Leaderboard', query: { id: topList[TopItem].id } }"
             >
-              更多 <svg-icon icon-class="前进" />
-            </span>
+              <span
+                class="more"
+                style="font-size: 12px; padding: 10px; float: right"
+              >
+                更多 <svg-icon icon-class="前进" /> </span
+            ></router-link>
           </ul>
         </div>
       </div>
@@ -223,7 +245,6 @@ export default {
     async getTopList() {
       var res = await topList();
       this.topList = res.list;
-      console.log(res.list);
       this.getPlayListDetail();
     },
     async getPlayListDetail() {
@@ -391,9 +412,9 @@ export default {
           display: flex;
           flex-direction: column;
           // position: relative;
-            //  align-items: end;
-             justify-content: space-between;
-  align-items: center;
+          //  align-items: end;
+          justify-content: space-between;
+          align-items: center;
           .span {
           }
           .svg {

@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 左侧导航栏
+ * @Author: Mr.You
+ * @Date: 2020-10-12 19:38:36
+ * @LastEditTime: 2020-10-15 13:57:26
+-->
+
 <template>
   <el-menu
     :default-active="activeMenu"
@@ -27,13 +34,18 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      initMenu:["/Recommend","/MyCreateList","/MyLoveList"]
+    };
   },
   computed: {
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
-      return path;
+      if (this.initMenu.includes(path)) {
+         return path;
+      }
+     return "/Recommend"
     },
   },
   methods: {

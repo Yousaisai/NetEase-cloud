@@ -40,11 +40,41 @@ export function newAlbum(payload) {
     })
 }
 
+//新碟详情
+export function newAlbumDetail(payload) {
+    return request({
+        url: "/album",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
 //所有榜单的摘要主要就是方便查看歌单ID
 export function topList(payload) {
     return request({
         url: "/toplist/detail",
         method: 'get',
+    })
+}
+
+//歌单分类
+export function playListCat(payload) {
+    return request({
+        url: "/playlist/catlist",
+        method: 'get',
+    })
+}
+
+//传参选择歌单类型
+export function playListCats(payload) {
+    return request({
+        url: "/top/playlist",
+        method: 'get',
+        params: {
+            ...payload
+        }
     })
 }
 

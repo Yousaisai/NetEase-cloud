@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 全局引入
+ * @Author: Mr.You
+ * @Date: 2020-10-12 14:47:41
+ * @LastEditTime: 2020-10-15 15:34:49
+ */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -17,7 +23,7 @@ Vue.config.productionTip = false
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */
   if (to.meta.title) {
-    document.title ="Mr.You " +to.meta.title
+    document.title =to.meta.title + " - Mr.You "
   }
   next()
 })

@@ -1,3 +1,9 @@
+<!--
+ * @Descripttion: 
+ * @Author: Mr.You
+ * @Date: 2020-10-12 14:47:41
+ * @LastEditTime: 2020-10-15 10:30:24
+-->
 <template>
   <div class="home">
     <el-container>
@@ -25,7 +31,6 @@
 import elheader from "./header";
 import elmain from "./main";
 import elfooter from "./footer";
-
 import elaside from "./aside";
 
 export default {
@@ -60,6 +65,11 @@ export default {
     display: flex;
     z-index: 2;
     flex-direction: column;
+    .main{
+      // width: 1080px;
+      // margin: 0 auto;
+ 
+    }
     .header {
       display: flex;
       background-color: #fff;

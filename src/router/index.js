@@ -39,7 +39,7 @@ const routes = [{
       },
     }, {
       path: '/Singer',
-      component: () => import('../views/FindMusic/singer/index.vue'),
+      component: () => import('../views/FindMusic/Singer/index.vue'),
       meta: {
         title: '歌手'
       },
@@ -57,7 +57,14 @@ const routes = [{
       name: 'Playlist',
       component: () => import('../views/PlayListDetail/index.vue'),
       meta: {
-        title: '歌单'
+        title: '歌单详情'
+      },
+    },   {
+      path: '/NewAlbum',
+      name: 'Newalbum',
+      component: () => import('../views/NewAlbum/index.vue'),
+      meta: {
+        title: '新碟详情'
       },
     },
   ]

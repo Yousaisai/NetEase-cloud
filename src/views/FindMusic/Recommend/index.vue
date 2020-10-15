@@ -1,3 +1,9 @@
+<!--
+ * @Descripttion: 推荐详情
+ * @Author: Mr.You
+ * @Date: 2020-10-12 16:07:07
+ * @LastEditTime: 2020-10-15 10:29:52
+-->
 <template>
   <div class="content">
     <div class="content_carousel">
@@ -60,7 +66,7 @@ export default {
     margin: 0 auto;
     text-align: center;
     background-color: #ffffff;
-    width: 74%;
+    width: 1080px;
     height: 100%;
   }
 }

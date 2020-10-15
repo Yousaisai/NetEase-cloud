@@ -1,3 +1,9 @@
+<!--
+ * @Descripttion: 我的音乐左侧导航栏
+ * @Author: Mr.You
+ * @Date: 2020-10-12 20:31:35
+ * @LastEditTime: 2020-10-15 09:15:54
+-->
 <template>
   <div class="home">
     <el-container>
