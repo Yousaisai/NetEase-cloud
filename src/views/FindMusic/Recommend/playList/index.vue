@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-10-15 21:56:24
+ * @LastEditTime: 2020-10-16 20:35:58
 -->
 <template>
   <div class="content">
@@ -154,7 +154,7 @@
 
               <div class="svghide">
                 <svg-icon
-                  @click="PlaySong(item,topListDetail[TopItem])"
+                  @click="PlaySong(item,topListDetail[TopItem],index)"
                   style="padding: 0 5px"
                   icon-class="播放 (6)"
                 />
@@ -255,18 +255,18 @@ export default {
       if (this.topList.length != 0) {
         for (let index = 0; index < 4; index++) {
           var res = await playlistDetail({ id: this.topList[index].id });
-          //   this.topListDetail[index] = res.playlist.tracks;
           this.$set(this.topListDetail, index, res.playlist.tracks);
         }
       }
     },
-    PlaySong(song,allsong) {
-      console.log(song,allsong);
+    PlaySong(song,allsong,index) {
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: allsong,
+        indexSong:index
       });
     },
+    
   },
 };
 </script>

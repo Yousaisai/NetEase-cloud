@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-15 21:55:19
+ * @LastEditTime: 2020-10-16 20:31:23
 -->
 
 <template>
@@ -33,7 +33,11 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       :loop="false"
     ></audio>
     <div class="btn">
-      <span> <svg-icon style="font-size: 1.5em" icon-class="上一首" /></span
+      <span>
+        <svg-icon
+          @click="SwitchSongs('last')"
+          style="font-size: 1.5em"
+          icon-class="上一首" /></span
       ><span>
         <svg-icon
           v-if="showStart"
@@ -45,7 +49,12 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
           @click="start"
           style="font-size: 2.5em"
           icon-class="开始 (1)" /></span
-      ><span> <svg-icon style="font-size: 1.5em" icon-class="下一首" /></span>
+      ><span>
+        <svg-icon
+          @click="SwitchSongs('next')"
+          style="font-size: 1.5em"
+          icon-class="下一首"
+      /></span>
     </div>
     <div class="pic">
       <svg-icon v-if="!cover" style="font-size: 2.5em" icon-class="网易云" />
@@ -57,20 +66,36 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       ></el-image>
     </div>
     <div class="border">
-      <div class="title">{{ name }}</div>
+      <div class="title">
+        <span v-if="lyric.length == 0">正在搜索歌词</span>
+        <span else>{{ lyricText }}</span>
+      </div>
       <div class="slider">
-        <el-slider
-          :max="time"
-          @change="editTime"
-          :show-tooltip="false"
-          v-model="SongTime"
-        ></el-slider>
+        <div class="songer">
+          <span>歌曲：{{ name }}</span>
+          <span>歌手：{{ onesong.ar[0].name }}</span>
+          <router-link
+          style="  text-decoration: none"
+            :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
+          >
+            <span>专辑：{{ album }}</span></router-link
+          >
+        </div>
+        <div class="slider_detail">
+          <el-slider
+            :max="time"
+            @change="editTime"
+            :show-tooltip="false"
+            v-model="SongTime"
+          ></el-slider>
+        </div>
       </div>
     </div>
     <div class="time">
       {{ milltosecond(SongTime) }}/{{ milltosecond(time) }}
     </div>
     <div class="other">
+      <div class="love"><svg-icon icon-class="心 爱心 (3)" /></div>
       <div class="volume">
         <div
           :style="{ visibility: showVol == false ? 'hidden' : 'visible' }"
@@ -80,7 +105,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
             v-model="volume"
             :show-tooltip="false"
             vertical
-            height="100px"
+            height="80px"
             @change="editVol"
           >
           </el-slider>
@@ -94,12 +119,12 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 </template>
 
 <script>
-import { millisToMinutesAndSeconds } from "@/api/index";
+import { millisToMinutesAndSeconds, SongLyric } from "@/api/index";
 
 export default {
   data() {
     return {
-      SongTime: 0,
+      SongTime: 1,
       volume: 50, //声音
       showVol: false,
       showStart: false,
@@ -109,21 +134,31 @@ export default {
       time: 100, //音乐时间，传入的数字是毫秒级
       album: "", //音乐专辑
       playing: false, //音频是否在播放
+      onesong: {}, //一首歌的详情
+      lyric: [], //歌词
+      currentLyric: 0, //当前歌词行数
+      lyricText: "", //当前歌词
     };
   },
   computed: {
     songDetail() {
+      console.log(this.$store.state.SongDetail); //这里还没那带数据
       if (this.$store.state.SongDetail.time != 0) {
         this.showStart = true;
-        return this.$store.state.SongDetail;
       }
+      return JSON.parse(localStorage.getItem("SongDetail"));
     },
   },
   watch: {
-    songDetail() {
-      for (const key in this.songDetail) {
-        this[key] = this.songDetail[key];
-      }
+    songDetail: {
+      //如果想打开就有缓存就要立即监听
+      handler() {
+        for (const key in this.songDetail) {
+          this[key] = this.songDetail[key];
+        }
+      },
+      deep: true,
+      immediate: true,
     },
   },
   methods: {
@@ -136,7 +171,6 @@ export default {
       this.showStart = !this.showStart;
       this.playing = true;
       this.$refs.audio.pause();
-      console.log(this.$refs.audio.currentTime);
     },
     //播放
     start() {
@@ -147,7 +181,6 @@ export default {
     // 快进，快退
     editTime(val) {
       this.$refs.audio.currentTime = val / 1000;
-      console.log(this.SongTime / 1000);
     },
     //调节声音
     editVol(val) {
@@ -155,12 +188,56 @@ export default {
     },
     // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
     onTimeupdate(res) {
+      //同步歌词
+      if (this.currentLyric == this.lyric.length) {
+        return;
+      }
+      if (this.lyric[this.currentLyric][0] < this.SongTime) {
+        this.currentLyric++;
+        this.lyricText = this.lyric[this.currentLyric - 1][1];
+      }
       this.SongTime = this.$refs.audio.currentTime * 1000;
+      //由于数据是毫秒级别监听不到，所以只需要监听到秒数相等就播放下一首
+      if (parseInt(this.time / 1000) == parseInt(this.SongTime / 1000)) {
+        this.SwitchSongs("next");
+      }
     },
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
-    onLoadedmetadata(res) {
-      // console.log(res);
+    async onLoadedmetadata(res) {
+      if (this.onesong.id) {
+        this.getLyric(this.onesong.id);
+        this.lyric = [];
+      }
+    },
+    //切换歌曲
+    SwitchSongs(val) {
+      this.$store.dispatch("SwitchSong", val);
+    },
+    async getLyric(id) {
+      //获取歌词
+      this.currentLyric = 0;
+      var res = await SongLyric(id);
+      res = res.lrc.lyric.split("\n");
+      var lyric = {};
+      let pattern = /\[\d{2}:\d{2}.\d{2,3}\]/g;
+      res.map((val, index) => {
+        var val = val.replace(/\s*/, "");
+        var time = val.replace(pattern, "");
+        var lyr = val.match(pattern);
+        if (lyr == null) {
+          lyr = ["[00:00.000]"];
+        }
+        lyric[index] = [...lyr, time];
+      });
+      for (const key in lyric) {
+        let ly = lyric[key][0];
+        const m = parseInt(ly.slice(1, 3));
+        const s = parseInt(ly.slice(4, 6));
+        const ms = parseInt(ly.slice(7, 10));
+        lyric[key][0] = m * 60 * 1000 + s * 1000 + ms;
+      }
+      this.lyric = lyric;
     },
   },
 };
@@ -186,18 +263,15 @@ export default {
       color: #b7b4b4;
     }
   }
-
   .pic {
     flex: 1;
     display: flex;
     align-items: center;
   }
-
   .border {
     display: flex;
     flex: 15;
     align-items: center;
-    // flex-direction: column;
     margin: auto 0px;
 
     .title {
@@ -205,11 +279,38 @@ export default {
       color: #939090;
       font-size: 12px;
       font-weight: blod;
+      //下面控制最多两行
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     .slider {
       flex: 6;
       width: 100%;
       margin: 0 0 0 10px;
+      position: relative;
+      .songer {
+        position: absolute;
+        color: #939090;
+        font-size: 12px;
+        font-weight: blod;
+        top: -5px;
+        padding-top: 10px;
+      
+         span {
+          padding-right: 20px;
+          color: #939090;
+        }
+        span:hover{
+          color: #b7b4b4;
+        }
+      }
+      .slider_detail {
+        padding-top: 10px;
+        width: 100%;
+      }
     }
     /deep/ .el-slider__bar {
       height: 6px;
@@ -237,16 +338,27 @@ export default {
     font-size: 13px;
   }
   .other {
-    flex: 3;
+    flex: 1;
     color: #fff;
     margin: auto 10px;
+    display: flex;
     position: relative;
+    .love {
+      flex: 1;
+      text-align: left;
+      color: #666666;
+      transform: scale(1.4);
+    }
+    .love:hover {
+      color: #b7b4b4;
+    }
     .volume {
+      flex: 1;
       position: absolute;
-      top: -125px;
+      top: -95px;
+      left: 20px;
       z-index: 1000000;
     }
-
     .svg {
       cursor: pointer;
       padding: 10px;
@@ -258,7 +370,6 @@ export default {
     }
     .slider {
       width: 40px;
-
       background-color: #2d2c2c;
       opacity: 0.8;
       border-top-left-radius: 5px;
@@ -267,15 +378,14 @@ export default {
     /deep/ .el-slider__bar {
       height: 6px;
       background-color: #666 !important;
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px;
     }
     /deep/.el-slider__button {
-      width: 16px;
-      height: 16px;
-      border: 2px solid #666;
+      width: 12px;
+      height: 1px;
+      visibility: hidden;
+      border: 1px solid #666;
       background-color: #fff;
-      border-radius: 50%;
+      // border-radius: 50%;
       transition: 0.2s;
       -webkit-user-select: none;
       -moz-user-select: none;

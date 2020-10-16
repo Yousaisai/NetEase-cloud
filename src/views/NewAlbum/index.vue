@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-15 10:35:56
+ * @LastEditTime: 2020-10-16 10:15:07
 -->
 
 <template>
@@ -138,7 +138,7 @@
         <el-table-column label="时长" align="right" min-width="150">
           <template slot-scope="scope">
             <div v-if="scope.row.play">
-              <span style="padding: 10px">
+              <span  @click="PlaySong(scope.row,scope.$index)" style="padding: 10px">
                 <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
               </span>
               <span style="padding: 10px">
@@ -224,6 +224,12 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
+    },    PlaySong(song,  index) {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: song,
+        allSong: this.playListsong,
+        indexSong: index,
+      });
     },
   },
 };

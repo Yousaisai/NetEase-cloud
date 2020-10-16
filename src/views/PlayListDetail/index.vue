@@ -2,7 +2,7 @@
  * @Descripttion: 热门推荐歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-13 18:39:42
- * @LastEditTime: 2020-10-15 17:08:42
+ * @LastEditTime: 2020-10-16 20:37:07
 -->
 <template>
   <div class="content">
@@ -35,7 +35,7 @@
         </div>
         <div class="btn">
           <div class="btn_item">
-            <el-button type="primary" size="mini" plain
+            <el-button type="primary" size="mini" @click="playAll" plain
               ><svg-icon icon-class="播放 (3)" /> 全部播放</el-button
             >
           </div>
@@ -109,7 +109,6 @@
         @cell-mouse-leave="cellleave"
         style="width: 100%"
       >
-        <!-- <el-table-column type="index" :index="indexMethod"> </el-table-column> -->
         <el-table-column label="序号" align="center" min-width="80">
           <template slot-scope="scope">
             <div v-if="scope.$index == 0">
@@ -122,7 +121,7 @@
               <svg-icon style="font-size: 35px" icon-class="铜牌" />
             </div>
             <div v-else>
-              <span> {{ scope.$index+1 }}</span>
+              <span> {{ scope.$index + 1 }}</span>
             </div>
           </template>
         </el-table-column>
@@ -150,7 +149,10 @@
         <el-table-column label="时长" align="right" min-width="150">
           <template slot-scope="scope">
             <div v-if="scope.row.play">
-              <span style="padding: 10px">
+              <span
+                @click="PlaySong(scope.row, scope.$index)"
+                style="padding: 10px"
+              >
                 <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
               </span>
               <span style="padding: 10px">
@@ -173,7 +175,6 @@
           </template>
         </el-table-column>
       </el-table>
-     
     </div>
   </div>
 </template>
@@ -230,6 +231,20 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
+    },
+    PlaySong(song, index) {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: song,
+        allSong: this.playListsong,
+        indexSong: index,
+      });
+    },
+    playAll() {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: this.playListsong[0],
+        allSong: this.playListsong,
+        indexSong: 0,
+      });
     },
   },
 };

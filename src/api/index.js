@@ -109,3 +109,14 @@ export function PlayOneSong(payload) {
         }
     })
 }
+
+//获取歌词，需要音乐 
+export function SongLyric(payload) {
+    return request({
+        url: "/lyric",
+        method: 'get',
+        params: {
+            id:payload
+        }
+    })
+}

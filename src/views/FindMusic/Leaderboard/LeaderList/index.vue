@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-15 21:52:20
+ * @LastEditTime: 2020-10-16 20:35:05
 -->
 <template>
   <div class="content">
@@ -35,7 +35,7 @@
         </div>
         <div class="btn">
           <div class="btn_item">
-            <el-button type="primary" size="mini" plain
+            <el-button type="primary" size="mini" plain @click="playAll"
               ><svg-icon icon-class="播放 (3)" /> 全部播放</el-button
             >
           </div>
@@ -124,7 +124,10 @@
           <el-table-column label="时长" align="right" min-width="80">
             <template slot-scope="scope">
               <div v-if="scope.row.play">
-                <span style="padding: 10px" @click="PlaySong(scope.row)">
+                <span
+                  style="padding: 10px"
+                  @click="PlaySong(scope.row, scope.$index)"
+                >
                   <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
                 </span>
                 <span style="padding: 10px">
@@ -204,11 +207,19 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val;
     },
-    PlaySong(song) {
-      console.log(song);
+    PlaySong(song, index) {
+      console.log(song, index);
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.playListsong,
+        indexSong: index,
+      });
+    },
+    playAll() {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: this.playListsong[0],
+        allSong: this.playListsong,
+        indexSong: 0,
       });
     },
   },

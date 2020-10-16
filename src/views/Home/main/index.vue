@@ -1,3 +1,9 @@
+<!--
+ * @Descripttion: 
+ * @Author: Mr.You
+ * @Date: 2020-10-12 19:39:00
+ * @LastEditTime: 2020-10-16 20:39:44
+-->
 <template>
   <el-menu
     :default-active="initMenu"
@@ -8,7 +14,7 @@
     <el-menu-item index="/Recommend">推荐</el-menu-item>
     <el-menu-item index="/Leaderboard">排行榜</el-menu-item>
     <el-menu-item index="/SongList">歌单</el-menu-item>
-    <el-menu-item index="/RadioAnchor">主播电台</el-menu-item>
+    <!-- <el-menu-item index="/RadioAnchor">主播电台</el-menu-item> -->
     <el-menu-item index="/Singer">歌手</el-menu-item>
     <el-menu-item index="/AddedNewAlbum">新碟上架</el-menu-item>
   </el-menu>
