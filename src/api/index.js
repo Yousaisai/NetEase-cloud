@@ -90,11 +90,22 @@ export function playlistDetail(payload) {
 }
 
 
-//毫秒边分钟
+//毫秒变分钟
 export function millisToMinutesAndSeconds(millis) {
     
    var hours=Math.floor(millis / (60000*60))
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
     return (hours >0 ? minutes : '') +(minutes < 10 ? '0'+minutes : minutes) + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+//获取音乐详情，获取连接，播放音乐
+export function PlayOneSong(payload) {
+    return request({
+        url: "/song/url",
+        method: 'get',
+        params: {
+            id:payload
+        }
+    })
 }

@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-10-15 15:51:44
+ * @LastEditTime: 2020-10-15 21:56:24
 -->
 <template>
   <div class="content">
@@ -20,7 +20,7 @@
               style="text-decoration: none"
               :to="{ path: '/SongList', query: { cat: item } }"
             >
-              <span class="more" style="color:#666;font-size: 13px"
+              <span class="more" style="color: #666; font-size: 13px"
                 >{{ item }}
               </span> </router-link
             ><span style="padding: 0 0 0 5px">|</span>
@@ -153,7 +153,11 @@
               </div>
 
               <div class="svghide">
-                <svg-icon style="padding: 0 5px" icon-class="播放 (6)" />
+                <svg-icon
+                  @click="PlaySong(item,topListDetail[TopItem])"
+                  style="padding: 0 5px"
+                  icon-class="播放 (6)"
+                />
                 <svg-icon style="padding: 0 5px" icon-class="加好 2-01" />
                 <svg-icon style="padding: 0 5px" icon-class="心 爱心 (2)" />
                 <svg-icon style="padding: 0 5px" icon-class="下载 (1)" />
@@ -255,6 +259,13 @@ export default {
           this.$set(this.topListDetail, index, res.playlist.tracks);
         }
       }
+    },
+    PlaySong(song,allsong) {
+      console.log(song,allsong);
+      this.$store.dispatch("PlaySongs", {
+        oneSong: song,
+        allSong: allsong,
+      });
     },
   },
 };
@@ -448,6 +459,7 @@ export default {
             }
             .svghide {
               display: none;
+              cursor: pointer;
             }
             span {
               color: #666;

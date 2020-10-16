@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-15 15:02:49
+ * @LastEditTime: 2020-10-15 21:52:20
 -->
 <template>
   <div class="content">
@@ -124,7 +124,7 @@
           <el-table-column label="时长" align="right" min-width="80">
             <template slot-scope="scope">
               <div v-if="scope.row.play">
-                <span style="padding: 10px">
+                <span style="padding: 10px" @click="PlaySong(scope.row)">
                   <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
                 </span>
                 <span style="padding: 10px">
@@ -186,7 +186,6 @@ export default {
       var res = await playlistDetail({ id: val });
       this.playListDetails = res.playlist;
       this.playListsong = res.playlist.tracks;
-   
     },
 
     cellenter(row, column, cell, event) {
@@ -204,6 +203,13 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
+    },
+    PlaySong(song) {
+      console.log(song);
+      this.$store.dispatch("PlaySongs", {
+        oneSong: song,
+        allSong: this.playListsong,
+      });
     },
   },
   props: ["id"],
@@ -249,6 +255,7 @@ export default {
         }
       }
       .btn {
+        cursor: pointer;
         display: flex;
         align-items: center;
         .btn_item {
