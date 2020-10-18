@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-16 20:31:23
+ * @LastEditTime: 2020-10-18 13:35:58
 -->
 
 <template>
@@ -75,7 +75,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
           <span>歌曲：{{ name }}</span>
           <span>歌手：{{ onesong.ar[0].name }}</span>
           <router-link
-          style="  text-decoration: none"
+            style="text-decoration: none"
             :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
           >
             <span>专辑：{{ album }}</span></router-link
@@ -137,12 +137,12 @@ export default {
       onesong: {}, //一首歌的详情
       lyric: [], //歌词
       currentLyric: 0, //当前歌词行数
-      lyricText: "", //当前歌词
+      lyricText: "音乐歌词", //当前歌词
     };
   },
   computed: {
     songDetail() {
-      console.log(this.$store.state.SongDetail); //这里还没那带数据
+      //这里还没那带数据
       if (this.$store.state.SongDetail.time != 0) {
         this.showStart = true;
       }
@@ -192,13 +192,18 @@ export default {
       if (this.currentLyric == this.lyric.length) {
         return;
       }
+
       if (this.lyric[this.currentLyric][0] < this.SongTime) {
         this.currentLyric++;
         this.lyricText = this.lyric[this.currentLyric - 1][1];
       }
-      this.SongTime = this.$refs.audio.currentTime * 1000;
+
+      if (this.$refs.audio.currentTime) {
+        this.SongTime = this.$refs.audio.currentTime * 1000;
+      }
+
       //由于数据是毫秒级别监听不到，所以只需要监听到秒数相等就播放下一首
-      if (parseInt(this.time / 1000) == parseInt(this.SongTime / 1000)) {
+      if (parseInt(this.time / 1000) <= parseInt(this.SongTime / 1000)) {
         this.SwitchSongs("next");
       }
     },
@@ -218,6 +223,15 @@ export default {
       //获取歌词
       this.currentLyric = 0;
       var res = await SongLyric(id);
+      if (res.nolyric) {
+        this.$message({
+          message: "抱歉，暂无歌词!",
+          type: "warning",
+        });
+        this.lyricText = "";
+        return;
+      }
+
       res = res.lrc.lyric.split("\n");
       var lyric = {};
       let pattern = /\[\d{2}:\d{2}.\d{2,3}\]/g;
@@ -298,12 +312,12 @@ export default {
         font-weight: blod;
         top: -5px;
         padding-top: 10px;
-      
-         span {
+
+        span {
           padding-right: 20px;
           color: #939090;
         }
-        span:hover{
+        span:hover {
           color: #b7b4b4;
         }
       }

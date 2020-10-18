@@ -99,6 +99,17 @@ export function millisToMinutesAndSeconds(millis) {
     return (hours >0 ? minutes : '') +(minutes < 10 ? '0'+minutes : minutes) + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
+//查看音乐是否可用
+export function AuthSongId(payload) {
+    return request({
+        url: "/check/music",
+        method: 'get',
+        params: {
+            id:payload
+        }
+    })
+}
+
 //获取音乐详情，获取连接，播放音乐
 export function PlayOneSong(payload) {
     return request({
@@ -117,6 +128,26 @@ export function SongLyric(payload) {
         method: 'get',
         params: {
             id:payload
+        }
+    })
+}
+
+//歌手排行榜首页
+export function SingerLeader(payload) {
+    return request({
+        url: "/toplist/artist",
+        method: 'get',
+      
+    })
+}
+
+//歌手分类
+export function CatSingers(payload) {
+    return request({
+        url: "/artist/list",
+        method: 'get',
+        params: {
+            ...payload
         }
     })
 }

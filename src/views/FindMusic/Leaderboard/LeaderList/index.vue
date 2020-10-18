@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-16 20:35:05
+ * @LastEditTime: 2020-10-18 14:46:18
 -->
 <template>
   <div class="content">
@@ -89,6 +89,7 @@
       <el-divider></el-divider>
       <div class="item_table">
         <el-table
+
           stripe
           :data="
             playListsong.slice(
@@ -99,7 +100,7 @@
           @cell-mouse-enter="cellenter"
           @cell-mouse-leave="cellleave"
         >
-          <el-table-column label="序号" align="center" min-width="20">
+          <el-table-column label="序号" align="center" min-width="30">
             <template slot-scope="scope">
               <div v-if="scope.$index == 0">
                 <svg-icon style="font-size: 35px" icon-class="金牌" />
@@ -208,7 +209,6 @@ export default {
       this.currentPage = val;
     },
     PlaySong(song, index) {
-      console.log(song, index);
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.playListsong,

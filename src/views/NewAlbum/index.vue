@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-16 10:15:07
+ * @LastEditTime: 2020-10-18 14:36:07
 -->
 
 <template>
@@ -24,7 +24,7 @@
 
         <div class="btn">
           <div class="btn_item">
-            <el-button type="primary" size="mini" plain
+            <el-button type="primary" size="mini" plain @click="playAll"
               ><svg-icon icon-class="播放 (3)" /> 全部播放</el-button
             >
           </div>
@@ -80,88 +80,7 @@
         <span style="font-size: 20px; font-weight: bold">歌曲列表</span>
       </div>
       <el-divider></el-divider>
-      <div class="item_table"></div>
-      <el-table
-        stripe
-        :data="
-          playListsong.slice(
-            (currentPage - 1) * pageSize,
-            currentPage * pageSize
-          )
-        "
-        @cell-mouse-enter="cellenter"
-        @cell-mouse-leave="cellleave"
-        style="width: 100%"
-      >
-        <!-- <el-table-column type="index" :index="indexMethod"> </el-table-column> -->
-        <el-table-column label="序号" align="center" min-width="80">
-          <template slot-scope="scope">
-            <div v-if="scope.$index+ (currentPage - 1) * pageSize == 0">
-              <svg-icon style="font-size: 35px" icon-class="金牌" />
-            </div>
-            <div v-else-if="scope.$index+ (currentPage - 1) * pageSize == 1">
-              <svg-icon style="font-size: 35px" icon-class="银牌" />
-            </div>
-            <div v-else-if="scope.$index+ (currentPage - 1) * pageSize == 2">
-              <svg-icon style="font-size: 35px" icon-class="铜牌" />
-            </div>
-            <div v-else>
-              <span>
-                {{ scope.$index + (currentPage - 1) * pageSize + 1 }}</span
-              >
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          show-overflow-tooltip
-          label="歌曲标题"
-          min-width="180"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="ar[0].name"
-          show-overflow-tooltip
-          label="歌手"
-          min-width="180"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="al.name"
-          show-overflow-tooltip
-          label="专辑"
-          min-width="180"
-        >
-        </el-table-column>
-        <!-- <el-table-column prop="dt" label="时长" min-width="150">
-        </el-table-column> -->
-        <el-table-column label="时长" align="right" min-width="150">
-          <template slot-scope="scope">
-            <div v-if="scope.row.play">
-              <span  @click="PlaySong(scope.row,scope.$index)" style="padding: 10px">
-                <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
-              </span>
-              <span style="padding: 10px">
-                <svg-icon style="font-size: 16px" icon-class="加好 2-01" />
-              </span>
-              <span style="padding: 10px">
-                <svg-icon
-                  style="font-size: 16px; color: #909399"
-                  icon-class="心 爱心 (2)"
-                />
-              </span>
-
-              <span style="padding: 10px">
-                <svg-icon style="font-size: 16px" icon-class="下载 (1)" />
-              </span>
-            </div>
-            <div v-if="!scope.row.play">
-              {{ milltosecond(scope.row.dt) }}
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-    
+      <div class="item_table"><eltable :Songs="playListsong" /></div>
     </div>
   </div>
 </template>
@@ -176,8 +95,9 @@ import {
   millisToMinutesAndSeconds,
   newAlbumDetail,
 } from "@/api/index";
+import eltable from "@/components/Talble";
 export default {
-  components: {},
+  components: { eltable },
   data() {
     return {
       play: false,
@@ -185,50 +105,28 @@ export default {
       albumDetails: [],
       //歌单曲目
       playListsong: [],
-      currentPage: 1,
-      pageSize: 10,
+  
     };
   },
-  computed: {
-    total() {
-      return this.playListsong.length;
-    },
-  },
+  computed: {},
 
   mounted() {
-    
     this.getPlaylistDetail();
   },
   methods: {
     async getPlaylistDetail() {
       const id = this.$route.query;
       var res = await newAlbumDetail({ ...id, limit: 30 });
+      console.log(res);
       this.albumDetails = res.album;
+      console.log(res);
       this.playListsong = res.songs;
     },
-    indexMethod(index) {
-      return index * 2;
-    },
-    cellenter(row, column, cell, event) {
-      this.$set(row, "play", true);
-    },
-
-    cellleave(row, column, cell, event) {
-      this.$set(row, "play", false);
-    },
-    milltosecond(val) {
-      return millisToMinutesAndSeconds(val);
-    },
-    handleSizeChange(val) {
-      this.pageSize = val;
-    },
-    handleCurrentChange(val) {
-      this.currentPage = val;
-    },    PlaySong(song,  index) {
+        playAll() {
       this.$store.dispatch("PlaySongs", {
-        oneSong: song,
+        oneSong: this.playListsong[0],
         allSong: this.playListsong,
-        indexSong: index,
+        indexSong: 0,
       });
     },
   },
@@ -238,7 +136,7 @@ export default {
 .content {
   margin: 0 auto;
   background-color: #ffffff;
-  width:1080px;
+  width: 1080px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -275,6 +173,7 @@ export default {
       .btn {
         display: flex;
         align-items: center;
+        margin: 20px 0 0 0;
         .btn_item {
           padding: 0 20px 0 0;
         }
@@ -297,10 +196,11 @@ export default {
   }
 
   .content_list_item {
+    margin: 10px 50px;
     span {
       cursor: pointer;
     }
-    margin: 10px 50px;
+
     .item_title {
       margin: 10px 0 0 0;
       text-align: left;

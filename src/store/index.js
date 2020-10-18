@@ -2,16 +2,20 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-16 20:02:22
+ * @LastEditTime: 2020-10-18 13:10:19
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import {
-  PlayOneSong
+  PlayOneSong,
+  AuthSongId
 } from '@/api/index'
 
+import {
+  Message
+} from 'element-ui'
 
 
 export default new Vuex.Store({
@@ -25,7 +29,7 @@ export default new Vuex.Store({
       cover: "",
       time: 0,
       album: "",
-      onesong:"",//单个歌曲的详细数据，包括专辑等
+      onesong: "", //单个歌曲的详细数据，包括专辑等
     },
     //传入的整个歌单用于切换歌曲下首，还有全部播放
     AllSongs: [],
@@ -53,6 +57,7 @@ export default new Vuex.Store({
     //获取播放歌曲的相关信息
     async PlaySongs({
       commit,
+      dispatch,
       state
     }, payload) {
       /*调用方式
@@ -67,20 +72,23 @@ export default new Vuex.Store({
       commit('ST_AllSongs', allSong)
       commit('ST_PlaySong', oneSong)
       commit('ST_IndexSong', indexSong)
-      var songs = await PlayOneSong(state.PlaySong.id)
-      var commSong = {
-        url: songs.data[0].url,
-        name: oneSong.name,
-        cover: oneSong.al.picUrl,
-        time: oneSong.dt,
-        album: oneSong.name,
-        onesong:oneSong
+      //首先判断音乐是否可用
+      var auth = await AuthSongId(state.PlaySong.id)
+      auth = auth.message
+      if (auth == "ok") {
+        dispatch("AuthSongId", state.PlaySong)
+      } else {
+        Message({
+          message: auth,
+          type: 'warning'
+        })
+        return
       }
-      commit('ST_SongDetail', commSong)
     },
     async SwitchSong({
       commit,
-      state
+      state,
+      dispatch
     }, payload) {
       var nextSong = {}
       if (state.AllSongs.length == 0) {
@@ -92,7 +100,7 @@ export default new Vuex.Store({
         }
         state.IndexSong = state.IndexSong + 1
         nextSong = state.AllSongs[state.IndexSong]
-    
+
       } else {
         //到顶层就会推到最后
         if (state.IndexSong == 0) {
@@ -100,18 +108,37 @@ export default new Vuex.Store({
         }
         state.IndexSong = state.IndexSong - 1
         nextSong = state.AllSongs[state.IndexSong]
-        console.log(nextSong);
       }
-      var songs = await PlayOneSong(nextSong.id)
+      //首先判断音乐是否可用
+      var auth = await AuthSongId(nextSong.id)
+      auth = auth.message
+      if (auth == "ok") {
+        dispatch("AuthSongId", nextSong)
+      } else {
+        Message({
+          message: auth,
+          type: 'warning'
+        })
+        return
+      }
+    },
+    //授权的音乐播放
+    async AuthSongId({
+      commit,
+      state
+    }, payload) {
+
+      var songs = await PlayOneSong(payload.id)
       var commSong = {
         url: songs.data[0].url,
-        name: nextSong.name,
-        cover: nextSong.al.picUrl,
-        time: nextSong.dt,
-        album: nextSong.al.name,
-        onesong:nextSong
+        name: payload.name,
+        cover: payload.al.picUrl,
+        time: payload.dt,
+        album: payload.al.name,
+        onesong: payload
       }
       commit('ST_SongDetail', commSong)
+
     }
   },
   modules: {}

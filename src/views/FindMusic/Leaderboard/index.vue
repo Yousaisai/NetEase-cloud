@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-10-15 14:57:16
+ * @LastEditTime: 2020-10-18 14:41:21
 -->
 <template>
   <div class="content1">
@@ -46,14 +46,6 @@ export default {
       NewId: "",
     };
   },
-  // mounted() {
-  //   var ID = this.$route.query.id;
-  //   if (ID) {
-  //     console.log(ID);
-  //     this.getPlaylistDetail(ID);
-  //   }
-  //   console.log(this.$route);
-  // },
   computed: {
     initId() {
       if (this.NewId == "") {
@@ -96,6 +88,7 @@ export default {
   width: 70vw;
   margin: 0 auto;
   padding: 0 10px 0 0;
+
   background-color: #fff;
   display: flex;
   .content_menu {
