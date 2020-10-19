@@ -59,13 +59,48 @@ const routes = [{
       meta: {
         title: '歌单详情'
       },
-    },   {
+    }, {
       path: '/NewAlbum',
       name: 'Newalbum',
       component: () => import('../views/NewAlbum/index.vue'),
       meta: {
         title: '新碟详情'
       },
+    },
+    {
+      path: '/SingerDetail',
+      name: 'Singerdetail',
+      component: () => import('../views/SingerDetail/index.vue'),
+      meta: {
+        title: '歌手详情'
+      },
+
+      children: [{
+        path: '/SingerDetail/Music',
+        component: () => import('../views/SingerDetail/Music/index.vue'),
+        meta: {
+          title: '歌曲'
+        },
+      }, {
+        path: '/SingerDetail/Album',
+        component: () => import('../views/SingerDetail/Album/index.vue'),
+        meta: {
+          title: '专辑'
+        },
+      }, {
+        path: '/SingerDetail/Mv',
+        component: () => import('../views/SingerDetail/Mv/index.vue'),
+        meta: {
+          title: 'MV'
+        },
+      }, {
+        path: '/SingerDetail/Desc',
+        component: () => import('../views/SingerDetail/Desc/index.vue'),
+        meta: {
+          title: '简介'
+        },
+      }, ]
+
     },
   ]
 }, {

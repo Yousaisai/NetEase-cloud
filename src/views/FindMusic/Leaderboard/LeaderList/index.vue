@@ -2,13 +2,13 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-18 14:46:18
+ * @LastEditTime: 2020-10-18 16:06:25
 -->
 <template>
   <div class="content">
     <div class="content_detail">
       <div class="detail_pic">
-        <el-image :src="playListDetails.coverImgUrl" :lazy="true"></el-image>
+        <el-image  style="border-radius: 50%" :src="playListDetails.coverImgUrl" :lazy="true"></el-image>
       </div>
       <div class="detail_item" v-if="playListDetails.length != 0">
         <div class="title">
@@ -239,6 +239,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: left;
+    align-items: center;
     .detail_pic {
       margin: 25px 10px;
       // border: 1px solid #f5f5f5;

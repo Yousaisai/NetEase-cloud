@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-10-18 14:41:21
+ * @LastEditTime: 2020-10-18 16:08:02
 -->
 <template>
   <div class="content1">

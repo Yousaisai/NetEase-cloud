@@ -1,8 +1,8 @@
 <!--
- * @Descripttion: 新碟上架详情
+ * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-18 14:25:17
+ * @LastEditTime: 2020-10-18 16:02:01
 -->
 
 <template>
@@ -20,7 +20,6 @@
         @cell-mouse-leave="cellleave"
         style="width: 100%"
       >
-        <!-- <el-table-column type="index" :index="indexMethod"> </el-table-column> -->
         <el-table-column label="序号" align="center" min-width="80">
           <template slot-scope="scope">
             <div v-if="scope.$index+ (currentPage - 1) * pageSize == 0">
@@ -60,8 +59,6 @@
           min-width="180"
         >
         </el-table-column>
-        <!-- <el-table-column prop="dt" label="时长" min-width="150">
-        </el-table-column> -->
         <el-table-column label="时长" align="right" min-width="150">
           <template slot-scope="scope">
             <div v-if="scope.row.play">
@@ -77,7 +74,6 @@
                   icon-class="心 爱心 (2)"
                 />
               </span>
-
               <span style="padding: 10px">
                 <svg-icon style="font-size: 16px" icon-class="下载 (1)" />
               </span>
@@ -171,78 +167,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.content {
-  margin: 0 auto;
-  background-color: #ffffff;
-  width:1080px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  .content_detail {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    .detail_pic {
-      margin: 25px 10px;
-      //   border: 1px solid #f5f5f5;
-      padding: 5px;
-      flex: 1;
-    }
-
-    .detail_item {
-      border-radius: 2px;
-      display: flex;
-      flex-direction: column;
-      margin: 25px;
-      text-align: left;
-      flex: 4;
-      .title {
-      }
-      .nickname {
-        margin: 20px 0;
-        display: flex;
-        align-items: center;
-        .img {
-        }
-        .span {
-          padding-left: 10px;
-        }
-      }
-      .btn {
-        display: flex;
-        align-items: center;
-        .btn_item {
-          padding: 0 20px 0 0;
-        }
-      }
-      .label {
-        font-size: 13px;
-        margin: 30px 0 0 0;
-        display: flex;
-        flex-direction: column;
-      }
-      .desc {
-        margin: 20px 0 0 0;
-        font-size: 13px;
-        width: 35vw;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
-        // overflow: hidden;
-      }
-    }
-  }
-
-  .content_list_item {
-    span {
-      cursor: pointer;
-    }
-    margin: 10px 50px;
-    .item_title {
-      margin: 10px 0 0 0;
-      text-align: left;
-    }
-    .item_table {
-    }
-  }
+span{
+  cursor: pointer;
 }
 </style>

@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-18 13:35:58
+ * @LastEditTime: 2020-10-19 11:12:42
 -->
 
 <template>
@@ -72,8 +72,25 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       </div>
       <div class="slider">
         <div class="songer">
-          <span>歌曲：{{ name }}</span>
-          <span>歌手：{{ onesong.ar[0].name }}</span>
+          <!-- <router-link
+            style="text-decoration: none"
+            :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
+          > -->
+          <span
+            ><span>歌曲：{{ name }}</span></span
+          >
+          <!-- </router-link > -->
+          <!-- {{onesong}} -->
+          <router-link
+            style="text-decoration: none"
+            :to="{
+              path: '/SingerDetail/Music',
+              query: { id: onesong.ar[0].id },
+            }"
+          >
+            <span>歌手：{{ onesong.ar[0].name }}</span>
+            </router-link
+          >
           <router-link
             style="text-decoration: none"
             :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
@@ -156,6 +173,7 @@ export default {
         for (const key in this.songDetail) {
           this[key] = this.songDetail[key];
         }
+        console.log(this.onesong);
       },
       deep: true,
       immediate: true,

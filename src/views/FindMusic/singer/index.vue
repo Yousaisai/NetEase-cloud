@@ -2,7 +2,7 @@
  * @Descripttion: 歌手导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:08
- * @LastEditTime: 2020-10-18 12:24:28
+ * @LastEditTime: 2020-10-18 16:28:10
 -->
 <template>
   <div class="content">
@@ -41,13 +41,17 @@
         <div class="singer" v-for="(item, index) in singers" :key="index">
           <div class="img10" v-if="index < 10">
             <div class="img">
-              <el-image
-                @click="getOneSinger(item)"
-                style="border-radius: 50%"
-                :src="item.picUrl + '?param=150y150'"
-                fit="fill"
-                :lazy="true"
-              ></el-image>
+              <router-link
+                :to="{ path: '/SingerDetail/Music', query: { id: item.id } }"
+              >
+                <el-image
+                  @click="getOneSinger(item)"
+                  style="border-radius: 50%"
+                  :src="item.picUrl + '?param=150y150'"
+                  fit="fill"
+                  :lazy="true"
+                ></el-image
+              ></router-link>
             </div>
             <div class="detail">
               <div class="title">{{ item.name }}</div>
@@ -56,13 +60,17 @@
           </div>
           <div class="img11" v-if="index >= 10">
             <div class="img">
-              <el-image
-                @click="getOneSinger(item)"
-                style="border-radius: 50%"
-                :src="item.picUrl + '?param=35y35'"
-                fit="fill"
-                :lazy="true"
-              ></el-image>
+              <router-link
+                :to="{ path: '/SingerDetail/Music', query: { id: item.id } }"
+              >
+                <el-image
+                  @click="getOneSinger(item)"
+                  style="border-radius: 50%"
+                  :src="item.picUrl + '?param=35y35'"
+                  fit="fill"
+                  :lazy="true"
+                ></el-image
+              ></router-link>
             </div>
             <div class="detail">
               <div class="title">{{ item.name }}</div>
@@ -233,9 +241,9 @@ export default {
       // transform: scale(1.2);
     }
     .active {
-      background-color: #B21212;
+      background-color: #b21212;
       color: #fff;
-      border-radius: 14px;;
+      border-radius: 14px;
     }
     span:active {
       // color: yellow;
@@ -270,7 +278,6 @@ export default {
           transform: scale(1.15);
           cursor: pointer;
         }
-
         width: 17%;
         .img10 {
           color: #b7b4b4;

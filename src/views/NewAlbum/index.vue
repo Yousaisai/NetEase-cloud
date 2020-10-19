@@ -2,14 +2,14 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-18 14:36:07
+ * @LastEditTime: 2020-10-18 16:05:36
 -->
 
 <template>
   <div class="content">
     <div class="content_detail">
       <div class="detail_pic">
-        <el-image :src="albumDetails.picUrl" :lazy="true"></el-image>
+        <el-image  style="border-radius: 50%" :src="albumDetails.picUrl" :lazy="true"></el-image>
       </div>
       <div class="detail_item" v-if="albumDetails.length != 0">
         <div class="title">
@@ -105,7 +105,6 @@ export default {
       albumDetails: [],
       //歌单曲目
       playListsong: [],
-  
     };
   },
   computed: {},
@@ -122,7 +121,7 @@ export default {
       console.log(res);
       this.playListsong = res.songs;
     },
-        playAll() {
+    playAll() {
       this.$store.dispatch("PlaySongs", {
         oneSong: this.playListsong[0],
         allSong: this.playListsong,
@@ -140,7 +139,9 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  
   .content_detail {
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -188,9 +189,7 @@ export default {
         margin: 20px 0 0 0;
         font-size: 13px;
         width: 35vw;
-        // text-overflow: ellipsis;
-        // white-space: nowrap;
-        // overflow: hidden;
+     
       }
     }
   }

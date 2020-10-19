@@ -29,7 +29,7 @@ export function resource(payload) {
     })
 }
 
-//新碟上架 
+//新碟上架 首页
 export function newAlbum(payload) {
     return request({
         url: "/album/newest",
@@ -39,6 +39,18 @@ export function newAlbum(payload) {
         }
     })
 }
+
+//新碟上架 
+export function newTopAlbum(payload) {
+    return request({
+        url: "/top/album",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
 
 //新碟详情
 export function newAlbumDetail(payload) {
@@ -145,6 +157,53 @@ export function SingerLeader(payload) {
 export function CatSingers(payload) {
     return request({
         url: "/artist/list",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+//获取歌手单曲  说明 : 调用此接口 , 传入歌手 id, 可获得歌手部分信息和热门歌曲
+
+export function SingersOne(payload) {
+    return request({
+        url: "/artists",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+
+//获取歌手的MV
+export function SingersAlbum(payload) {
+    return request({
+        url: "/artist/album",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+//获取歌手的MV
+export function SingersMv(payload) {
+    return request({
+        url: "/artist",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+
+//获取歌手描述
+export function SingersDesc(payload) {
+    return request({
+        url: "/artist/desc",
         method: 'get',
         params: {
             ...payload
