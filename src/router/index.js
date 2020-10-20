@@ -99,9 +99,15 @@ const routes = [{
         meta: {
           title: '简介'
         },
-      }, ]
+      },]
 
-    },
+    },{
+      path: '/PlayDetail',
+      component: () => import('../views/PlayDetail/index.vue'),
+      meta: {
+        title: '音乐详情'
+      },
+    }, 
   ]
 }, {
   path: '/',

@@ -104,11 +104,11 @@ export function playlistDetail(payload) {
 
 //毫秒变分钟
 export function millisToMinutesAndSeconds(millis) {
-    
-   var hours=Math.floor(millis / (60000*60))
+
+    var hours = Math.floor(millis / (60000 * 60))
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return (hours >0 ? minutes : '') +(minutes < 10 ? '0'+minutes : minutes) + ":" + (seconds < 10 ? '0' : '') + seconds;
+    return (hours > 0 ? minutes : '') + (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' : '') + seconds;
 }
 
 //查看音乐是否可用
@@ -117,7 +117,18 @@ export function AuthSongId(payload) {
         url: "/check/music",
         method: 'get',
         params: {
-            id:payload
+            id: payload
+        }
+    })
+}
+
+//获取歌曲详情  说明 : 调用此接口 , 传入音乐 id(支持多个 id, 用 , 隔开), 可获得歌曲详情(注意:歌曲封面现在需要通过专辑内容接口获取)
+export function SongDetail(payload) {
+    return request({
+        url: "/song/detail",
+        method: 'get',
+        params: {
+            ids: payload
         }
     })
 }
@@ -128,7 +139,7 @@ export function PlayOneSong(payload) {
         url: "/song/url",
         method: 'get',
         params: {
-            id:payload
+            id: payload
         }
     })
 }
@@ -139,7 +150,7 @@ export function SongLyric(payload) {
         url: "/lyric",
         method: 'get',
         params: {
-            id:payload
+            id: payload
         }
     })
 }
@@ -149,7 +160,7 @@ export function SingerLeader(payload) {
     return request({
         url: "/toplist/artist",
         method: 'get',
-      
+
     })
 }
 
@@ -204,6 +215,48 @@ export function SingersMv(payload) {
 export function SingersDesc(payload) {
     return request({
         url: "/artist/desc",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+//搜索建议，就是搜索的时候，下面弹出的列表/search/suggest?keywords= 海阔天空 /search/suggest?keywords= 海阔天空&type=mobile
+
+export function SearchSug(payload) {
+    return request({
+        url: "/search/suggest",
+        method: 'get',
+        params: {
+            "keywords": payload
+        }
+    })
+}
+
+
+//默认搜索关键词
+export function DefSearch(payload) {
+    return request({
+        url: "/search/default",
+        method: 'get',
+    })
+}
+//热搜列表（简单）
+export function HotSearch(payload) {
+    return request({
+        url: "/search/hot",
+        method: 'get',
+    })
+}
+
+
+
+
+
+//说明 : 调用此接口 , 传入搜索关键词可以搜索该音乐 / 专辑 / 歌手 / 歌单 / 用户 , 关键词可以多个 , 以空格隔开 , 如 " 周杰伦 搁浅 "( 不需要登录 ), 搜索获取的 mp3url 不能直接用 , 可通过 /song/url 接口传入歌曲 id 获取具体的播放链接
+export function Search(payload) {
+    return request({
+        url: "/search",
         method: 'get',
         params: {
             ...payload
