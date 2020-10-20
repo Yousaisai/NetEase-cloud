@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-20 10:28:17
+ * @LastEditTime: 2020-10-20 17:03:33
 -->
 <template>
   <div class="content">
@@ -36,47 +36,83 @@
           </div>
           <div class="searchall" v-show="search.trim() != ''">
             <div class="singer" v-if="allSearch.artists">
-              <div class="seatitle">歌手</div>
+              <div class="seatitle">
+                <svg-icon style="font-size: 1.2em" icon-class="歌手" /> 歌手
+              </div>
               <div class="item">
-                <li v-for="item in allSearch.artists" :key="item.id">
-                  <span
-                    v-html="item.name.replace(search.trim(), searchtext)"
-                  ></span>
-                </li>
+                <router-link
+                  v-for="item in allSearch.artists"
+                  :key="item.id"
+                  style="text-decoration: none; color: #666"
+                  :to="{
+                    path: '/SingerDetail/Music',
+                    query: { id: item.id },
+                  }"
+                >
+                  <li>
+                    <span
+                      v-html="item.name.replace(search.trim(), searchtext)"
+                    ></span>
+                  </li>
+                </router-link>
               </div>
             </div>
             <div class="album" v-if="allSearch.albums">
-              <div class="seatitle">专辑</div>
+              <div class="seatitle"><svg-icon icon-class="专辑" /> 专辑</div>
               <div class="item">
-                <li v-for="item in allSearch.albums" :key="item.id">
-                  <span
-                    v-html="item.name.replace(search.trim(), searchtext)"
-                  ></span>
-                  - {{ item.artist.name }}
-                </li>
+                <router-link
+                
+                  v-for="item in allSearch.albums"
+                  :key="item.id"
+                  style="text-decoration: none; color: #666"
+                  :to="{ path: '/NewAlbum', query: { id: item.id } }"
+                >
+                  <li>
+                    <span
+                      v-html="item.name.replace(search.trim(), searchtext)"
+                    ></span>
+                    - {{ item.artist.name }}
+                  </li></router-link
+                >
               </div>
             </div>
             <div class="songs" v-if="allSearch.songs">
-              <div class="seatitle">单曲</div>
+              <div class="seatitle"><svg-icon icon-class="音乐" /> 单曲</div>
               <div class="item">
-                <li v-for="item in allSearch.songs" :key="item.id">
-                  <span
-                    v-html="item.name.replace(search.trim(), searchtext)"
-                  ></span
-                  >-
-                  {{ item.artists[0].name }}
-                </li>
+                <router-link
+                  v-for="item in allSearch.songs"
+                  :key="item.id"
+                  style="text-decoration: none; color: #666"
+                  :to="{ path: '/PlayDetail', query: { id: item.id } }"
+                >
+                  <li>
+                    <span
+                      v-html="item.name.replace(search.trim(), searchtext)"
+                    ></span
+                    >-
+                    {{ item.artists[0].name }}
+                  </li>
+                </router-link>
               </div>
             </div>
             <div class="songs" v-if="allSearch.playlists">
-              <div class="seatitle">歌单</div>
+              <div class="seatitle"><svg-icon icon-class="歌单" /> 歌单</div>
               <div class="item">
-                <li v-for="item in allSearch.playlists" :key="item.id">
-                  <span
-                    v-html="item.name.replace(search.trim(), searchtext)"
-                  ></span
-                  >
-                </li>
+                <router-link
+                  v-for="item in allSearch.playlists"
+                  :key="item.id"
+                  style="text-decoration: none; color: #666"
+                  :to="{
+                    path: '/PlayList',
+                    query: { id: item.id },
+                  }"
+                >
+                  <li>
+                    <span
+                      v-html="item.name.replace(search.trim(), searchtext)"
+                    ></span>
+                  </li>
+                </router-link>
               </div>
             </div>
           </div>
@@ -91,7 +127,6 @@
           >
           </el-input>
         </el-popover>
-  
       </el-col>
       <el-col :span="16">
         <div
@@ -160,7 +195,6 @@ export default {
         val["index"] = index;
       });
       this.hotSearch = res;
-
     },
     async querySearch(val) {
       console.log(1);
@@ -204,7 +238,7 @@ li:hover {
     padding: 10px 10px 0 10px;
     margin: 0;
 
-    li {
+    li { font-size: 12px;
       list-style: none;
 
       .li {
@@ -213,7 +247,7 @@ li:hover {
           background-color: #f5f5f5;
           border-radius: 20px;
           display: inline-block;
-          font-size: 12px;
+        
           font-weight: 600;
           margin-right: 24px;
           height: 20px;
@@ -225,7 +259,7 @@ li:hover {
           background-color: #314659;
           border-radius: 20px;
           display: inline-block;
-          font-size: 12px;
+          
           font-weight: 600;
           margin-right: 24px;
           height: 20px;

@@ -1,39 +1,38 @@
 <!--
- * @Descripttion: 我的音乐左侧导航栏
+ * @Descripttion: 
  * @Author: Mr.You
- * @Date: 2020-10-12 20:31:35
- * @LastEditTime: 2020-10-15 09:15:54
+ * @Date: 2020-10-12 14:47:41
+ * @LastEditTime: 2020-10-20 17:10:36
 -->
 <template>
   <div class="home">
     <el-container>
-      <el-header style="height: 80px">
+      <el-header style="height: 60px">
         <elheader />
       </el-header>
       <el-container>
         <el-aside width="130px"><elaside /></el-aside>
         <el-main
-          ><div class="main">
+          >
+          <div class="main">
             <transition name="fade-transform" mode="out-in">
               <router-view></router-view>
             </transition></div
         ></el-main>
       </el-container>
-      <el-footer style="height: 40px"><elfooter /></el-footer>
+      <el-footer style="height: 50px"><elfooter /></el-footer>
     </el-container>
   </div>
 </template>
 
 <script>
-import elheader from "../Home/header";
-import elmain from "../Home/main";
-import elfooter from "../Home/footer";
-
-import elaside from "../Home/aside";
+import elheader from "@/views/Home/header";
+import elfooter from "@/views/Home/footer";
+import elaside from "@/views/Home/aside";
 
 export default {
   name: "Home",
-  components: { elheader, elaside, elmain, elfooter },
+  components: { elheader, elaside,  elfooter },
 };
 </script>
 <style lang="scss" scoped>
@@ -45,27 +44,36 @@ export default {
     color: #333;
   }
   .el-footer {
-    // background-color: #9B0909;
+    background-color: #2d2c2c;
     color: #333;
   }
   .el-aside {
     background-color: #ffffff;
     color: #333;
 
-    height: calc(100vh - 120px);
+    height: calc(100vh - 110px);
   }
 
   .el-main {
-    background-color: #e9eef3;
+    background-color: #f5f5f5;
     color: #333;
     padding: 0px;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 110px);
     display: flex;
+    z-index: 2;
     flex-direction: column;
+    .main{
+      // width: 1080px;
+      // margin: 0 auto;
+ 
+    }
     .header {
       display: flex;
       background-color: #fff;
       justify-content: center;
+      z-index: 100;
+      position: sticky;
+      top: 0;
     }
   }
 }

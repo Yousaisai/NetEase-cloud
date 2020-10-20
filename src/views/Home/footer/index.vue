@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-20 11:48:00
+ * @LastEditTime: 2020-10-20 16:56:07
 -->
 
 <template>
@@ -58,17 +58,17 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
     </div>
     <div class="pic">
       <svg-icon v-if="!cover" style="font-size: 2.5em" icon-class="网易云" />
-         <router-link
-            style="text-decoration: none"
-            :to="{ path: '/PlayDetail', query: { id: onesong.id } }"
-          >
-      <el-image
-        v-if="cover"
-        style="width: 35px; border-radius: 30%; height: 35px"
-        :src="cover"
-        :lazy="true"
-      ></el-image>  
-       </router-link >
+      <router-link
+        style="text-decoration: none"
+        :to="{ path: '/PlayDetail', query: { id: onesong.id } }"
+      >
+        <el-image
+          v-if="cover"
+          style="width: 35px; border-radius: 30%; height: 35px"
+          :src="cover"
+          :lazy="true"
+        ></el-image>
+      </router-link>
     </div>
     <div class="border">
       <div class="title">
@@ -77,15 +77,12 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       </div>
       <div class="slider">
         <div class="songer">
-          <!-- <router-link
+          <router-link
             style="text-decoration: none"
-            :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
-          > -->
-          <span
-            ><span>歌曲：{{ name }}</span></span
+            :to="{ path: '/PlayDetail', query: { id: onesong.id } }"
           >
-          <!-- </router-link > -->
-          <!-- {{onesong}} -->
+            <span>歌曲：{{ name }}</span>
+          </router-link>
           <router-link
             style="text-decoration: none"
             :to="{
@@ -94,8 +91,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
             }"
           >
             <span>歌手：{{ onesong.ar[0].name }}</span>
-            </router-link
-          >
+          </router-link>
           <router-link
             style="text-decoration: none"
             :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
@@ -178,7 +174,6 @@ export default {
         for (const key in this.songDetail) {
           this[key] = this.songDetail[key];
         }
-      
       },
       deep: true,
       immediate: true,
@@ -215,10 +210,11 @@ export default {
       if (this.currentLyric == this.lyric.length) {
         return;
       }
-
-      if (this.lyric[this.currentLyric][0] < this.SongTime) {
-        this.currentLyric++;
-        this.lyricText = this.lyric[this.currentLyric - 1][1];
+      if (this.lyric[this.currentLyric][0]) {
+        if (this.lyric[this.currentLyric][0] < this.SongTime) {
+          this.currentLyric++;
+          this.lyricText = this.lyric[this.currentLyric - 1][1];
+        }
       }
 
       if (this.$refs.audio.currentTime) {
@@ -285,9 +281,9 @@ export default {
   width: 75%;
   height: 100%;
   margin: 0 auto;
-li{
-  list-style: none; 
-}
+  li {
+    list-style: none;
+  }
   display: flex;
   .btn {
     flex: 3;

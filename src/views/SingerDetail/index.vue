@@ -2,7 +2,7 @@
  * @Descripttion: 歌手详情
  * @Author: Mr.You
  * @Date: 2020-10-18 13:24:07
- * @LastEditTime: 2020-10-18 17:06:03
+ * @LastEditTime: 2020-10-20 16:48:40
 -->
 <template>
   <div class="content">
@@ -47,15 +47,23 @@
     <div class="content_songs">
       <div class="menu">
         <el-menu
-          :default-active="initMenu+'?id='+singerId.id"
+          :default-active="initMenu + '?id=' + singerId.id"
           class="el-menu-demo"
           mode="horizontal"
           :router="true"
         >
-          <el-menu-item :index="'/SingerDetail/Music?id='+singerId.id">单曲</el-menu-item>
-          <el-menu-item :index="'/SingerDetail/Album?id='+singerId.id">专辑</el-menu-item>
-          <el-menu-item :index="'/SingerDetail/Mv?id='+singerId.id">MV</el-menu-item>
-          <el-menu-item :index="'/SingerDetail/Desc?id='+singerId.id">简介</el-menu-item>
+          <el-menu-item :index="'/SingerDetail/Music?id=' + singerId.id"
+            >单曲</el-menu-item
+          >
+          <el-menu-item :index="'/SingerDetail/Album?id=' + singerId.id"
+            >专辑</el-menu-item
+          >
+          <el-menu-item :index="'/SingerDetail/Mv?id=' + singerId.id"
+            >MV</el-menu-item
+          >
+          <el-menu-item :index="'/SingerDetail/Desc?id=' + singerId.id"
+            >简介</el-menu-item
+          >
         </el-menu>
       </div>
       <div class="menuItem">
@@ -78,6 +86,14 @@ export default {
       artist: {}, //歌手信息
       hotSongs: [], //热门歌曲
     };
+  },
+  watch: {
+    $route(to, from) {
+      if (to.query.id != from.query.id) {
+        //加载数据
+        this.getSingersOne();
+      }
+    },
   },
   mounted() {
     this.getSingersOne();

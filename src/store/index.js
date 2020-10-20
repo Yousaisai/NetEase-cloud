@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-18 13:10:19
+ * @LastEditTime: 2020-10-20 16:35:15
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -111,6 +111,7 @@ export default new Vuex.Store({
       }
       //首先判断音乐是否可用
       var auth = await AuthSongId(nextSong.id)
+
       auth = auth.message
       if (auth == "ok") {
         dispatch("AuthSongId", nextSong)

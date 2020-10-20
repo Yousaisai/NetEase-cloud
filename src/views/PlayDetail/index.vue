@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-20 11:47:37
+ * @LastEditTime: 2020-10-20 16:52:32
 -->
 <template>
   <div class="content">
@@ -24,21 +24,40 @@
             {{ songDetail.name }}
           </div>
           <div class="name">
-            <span>歌手：</span><span>{{ songDetail.al.name }}</span>
+            <span>歌手： </span>
+            <router-link
+              style="text-decoration: none"
+              :to="{
+                path: '/SingerDetail/Music',
+                query: { id: songDetail.ar[0].id },
+              }"
+              ><span style="font-size: 15px; color: #409eff; cursor: pointer">{{
+                songDetail.al.name
+              }}</span>
+            </router-link>
           </div>
           <div class="album">
-            <span>专辑：</span
-            ><span
-              style="padding: 10px"
-              v-for="item in songDetail.ar"
-              :key="item.id"
-              >{{ item.name }}</span
+            <span>专辑：</span>
+            <router-link
+              style="text-decoration: none"
+              :to="{ path: '/NewAlbum', query: { id: songDetail.al.id } }"
+              ><span
+                style="
+                  padding: 10px;
+                  font-size: 15px;
+                  color: #409eff;
+                  cursor: pointer;
+                "
+                v-for="item in songDetail.ar"
+                :key="item.id"
+                >{{ item.name }}</span
+              ></router-link
             >
           </div>
           <div class="btn">
             <div class="btn_item">
-              <el-button type="primary" size="mini" plain
-                ><svg-icon icon-class="播放 (3)" /> 全部播放</el-button
+              <el-button @click="PlayMusic" type="primary" size="mini" plain
+                ><svg-icon icon-class="播放 (3)" /> 播放</el-button
               >
             </div>
             <div class="btn_item">
@@ -62,12 +81,26 @@
               </el-button>
             </div>
           </div>
-          <div class="lyc">
-            <li  v-for="(item,index ) in lyric" :key="index">
-              {{item[0]}}{{ item[1] }}
-            </li>
-          </div>
         </div>
+      </div>
+      <div class="lyc">
+        <li v-for="(item, index) in lyric" v-show="index < isShow" :key="index">
+          {{ item[1] }}
+        </li>
+        <li
+          v-show="isShow == 10"
+          style="color: #409eff; cursor: pointer"
+          @click="isShow = 1000"
+        >
+          展开
+        </li>
+        <li
+          v-show="isShow != 10"
+          style="color: #409eff; cursor: pointer"
+          @click="isShow = 10"
+        >
+          收起
+        </li>
       </div>
       <div class="comment"></div>
     </div>
@@ -84,15 +117,20 @@ import {
 
 export default {
   data() {
-    return {
-      songDetail: {},
-      lyric: [],
-      currentLyric: 0,
-    };
+    return { isShow: 10, songDetail: {}, lyric: [], currentLyric: 0 };
   },
   computed: {
     Id() {
       return this.$route.query.id;
+    },
+  },
+  watch: {
+    $route(to, from) {
+      if (to.query.id != from.query.id) {
+        //加载数据
+        this.getPlayOneSong();
+        this.getLyric();
+      }
     },
   },
   mounted() {
@@ -100,9 +138,15 @@ export default {
     this.getLyric();
   },
   methods: {
+    PlayMusic() {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: this.songDetail,
+        allSong: JSON.parse(localStorage.getItem("AllSongs")),
+        indexSong: 0,
+      });
+    },
     async getPlayOneSong() {
       var res = await SongDetail(this.Id);
-      console.log(res);
       this.songDetail = res.songs[0];
     },
     async getLyric(id) {
@@ -138,13 +182,15 @@ export default {
         lyric[key][0] = m * 60 * 1000 + s * 1000 + ms;
       }
       this.lyric = lyric;
-      console.log(lyric);
     },
   },
 };
 </script>
 <style lang="scss" scoped>
 .content {
+  li {
+    list-style: none;
+  }
   position: relative;
   z-index: 1000000;
   .content_poab {
@@ -152,6 +198,9 @@ export default {
     position: absolute;
     top: -60px;
     width: calc(100vw - 130px);
+    display: flex;
+    flex-direction: column;
+    right: 2px;
     .detail {
       padding: 10px;
       width: 1080px;
@@ -186,14 +235,22 @@ export default {
             padding: 0 20px 0 0;
           }
         }
-
-        .lyc {
-          padding: 10px;
-        }
       }
     }
-
+    .lyc {
+      padding: 0 10px;
+      width: 1080px;
+      margin: 0 auto;
+      background-color: #fff;
+      li {
+        padding: 5px;
+        font-size: 13px;
+      }
+    }
     .comment {
+      width: 1080px;
+      margin: 0 auto;
+      background-color: #fff;
     }
   }
 }

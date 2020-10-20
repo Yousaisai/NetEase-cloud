@@ -2,13 +2,17 @@
  * @Descripttion: 热门推荐歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-13 18:39:42
- * @LastEditTime: 2020-10-20 10:11:21
+ * @LastEditTime: 2020-10-20 17:00:33
 -->
 <template>
   <div class="content">
     <div class="content_detail">
       <div class="detail_pic">
-        <el-image  style="border-radius: 50%" :src="playListDetails.coverImgUrl" :lazy="true"></el-image>
+        <el-image
+          style="border-radius: 50%"
+          :src="playListDetails.coverImgUrl"
+          :lazy="true"
+        ></el-image>
       </div>
       <div class="detail_item" v-if="playListDetails.length != 0">
         <div class="title">
@@ -95,9 +99,10 @@
           ></span
         >
       </div>
-         <el-divider></el-divider>
+      <el-divider></el-divider>
       <div class="item_table">
-        <eltable :Songs="playListsong" /></div>
+        <eltable :Songs="playListsong" />
+      </div>
     </div>
   </div>
 </template>
@@ -118,16 +123,23 @@ export default {
       playListDetails: [],
       //歌单曲目
       playListsong: [],
-  
     };
   },
-
+  watch: {
+    $route(to, from) {
+      if (to.query.id != from.query.id) {
+        //加载数据
+        this.getPlaylistDetail();
+      }
+    },
+  },
 
   mounted() {
     this.getPlaylistDetail();
   },
   methods: {
     async getPlaylistDetail() {
+    
       const id = this.$route.query;
       var res = await playlistDetail(id);
 
@@ -203,7 +215,6 @@ export default {
         margin: 20px 0 0 0;
         font-size: 13px;
         width: 35vw;
- 
       }
     }
   }
