@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-10-21 17:42:54
+ * @LastEditTime: 2020-10-21 19:04:46
 -->
 <template>
   <div class="content">
@@ -25,9 +25,11 @@
               </span> </router-link
             ><span style="padding: 0 0 0 5px">|</span>
           </span>
-          <span class="more" style="float: right; font-size: 12px"
-            >更多 <svg-icon icon-class="前进" /></span
-        ></el-col>
+          <router-link to="/SongList">
+            <span class="more" style="float: right; font-size: 12px"
+              >更多 <svg-icon icon-class="前进" /></span
+          ></router-link>
+        </el-col>
       </el-row>
     </div>
 
@@ -49,7 +51,6 @@
               <div class="player"></div>
             </div></div
         ></router-link>
-
         <div class="titledetail">
           <span>{{ item.name }}</span>
         </div>
@@ -63,9 +64,10 @@
         <el-col :span="24"
           ><svg-icon style="font-size: 20px" icon-class="碟片" />
           <span style="font-size: 25px; padding-right: 5px">新碟上架</span>
-          <span class="more" style="float: right; font-size: 12px"
-            >更多 <svg-icon icon-class="前进"
-          /></span>
+          <router-link to="/AddedNewAlbum">
+            <span class="more" style="float: right; font-size: 12px"
+              >更多 <svg-icon icon-class="前进" /></span
+          ></router-link>
         </el-col>
       </el-row>
     </div>
@@ -104,9 +106,10 @@
         <el-col :span="24"
           ><svg-icon style="font-size: 20px" icon-class="碟片" />
           <span style="font-size: 25px; padding-right: 5px">榜单</span>
-          <span class="more" style="float: right; font-size: 12px"
-            >更多 <svg-icon icon-class="前进"
-          /></span>
+          <router-link to="/Leaderboard">
+            <span class="more" style="float: right; font-size: 12px"
+              >更多 <svg-icon icon-class="前进" /></span
+          ></router-link>
         </el-col>
       </el-row>
     </div>
@@ -114,12 +117,16 @@
     <div class="toplist" v-if="topList.length != 0">
       <div class="topone" v-for="(item, TopItem) in 4" :key="TopItem">
         <div class="img">
-          <el-image
-            :src="topList[TopItem].coverImgUrl"
-            style="width: 100px; height: 100px; float: left"
-            fit="fill"
-            :lazy="true"
-          ></el-image>
+          <router-link
+            :to="{ path: '/Leaderboard', query: { id: topList[TopItem].id } }"
+          >
+            <el-image
+              :src="topList[TopItem].coverImgUrl"
+              style="width: 100px; height: 100px; float: left"
+              fit="fill"
+              :lazy="true"
+            ></el-image>
+          </router-link>
           <div class="imgtitle">
             <div class="span">
               <span>{{ topList[TopItem].name }}</span>
@@ -154,7 +161,7 @@
 
               <div class="svghide">
                 <svg-icon
-                  @click="PlaySong(item,topListDetail[TopItem],index)"
+                  @click="PlaySong(item, topListDetail[TopItem], index)"
                   style="padding: 0 5px"
                   icon-class="播放 (6)"
                 />
@@ -168,7 +175,12 @@
             >
               <span
                 class="more"
-                style="font-size: 12px; padding: 10px; float: right;color:#666"
+                style="
+                  font-size: 12px;
+                  padding: 10px;
+                  float: right;
+                  color: #666;
+                "
               >
                 更多 <svg-icon icon-class="前进" /> </span
             ></router-link>
@@ -259,14 +271,13 @@ export default {
         }
       }
     },
-    PlaySong(song,allsong,index) {
+    PlaySong(song, allsong, index) {
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: allsong,
-        indexSong:index
+        indexSong: index,
       });
     },
-    
   },
 };
 </script>

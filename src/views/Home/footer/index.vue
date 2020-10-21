@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-21 15:08:21
+ * @LastEditTime: 2020-10-21 18:54:32
 -->
 
 <template>
@@ -77,27 +77,29 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       </div>
       <div class="slider">
         <div class="songer">
-          <!-- <router-link
-            style="text-decoration: none"
-            :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
-          > -->
-          <span
-            ><span>歌曲：{{ name }}</span></span
-          >
-          <!-- </router-link > -->
-          <!-- {{onesong}} -->
+          <span>歌曲：{{ name }}</span>
+
           <router-link
             style="text-decoration: none"
             :to="{
               path: '/SingerDetail/Music',
-              query: { id: onesong.ar[0].id },
+              query: {
+                id: onesong.ar ? onesong.ar[0].id : onesong.artists[0].id,
+              },
             }"
           >
-            <span>歌手：{{ onesong.ar[0].name }}</span>
+            <span
+              >歌手：{{
+                onesong.ar ? onesong.ar[0].name : onesong.artists[0].name
+              }}</span
+            >
           </router-link>
           <router-link
             style="text-decoration: none"
-            :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
+            :to="{
+              path: '/NewAlbum',
+              query: { id: onesong.al ? onesong.al.id : onesong.album.id },
+            }"
           >
             <span>专辑：{{ album }}</span></router-link
           >
@@ -174,6 +176,7 @@ export default {
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
+        console.log(1111111111);
         for (const key in this.songDetail) {
           this[key] = this.songDetail[key];
         }
@@ -210,19 +213,19 @@ export default {
     // 当timeupdate事件大概每秒一次，用来更新音频流的当前播放时间
     onTimeupdate(res) {
       //同步歌词
-      if (this.currentLyric == this.lyric.length) {
-        return;
+      if (this.lyric.length != 0) {
+        if (this.currentLyric != this.lyric.length) {
+          if (this.lyric[this.currentLyric][0] < this.SongTime) {
+            this.currentLyric++;
+            this.lyricText = this.lyric[this.currentLyric - 1][1];
+          }
+        }
       }
 
-      if (this.lyric[this.currentLyric][0] < this.SongTime) {
-        this.currentLyric++;
-        this.lyricText = this.lyric[this.currentLyric - 1][1];
-      }
-
+      console.log(this.$refs.audio.currentTime);
       if (this.$refs.audio.currentTime) {
         this.SongTime = this.$refs.audio.currentTime * 1000;
       }
-
       //由于数据是毫秒级别监听不到，所以只需要监听到秒数相等就播放下一首
       if (parseInt(this.time / 1000) <= parseInt(this.SongTime / 1000)) {
         this.SwitchSongs("next");
@@ -231,6 +234,7 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
+      // this.$refs.audio.play();
       if (this.onesong.id) {
         this.getLyric(this.onesong.id);
         this.lyric = [];
@@ -244,7 +248,7 @@ export default {
       //获取歌词
       this.currentLyric = 0;
       var res = await SongLyric(id);
-      if (res.nolyric) {
+      if (!res.lrc) {
         this.$message({
           message: "抱歉，暂无歌词!",
           type: "warning",
@@ -252,7 +256,6 @@ export default {
         this.lyricText = "";
         return;
       }
-
       res = res.lrc.lyric.split("\n");
       var lyric = {};
       let pattern = /\[\d{2}:\d{2}.\d{2,3}\]/g;

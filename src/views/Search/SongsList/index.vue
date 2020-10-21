@@ -2,7 +2,7 @@
  * @Descripttion: 单曲列表
  * @Author: Mr.You
  * @Date: 2020-10-21 09:55:07
- * @LastEditTime: 2020-10-21 14:41:22
+ * @LastEditTime: 2020-10-21 18:09:32
 -->
 <template>
   <div class="content">
@@ -140,6 +140,7 @@ export default {
       this.currentPage = val;
     },
     PlaySong(song, index) {
+      console.log(song, index);
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.Songs,

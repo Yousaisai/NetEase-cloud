@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-21 14:54:59
+ * @LastEditTime: 2020-10-21 18:54:19
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -24,7 +24,7 @@ export default new Vuex.Store({
     PlaySong: "",
     //需要传到播放界面的参数,包含音乐url、音乐名name、封面cover、时长time、专辑album
     SongDetail: {
-  
+
       name: "",
       cover: "",
       time: 0,
@@ -35,7 +35,7 @@ export default new Vuex.Store({
     AllSongs: [],
     //播放的第几个歌曲，哦那个与切换下一首
     IndexSong: 0,
-    BannerUrl:""
+    BannerUrl: ""
   },
   mutations: {
     ST_PlaySong: (state, payload) => {
@@ -73,8 +73,13 @@ export default new Vuex.Store({
       commit('ST_AllSongs', allSong)
       commit('ST_PlaySong', oneSong)
       commit('ST_IndexSong', indexSong)
+
+      try {
+        var auth = await AuthSongId(state.PlaySong.id)
+      } catch (e) {
+        return 
+      }
       //首先判断音乐是否可用
-      var auth = await AuthSongId(state.PlaySong.id)
       auth = auth.message
       if (auth == "ok") {
         dispatch("AuthSongId", state.PlaySong)
@@ -111,6 +116,7 @@ export default new Vuex.Store({
         nextSong = state.AllSongs[state.IndexSong]
       }
       //首先判断音乐是否可用
+
       var auth = await AuthSongId(nextSong.id)
 
       auth = auth.message
@@ -129,17 +135,17 @@ export default new Vuex.Store({
       commit,
       state
     }, payload) {
-
+      console.log(3333);
       var songs = await PlayOneSong(payload.id)
-      console.log(payload,songs);
       var commSong = {
         url: songs.data[0].url,
         name: payload.name,
-        cover: payload.al?payload.al.picUrl:payload.artists[0].img1v1Url,
-        time: payload.dt,
-        album: payload.al?payload.al.name:payload.album.name,
+        cover: payload.al ? payload.al.picUrl : payload.artists[0].img1v1Url,
+        time: payload.dt ? payload.dt : payload.duration,
+        album: payload.al ? payload.al.name : payload.album.name,
         onesong: payload
       }
+      console.log(commSong);
       commit('ST_SongDetail', commSong)
 
     }
