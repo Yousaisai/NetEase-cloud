@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-20 16:35:15
+ * @LastEditTime: 2020-10-21 14:54:59
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -24,7 +24,7 @@ export default new Vuex.Store({
     PlaySong: "",
     //需要传到播放界面的参数,包含音乐url、音乐名name、封面cover、时长time、专辑album
     SongDetail: {
-      url: "",
+  
       name: "",
       cover: "",
       time: 0,
@@ -34,7 +34,8 @@ export default new Vuex.Store({
     //传入的整个歌单用于切换歌曲下首，还有全部播放
     AllSongs: [],
     //播放的第几个歌曲，哦那个与切换下一首
-    IndexSong: 0
+    IndexSong: 0,
+    BannerUrl:""
   },
   mutations: {
     ST_PlaySong: (state, payload) => {
@@ -130,12 +131,13 @@ export default new Vuex.Store({
     }, payload) {
 
       var songs = await PlayOneSong(payload.id)
+      console.log(payload,songs);
       var commSong = {
         url: songs.data[0].url,
         name: payload.name,
-        cover: payload.al.picUrl,
+        cover: payload.al?payload.al.picUrl:payload.artists[0].img1v1Url,
         time: payload.dt,
-        album: payload.al.name,
+        album: payload.al?payload.al.name:payload.album.name,
         onesong: payload
       }
       commit('ST_SongDetail', commSong)

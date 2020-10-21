@@ -2,7 +2,7 @@
  * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-18 16:02:01
+ * @LastEditTime: 2020-10-21 14:36:28
 -->
 
 <template>
@@ -131,15 +131,8 @@ export default {
   },
 
   mounted() {
-    // this.getPlaylistDetail();
   },
   methods: {
-    // async getPlaylistDetail() {
-
-    //   var res = await newAlbumDetail({ id:this.id, limit: 30 });
-    //   this.albumDetails = res.album;
-    //   this.Songs = res.songs;
-    // },
   
     cellenter(row, column, cell, event) {
       this.$set(row, "play", true);

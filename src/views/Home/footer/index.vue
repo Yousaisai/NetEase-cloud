@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-20 16:56:07
+ * @LastEditTime: 2020-10-21 15:08:21
 -->
 
 <template>
@@ -77,12 +77,15 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       </div>
       <div class="slider">
         <div class="songer">
-          <router-link
+          <!-- <router-link
             style="text-decoration: none"
-            :to="{ path: '/PlayDetail', query: { id: onesong.id } }"
+            :to="{ path: '/NewAlbum', query: { id: onesong.al.id } }"
+          > -->
+          <span
+            ><span>歌曲：{{ name }}</span></span
           >
-            <span>歌曲：{{ name }}</span>
-          </router-link>
+          <!-- </router-link > -->
+          <!-- {{onesong}} -->
           <router-link
             style="text-decoration: none"
             :to="{
@@ -210,11 +213,10 @@ export default {
       if (this.currentLyric == this.lyric.length) {
         return;
       }
-      if (this.lyric[this.currentLyric][0]) {
-        if (this.lyric[this.currentLyric][0] < this.SongTime) {
-          this.currentLyric++;
-          this.lyricText = this.lyric[this.currentLyric - 1][1];
-        }
+
+      if (this.lyric[this.currentLyric][0] < this.SongTime) {
+        this.currentLyric++;
+        this.lyricText = this.lyric[this.currentLyric - 1][1];
       }
 
       if (this.$refs.audio.currentTime) {

@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-10-16 20:35:58
+ * @LastEditTime: 2020-10-21 17:42:54
 -->
 <template>
   <div class="content">
@@ -168,7 +168,7 @@
             >
               <span
                 class="more"
-                style="font-size: 12px; padding: 10px; float: right"
+                style="font-size: 12px; padding: 10px; float: right;color:#666"
               >
                 更多 <svg-icon icon-class="前进" /> </span
             ></router-link>

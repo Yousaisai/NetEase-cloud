@@ -2,10 +2,10 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:07
- * @LastEditTime: 2020-10-15 10:29:52
+ * @LastEditTime: 2020-10-21 10:22:57
 -->
 <template>
-  <div class="content">
+  <div class="content">{{this.$store.state.BannerUrl}}
     <div class="content_carousel">
       <el-carousel>
         <el-carousel-item

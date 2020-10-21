@@ -99,15 +99,57 @@ const routes = [{
         meta: {
           title: '简介'
         },
-      },]
+      }, ]
 
-    },{
+    }, {
       path: '/PlayDetail',
       component: () => import('../views/PlayDetail/index.vue'),
       meta: {
         title: '音乐详情'
       },
-    }, 
+    }, ,
+    {
+      path: '/Search',
+      name: 'Search',
+      redirect: '/Search/SongsList',
+      component: () => import('../views/Search/index.vue'),
+      meta: {
+        title: '搜索'
+      },
+
+      children: [{
+        path: '/Search/SongsList',
+        component: () => import('../views/Search/SongsList/index.vue'),
+        meta: {
+          title: '单曲'
+        },
+      }, {
+        path: '/Search/Album',
+        component: () => import('../views/Search/Album/index.vue'),
+        meta: {
+          title: '专辑'
+        },
+      }, {
+        path: '/Search/Mv',
+        component: () => import('../views/Search/Mv/index.vue'),
+        meta: {
+          title: 'MV'
+        },
+      }, {
+        path: '/Search/PlayList',
+        component: () => import('../views/Search/PlayList/index.vue'),
+        meta: {
+          title: '歌单'
+        },
+      }, {
+        path: '/Search/Singers',
+        component: () => import('../views/Search/Singers/index.vue'),
+        meta: {
+          title: '歌手'
+        },
+      }, ]
+
+    }
   ]
 }, {
   path: '/',

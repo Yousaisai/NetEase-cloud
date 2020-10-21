@@ -1,8 +1,8 @@
 <!--
- * @Descripttion: 
+ * @Descripttion: 首页导航栏标签
  * @Author: Mr.You
  * @Date: 2020-10-12 19:39:00
- * @LastEditTime: 2020-10-16 20:39:44
+ * @LastEditTime: 2020-10-21 09:51:58
 -->
 <template>
   <el-menu

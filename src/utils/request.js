@@ -6,6 +6,8 @@ import { MessageBox, Message } from 'element-ui'
 // create an axios instance
 const service = axios.create({
   baseURL: 'http://localhost:3000', // url = base url + request url
+
+  // baseURL: 'http://49.4.79.236:3000', // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 50000 // request timeout
 })

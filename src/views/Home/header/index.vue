@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-20 17:03:33
+ * @LastEditTime: 2020-10-21 11:25:41
 -->
 <template>
   <div class="content">
@@ -20,113 +20,7 @@
         </el-row>
       </el-col>
       <el-col :span="4" style="padding: 10px 0; line-height: 40px">
-        <el-popover placement="bottom" width="250" height="100" trigger="focus">
-          <div v-show="search.trim() == ''" class="defsearch">
-            <span class="seatitle"> 大家都在搜</span>
-            <ul>
-              <li v-for="(item, index) in this.hotSearch" :key="index">
-                <div class="li">
-                  <span :class="index > 2 ? 'index1' : 'index2'">{{
-                    index + 1
-                  }}</span>
-                  <span>{{ item.first }}</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="searchall" v-show="search.trim() != ''">
-            <div class="singer" v-if="allSearch.artists">
-              <div class="seatitle">
-                <svg-icon style="font-size: 1.2em" icon-class="歌手" /> 歌手
-              </div>
-              <div class="item">
-                <router-link
-                  v-for="item in allSearch.artists"
-                  :key="item.id"
-                  style="text-decoration: none; color: #666"
-                  :to="{
-                    path: '/SingerDetail/Music',
-                    query: { id: item.id },
-                  }"
-                >
-                  <li>
-                    <span
-                      v-html="item.name.replace(search.trim(), searchtext)"
-                    ></span>
-                  </li>
-                </router-link>
-              </div>
-            </div>
-            <div class="album" v-if="allSearch.albums">
-              <div class="seatitle"><svg-icon icon-class="专辑" /> 专辑</div>
-              <div class="item">
-                <router-link
-                
-                  v-for="item in allSearch.albums"
-                  :key="item.id"
-                  style="text-decoration: none; color: #666"
-                  :to="{ path: '/NewAlbum', query: { id: item.id } }"
-                >
-                  <li>
-                    <span
-                      v-html="item.name.replace(search.trim(), searchtext)"
-                    ></span>
-                    - {{ item.artist.name }}
-                  </li></router-link
-                >
-              </div>
-            </div>
-            <div class="songs" v-if="allSearch.songs">
-              <div class="seatitle"><svg-icon icon-class="音乐" /> 单曲</div>
-              <div class="item">
-                <router-link
-                  v-for="item in allSearch.songs"
-                  :key="item.id"
-                  style="text-decoration: none; color: #666"
-                  :to="{ path: '/PlayDetail', query: { id: item.id } }"
-                >
-                  <li>
-                    <span
-                      v-html="item.name.replace(search.trim(), searchtext)"
-                    ></span
-                    >-
-                    {{ item.artists[0].name }}
-                  </li>
-                </router-link>
-              </div>
-            </div>
-            <div class="songs" v-if="allSearch.playlists">
-              <div class="seatitle"><svg-icon icon-class="歌单" /> 歌单</div>
-              <div class="item">
-                <router-link
-                  v-for="item in allSearch.playlists"
-                  :key="item.id"
-                  style="text-decoration: none; color: #666"
-                  :to="{
-                    path: '/PlayList',
-                    query: { id: item.id },
-                  }"
-                >
-                  <li>
-                    <span
-                      v-html="item.name.replace(search.trim(), searchtext)"
-                    ></span>
-                  </li>
-                </router-link>
-              </div>
-            </div>
-          </div>
-
-          <el-input
-            v-model="search"
-            suffix-icon="el-icon-search"
-            :placeholder="DefPlaceHoder"
-            size="small"
-            slot="reference"
-            @input="querySearch"
-          >
-          </el-input>
-        </el-popover>
+        <el-search @emitSearch="emitSearch($event)" :width="250"/>
       </el-col>
       <el-col :span="16">
         <div
@@ -161,7 +55,11 @@
 
 <script>
 import { SearchSug, DefSearch, HotSearch } from "@/api/index";
+import elSearch from '@/components/Search'
 export default {
+  components: {
+    elSearch
+  },
   data() {
     return {
       search: "",
@@ -215,6 +113,8 @@ export default {
 
     handleSelect(val) {
       console.log(val);
+    },   emitSearch(val) {
+      console.log(111,val);
     },
   },
 };
