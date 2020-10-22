@@ -2,98 +2,109 @@
  * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-21 14:36:28
+ * @LastEditTime: 2020-10-22 10:54:20
 -->
 
 <template>
-  <div >
-  
-      <el-table
-        stripe
-        :data="
-          Songs.slice(
-            (currentPage - 1) * pageSize,
-            currentPage * pageSize
-          )
-        "
-        @cell-mouse-enter="cellenter"
-        @cell-mouse-leave="cellleave"
-        style="width: 100%"
+  <div>
+    <el-table
+      stripe
+      :data="Songs.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
+      @cell-mouse-enter="cellenter"
+      @cell-mouse-leave="cellleave"
+      style="width: 100%"
+    >
+      <el-table-column label="序号" align="center" min-width="80">
+        <template slot-scope="scope">
+          <div v-if="scope.$index + (currentPage - 1) * pageSize == 0">
+            <svg-icon style="font-size: 35px" icon-class="金牌" />
+          </div>
+          <div v-else-if="scope.$index + (currentPage - 1) * pageSize == 1">
+            <svg-icon style="font-size: 35px" icon-class="银牌" />
+          </div>
+          <div v-else-if="scope.$index + (currentPage - 1) * pageSize == 2">
+            <svg-icon style="font-size: 35px" icon-class="铜牌" />
+          </div>
+          <div v-else>
+            <span> {{ scope.$index + (currentPage - 1) * pageSize + 1 }}</span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        show-overflow-tooltip
+        label="歌曲标题"
+        min-width="180"
       >
-        <el-table-column label="序号" align="center" min-width="80">
-          <template slot-scope="scope">
-            <div v-if="scope.$index+ (currentPage - 1) * pageSize == 0">
-              <svg-icon style="font-size: 35px" icon-class="金牌" />
-            </div>
-            <div v-else-if="scope.$index+ (currentPage - 1) * pageSize == 1">
-              <svg-icon style="font-size: 35px" icon-class="银牌" />
-            </div>
-            <div v-else-if="scope.$index+ (currentPage - 1) * pageSize == 2">
-              <svg-icon style="font-size: 35px" icon-class="铜牌" />
-            </div>
-            <div v-else>
-              <span>
-                {{ scope.$index + (currentPage - 1) * pageSize + 1 }}</span
-              >
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="name"
-          show-overflow-tooltip
-          label="歌曲标题"
-          min-width="180"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="ar[0].name"
-          show-overflow-tooltip
-          label="歌手"
-          min-width="180"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="al.name"
-          show-overflow-tooltip
-          label="专辑"
-          min-width="180"
-        >
-        </el-table-column>
-        <el-table-column label="时长" align="right" min-width="150">
-          <template slot-scope="scope">
-            <div v-if="scope.row.play">
-              <span  @click="PlaySong(scope.row,scope.$index)" style="padding: 10px">
-                <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
-              </span>
-              <span style="padding: 10px">
-                <svg-icon style="font-size: 16px" icon-class="加好 2-01" />
-              </span>
-              <span style="padding: 10px">
-                <svg-icon
-                  style="font-size: 16px; color: #909399"
-                  icon-class="心 爱心 (2)"
-                />
-              </span>
-              <span style="padding: 10px">
-                <svg-icon style="font-size: 16px" icon-class="下载 (1)" />
-              </span>
-            </div>
-            <div v-if="!scope.row.play">
-              {{ milltosecond(scope.row.dt) }}
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
+        <template slot-scope="scope">
+          <div>
+            {{ scope.row.name }}
+            <router-link
+              :to="{
+                path: '/PlayMv',
+                query: { mvid: scope.row.mv },
+              }"
+            >
+              <span
+                ><svg-icon v-show="scope.row.mv != 0" icon-class="MV"
+              /></span>
+            </router-link>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="ar[0].name"
+        show-overflow-tooltip
+        label="歌手"
+        min-width="180"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="al.name"
+        show-overflow-tooltip
+        label="专辑"
+        min-width="180"
+      >
+      </el-table-column>
+      <el-table-column label="时长" align="right" min-width="150">
+        <template slot-scope="scope">
+          <div v-if="scope.row.play">
+            <span
+              @click="PlaySong(scope.row, scope.$index)"
+              style="padding: 10px"
+            >
+              <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
+            </span>
+            <span style="padding: 10px">
+              <svg-icon style="font-size: 16px" icon-class="加好 2-01" />
+            </span>
+            <span style="padding: 10px">
+              <svg-icon
+                style="font-size: 16px; color: #909399"
+                icon-class="心 爱心 (2)"
+              />
+            </span>
+            <span style="padding: 10px">
+              <svg-icon style="font-size: 16px" icon-class="下载 (1)" />
+            </span>
+          </div>
+          <div v-if="!scope.row.play">
+            {{ milltosecond(scope.row.dt) }}
+          </div>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      v-show="Songs.length > 10"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage"
       :page-size="10"
       layout="total, prev, pager, next"
-      :total="total">
+      :total="total"
+    >
     </el-pagination>
-    </div>
-  
+  </div>
 </template>
 
 
@@ -108,18 +119,17 @@ import {
 } from "@/api/index";
 export default {
   components: {},
-  props:{
-  Songs:{    //歌单曲目
-      type:Array,
-      default:[]  
-  }
+  props: {
+    Songs: {
+      //歌单曲目
+      type: Array,
+      default: [],
+    },
   },
   data() {
     return {
       play: false,
       //歌单详情
- 
-  
       currentPage: 1,
       pageSize: 10,
     };
@@ -130,10 +140,8 @@ export default {
     },
   },
 
-  mounted() {
-  },
+  mounted() {},
   methods: {
-  
     cellenter(row, column, cell, event) {
       this.$set(row, "play", true);
     },
@@ -149,7 +157,9 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
-    },    PlaySong(song,  index) {
+    },
+    PlaySong(song, index) {
+   
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.Songs,
@@ -160,7 +170,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-span{
+span {
   cursor: pointer;
 }
 </style>

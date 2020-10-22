@@ -202,13 +202,24 @@ export function SingersAlbum(payload) {
 //获取歌手的MV
 export function SingersMv(payload) {
     return request({
-        url: "/artist",
+        url: "/artist/mv",
         method: 'get',
         params: {
             ...payload
         }
     })
 }
+//获取歌手的MV地址
+export function MvUrl(payload) {
+    return request({
+        url: "/mv/url",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
 
 
 //获取MV数据
@@ -232,6 +243,8 @@ export function SingersDesc(payload) {
         }
     })
 }
+
+
 //搜索建议，就是搜索的时候，下面弹出的列表/search/suggest?keywords= 海阔天空 /search/suggest?keywords= 海阔天空&type=mobile
 
 export function SearchSug(payload) {

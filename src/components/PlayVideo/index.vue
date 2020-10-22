@@ -6,7 +6,7 @@ this.$refs.videoPlayer.player.src(src) // 重置进度条
 
  * @Author: Mr.You
  * @Date: 2020-10-21 20:28:25
- * @LastEditTime: 2020-10-21 21:49:14
+ * @LastEditTime: 2020-10-22 10:06:58
 -->
 <template>
   <div class="demo">
@@ -33,11 +33,13 @@ this.$refs.videoPlayer.player.src(src) // 重置进度条
 
   <script>
 export default {
+  props:["mvurl"],
+  
   data() {
     return {
       playerOptions: {
         playbackRates: [0.5, 1.0, 1.5, 2.0], // 可选的播放速度
-        autoplay: true, // 如果为true,浏览器准备好时开始回放。
+        autoplay: false, // 如果为true,浏览器准备好时开始回放。
         muted: false, // 默认情况下将会消除任何音频。
         loop: false, // 是否视频一结束就重新开始。
         preload: "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
@@ -48,7 +50,7 @@ export default {
           {
             type: "video/mp4", // 类型
             src:
-              "http://vodkgeyttp8.vod.126.net/cloudmusic/MiUiICEhMDAgMDBkITk0Mg==/mv/5341369/011778fd2bd79e68e3e751ca95d559a0.mp4?wsSecret=a817e730f474d5e62fc105903e30e427&wsTime=1603284507",
+              "",
           },
         ],
         poster: "", // 封面地址
@@ -62,7 +64,11 @@ export default {
       },
     };
   },
-
+watch: {
+  mvurl(val){
+    this.playerOptions.sources[0].src=val
+  }
+},
   methods: {
     // 播放回调
     onPlayerPlay(player) {

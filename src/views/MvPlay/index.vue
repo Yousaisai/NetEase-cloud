@@ -2,14 +2,14 @@
  * @Descripttion: 播放
  * @Author: Mr.You
  * @Date: 2020-10-21 20:50:08
- * @LastEditTime: 2020-10-21 22:14:06
+ * @LastEditTime: 2020-10-22 10:05:45
 -->
 <template>
   <div class="content">
     <div class="title">
       <svg-icon style="font-size: 1.2em" icon-class="MV" /> {{ mvdata.name }}
     </div>
-    <div class="mv"><mv-play /></div>
+    <div class="mv"><mv-play :mvurl="mvurl" /></div>
     <div class="btn">
       <div class="btn_item">
         <el-button type="primary" size="mini" plain
@@ -34,19 +34,18 @@
         >
       </div>
     </div>
+    <div class="com">简介：{{ mvdata.desc }}</div>
     <div class="comment"></div>
   </div>
 </template>
 
 <script>
 import MvPlay from "@/components/PlayVideo/index";
-import { MvData } from "@/api/index";
+import { MvData, MvUrl } from "@/api/index";
 export default {
   components: { MvPlay },
   data() {
-    return {
-      mvdata: {},
-    };
+    return { mvurl: "", mvdata: {} };
   },
   computed: {
     mvid() {
@@ -55,12 +54,18 @@ export default {
   },
   mounted() {
     this.getMvData();
+    this.getMvUrl();
   },
   methods: {
     async getMvData() {
       var res = await MvData(this.mvid);
       console.log(res.data);
       this.mvdata = res.data;
+    },
+    async getMvUrl() {
+      var res = await MvUrl({ id: this.mvid.mvid });
+      console.log(res.data.url);
+      this.mvurl = res.data.url;
     },
   },
 };
@@ -90,7 +95,11 @@ export default {
       padding: 0 20px 0 0;
     }
   }
-
+  .com {
+    padding: 10px 90px;
+    font-size: 15px;
+    text-align: left;
+  }
   .comment {
   }
 }

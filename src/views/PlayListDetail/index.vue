@@ -2,7 +2,7 @@
  * @Descripttion: 热门推荐歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-13 18:39:42
- * @LastEditTime: 2020-10-20 17:00:33
+ * @LastEditTime: 2020-10-22 09:32:51
 -->
 <template>
   <div class="content">
@@ -139,11 +139,10 @@ export default {
   },
   methods: {
     async getPlaylistDetail() {
-    
       const id = this.$route.query;
       var res = await playlistDetail(id);
-
       this.playListDetails = res.playlist;
+      console.log(res);
       this.playListsong = res.playlist.tracks;
     },
 

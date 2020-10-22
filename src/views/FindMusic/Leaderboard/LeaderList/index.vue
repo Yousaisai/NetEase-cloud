@@ -2,13 +2,17 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-18 16:06:25
+ * @LastEditTime: 2020-10-22 10:55:05
 -->
 <template>
   <div class="content">
     <div class="content_detail">
       <div class="detail_pic">
-        <el-image  style="border-radius: 50%" :src="playListDetails.coverImgUrl" :lazy="true"></el-image>
+        <el-image
+          style="border-radius: 50%"
+          :src="playListDetails.coverImgUrl"
+          :lazy="true"
+        ></el-image>
       </div>
       <div class="detail_item" v-if="playListDetails.length != 0">
         <div class="title">
@@ -89,7 +93,6 @@
       <el-divider></el-divider>
       <div class="item_table">
         <el-table
-
           stripe
           :data="
             playListsong.slice(
@@ -117,6 +120,21 @@
             </template>
           </el-table-column>
           <el-table-column prop="name" show-overflow-tooltip label="歌曲标题">
+          <template slot-scope="scope">
+          <div>
+            {{ scope.row.name }}
+            <router-link
+              :to="{
+                path: '/PlayMv',
+                query: { mvid: scope.row.mv },
+              }"
+            >
+              <span
+                ><svg-icon v-show="scope.row.mv != 0" icon-class="MV"
+              /></span>
+            </router-link>
+          </div>
+        </template>
           </el-table-column>
           <el-table-column prop="ar[0].name" show-overflow-tooltip label="歌手">
           </el-table-column>
@@ -209,6 +227,7 @@ export default {
       this.currentPage = val;
     },
     PlaySong(song, index) {
+      console.log(this.playListsong);
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.playListsong,
