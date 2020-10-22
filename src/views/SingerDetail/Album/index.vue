@@ -1,3 +1,9 @@
+<!--
+ * @Descripttion: 
+ * @Author: Mr.You
+ * @Date: 2020-10-18 16:29:21
+ * @LastEditTime: 2020-10-21 20:18:22
+-->
 <template>
   <div class="content">
     <div class="item" v-for="(item, index) in hotAlbums" :key="index">
@@ -45,10 +51,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+ 
   .item {
     width: 18%;
-    padding: 10px 0;
+    padding: 10px 10px;
     .img {
     }
     .img:hover {

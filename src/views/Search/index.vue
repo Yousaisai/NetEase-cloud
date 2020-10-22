@@ -2,13 +2,15 @@
  * @Descripttion: 这里是搜索的界面
  * @Author: Mr.You
  * @Date: 2020-10-21 09:45:07
- * @LastEditTime: 2020-10-21 14:34:47
+ * @LastEditTime: 2020-10-21 19:57:11
 -->
 <template>
   <div class="content">
     <div class="search">
       <div class="elsearch">
-        <div style="padding:10px"><span style="color: #666; font-size: 20px">音乐搜索</span></div>
+        <div style="padding: 10px">
+          <span style="color: #666; font-size: 20px">音乐搜索</span>
+        </div>
         <el-search :width="500" />
       </div>
     </div>
@@ -38,7 +40,9 @@
         </el-menu>
       </div>
       <div class="search_item">
-        <router-view :searchRe="searchRe"></router-view>
+        <keep-alive>
+          <router-view :searchRe="searchRe"></router-view>
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -75,6 +79,26 @@ export default {
   },
   watch: {
     $route(to, from) {
+    //   var path = this.$route.path.slice(8);
+    //   if (path == "SongsList") {
+    //     this.payload.type = 1;
+    //   } else if (path == "Album") {
+    //     this.payload.type = 10;
+    //   } else if (path == "Mv") {
+    //     this.payload.type = 1004;
+    //   } else if (path == "PlayList") {
+    //     this.payload.type = 1000;
+    //   } else {
+    //     this.payload.type = 100;
+    //   }
+      this.getSearch();
+    },
+  },
+  mounted() {
+    this.getSearch();
+  },
+  methods: {
+    async getSearch() {
       var path = this.$route.path.slice(8);
       if (path == "SongsList") {
         this.payload.type = 1;
@@ -87,14 +111,6 @@ export default {
       } else {
         this.payload.type = 100;
       }
-      this.getSearch();
-    },
-  },
-  mounted() {
-    this.getSearch();
-  },
-  methods: {
-    async getSearch() {
       this.payload.keywords = this.keyword;
 
       if (this.keyword.trim() == "") {

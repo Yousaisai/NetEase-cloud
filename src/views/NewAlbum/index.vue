@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-18 16:05:36
+ * @LastEditTime: 2020-10-21 19:14:58
 -->
 
 <template>
@@ -60,7 +60,7 @@
             <span>歌手：{{ albumDetails.artist.name }}</span>
           </div>
           <div style="padding: 5px 0">
-            <span>发行时间：{{ albumDetails.publishTime }}</span>
+            <span>发行时间：{{ dataForm(albumDetails.publishTime )}}</span>
           </div>
           <div style="padding: 5px 0">
             <span>发行公司：{{ albumDetails.company }}</span>
@@ -93,7 +93,7 @@
 import {
   playlistDetail,
   millisToMinutesAndSeconds,
-  newAlbumDetail,
+  newAlbumDetail,dataType
 } from "@/api/index";
 import eltable from "@/components/Talble";
 export default {
@@ -113,6 +113,9 @@ export default {
     this.getPlaylistDetail();
   },
   methods: {
+    dataForm(val){
+      return dataType(val)
+    },
     async getPlaylistDetail() {
       const id = this.$route.query;
       var res = await newAlbumDetail({ ...id, limit: 30 });

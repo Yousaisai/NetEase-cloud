@@ -211,6 +211,17 @@ export function SingersMv(payload) {
 }
 
 
+//获取MV数据
+export function MvData(payload) {
+    return request({
+        url: "/mv/detail",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
 //获取歌手描述
 export function SingersDesc(payload) {
     return request({
@@ -264,3 +275,31 @@ export function Search(payload) {
     })
 }
 
+//传进来的是国际时间转换时间格式, 传入的是十三位的时间戳或者utc	2020-02-15T09:48:38.685Z
+export function dataType(payload) {
+    const dateMat = new Date(payload);
+    const year = dateMat.getFullYear();
+    var month = dateMat.getMonth() + 1;
+    if (month < 10) {
+      month = "0" + month
+    }
+    var day = dateMat.getDate();
+    if (day < 10) {
+      day = "0" + day
+    }
+    var hh = dateMat.getHours();
+    if (hh < 10) {
+      hh = "0" + hh
+    }
+    var mm = dateMat.getMinutes();
+    if (mm < 10) {
+      mm = "0" + mm
+    }
+    var ss = dateMat.getSeconds();
+    if (ss < 10) {
+      ss = "0" + ss
+    }
+    var timeFormat =
+      year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
+    return timeFormat;
+  }

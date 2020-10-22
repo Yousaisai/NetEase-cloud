@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-21 18:54:32
+ * @LastEditTime: 2020-10-21 19:25:42
 -->
 
 <template>
@@ -176,7 +176,7 @@ export default {
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
-        console.log(1111111111);
+ 
         for (const key in this.songDetail) {
           this[key] = this.songDetail[key];
         }
@@ -221,8 +221,6 @@ export default {
           }
         }
       }
-
-      console.log(this.$refs.audio.currentTime);
       if (this.$refs.audio.currentTime) {
         this.SongTime = this.$refs.audio.currentTime * 1000;
       }

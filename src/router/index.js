@@ -107,7 +107,13 @@ const routes = [{
       meta: {
         title: '音乐详情'
       },
-    }, ,
+    }, {
+      path: '/PlayMv',
+      component: () => import('../views/MvPlay/index.vue'),
+      meta: {
+        title: 'MV详情'
+      },
+    },
     {
       path: '/Search',
       name: 'Search',

@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-21 14:35:16
+ * @LastEditTime: 2020-10-21 19:39:26
 -->
 <template>
   <el-popover
@@ -110,6 +110,7 @@
     </div>
 
     <el-input
+    v-on:keyup.enter="emitSearch"
       @change="emitSearch"
       v-model="search"
       suffix-icon="el-icon-search"
@@ -117,6 +118,7 @@
       size="small"
       slot="reference"
       @input="querySearch"
+      
     >
     </el-input>
   </el-popover>

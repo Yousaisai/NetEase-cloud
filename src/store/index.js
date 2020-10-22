@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-21 18:54:19
+ * @LastEditTime: 2020-10-21 20:22:33
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -75,20 +75,24 @@ export default new Vuex.Store({
       commit('ST_IndexSong', indexSong)
 
       try {
-        var auth = await AuthSongId(state.PlaySong.id)
+        var auth = await AuthSongId(state.PlaySong.id) 
+
+        
       } catch (e) {
-        return 
+        console.log(e);
+     
       }
       //首先判断音乐是否可用
       auth = auth.message
-      if (auth == "ok") {
-        dispatch("AuthSongId", state.PlaySong)
-      } else {
+      if (auth != "ok") {
         Message({
           message: auth,
           type: 'warning'
         })
         return
+
+      } else {
+        dispatch("AuthSongId", state.PlaySong)
       }
     },
     async SwitchSong({
