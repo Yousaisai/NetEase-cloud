@@ -2,14 +2,18 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-21 19:14:58
+ * @LastEditTime: 2020-10-22 17:09:21
 -->
 
 <template>
   <div class="content">
     <div class="content_detail">
       <div class="detail_pic">
-        <el-image  style="border-radius: 50%" :src="albumDetails.picUrl" :lazy="true"></el-image>
+        <el-image
+          style="border-radius: 50%"
+          :src="albumDetails.picUrl"
+          :lazy="true"
+        ></el-image>
       </div>
       <div class="detail_item" v-if="albumDetails.length != 0">
         <div class="title">
@@ -60,7 +64,7 @@
             <span>歌手：{{ albumDetails.artist.name }}</span>
           </div>
           <div style="padding: 5px 0">
-            <span>发行时间：{{ dataForm(albumDetails.publishTime )}}</span>
+            <span>发行时间：{{ dataForm(albumDetails.publishTime) }}</span>
           </div>
           <div style="padding: 5px 0">
             <span>发行公司：{{ albumDetails.company }}</span>
@@ -82,6 +86,9 @@
       <el-divider></el-divider>
       <div class="item_table"><eltable :Songs="playListsong" /></div>
     </div>
+    <div class="comment">
+      <comment :commentData="JSON.stringify(commentData)"> </comment>
+    </div>
   </div>
 </template>
 
@@ -93,11 +100,15 @@
 import {
   playlistDetail,
   millisToMinutesAndSeconds,
-  newAlbumDetail,dataType
+  newAlbumDetail,
+  dataType,
+  AlbumComment,
 } from "@/api/index";
+import comment from "@/components/comment/index";
+
 import eltable from "@/components/Talble";
 export default {
-  components: { eltable },
+  components: { eltable, comment },
   data() {
     return {
       play: false,
@@ -105,16 +116,22 @@ export default {
       albumDetails: [],
       //歌单曲目
       playListsong: [],
+      commentData: {},
     };
   },
-  computed: {},
+  computed: {
+    Id() {
+      return this.$route.query.id;
+    },
+  },
 
   mounted() {
     this.getPlaylistDetail();
+    this.getComment()
   },
   methods: {
-    dataForm(val){
-      return dataType(val)
+    dataForm(val) {
+      return dataType(val);
     },
     async getPlaylistDetail() {
       const id = this.$route.query;
@@ -123,6 +140,11 @@ export default {
       this.albumDetails = res.album;
       console.log(res);
       this.playListsong = res.songs;
+    },
+    async getComment() {
+      var res = await AlbumComment({ id: this.Id });
+      console.log(res);
+      this.commentData = res;
     },
     playAll() {
       this.$store.dispatch("PlaySongs", {
@@ -142,7 +164,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  
+
   .content_detail {
     align-items: center;
     display: flex;
@@ -192,7 +214,6 @@ export default {
         margin: 20px 0 0 0;
         font-size: 13px;
         width: 35vw;
-     
       }
     }
   }
@@ -209,6 +230,9 @@ export default {
     }
     .item_table {
     }
+  }
+  .comment{
+    padding-top: 30px;
   }
 }
 </style>

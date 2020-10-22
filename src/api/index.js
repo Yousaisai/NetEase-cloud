@@ -1,5 +1,35 @@
 import request from '@/utils/request'
 
+//传进来的是国际时间转换时间格式, 传入的是十三位的时间戳或者utc	2020-02-15T09:48:38.685Z
+export function dataType(payload) {
+    const dateMat = new Date(payload);
+    const year = dateMat.getFullYear();
+    var month = dateMat.getMonth() + 1;
+    if (month < 10) {
+      month = "0" + month
+    }
+    var day = dateMat.getDate();
+    if (day < 10) {
+      day = "0" + day
+    }
+    var hh = dateMat.getHours();
+    if (hh < 10) {
+      hh = "0" + hh
+    }
+    var mm = dateMat.getMinutes();
+    if (mm < 10) {
+      mm = "0" + mm
+    }
+    var ss = dateMat.getSeconds();
+    if (ss < 10) {
+      ss = "0" + ss
+    }
+    var timeFormat =
+      year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
+    return timeFormat;
+  }
+
+
 //获取轮播图
 export function banner() {
     return request({
@@ -288,31 +318,52 @@ export function Search(payload) {
     })
 }
 
-//传进来的是国际时间转换时间格式, 传入的是十三位的时间戳或者utc	2020-02-15T09:48:38.685Z
-export function dataType(payload) {
-    const dateMat = new Date(payload);
-    const year = dateMat.getFullYear();
-    var month = dateMat.getMonth() + 1;
-    if (month < 10) {
-      month = "0" + month
-    }
-    var day = dateMat.getDate();
-    if (day < 10) {
-      day = "0" + day
-    }
-    var hh = dateMat.getHours();
-    if (hh < 10) {
-      hh = "0" + hh
-    }
-    var mm = dateMat.getMinutes();
-    if (mm < 10) {
-      mm = "0" + mm
-    }
-    var ss = dateMat.getSeconds();
-    if (ss < 10) {
-      ss = "0" + ss
-    }
-    var timeFormat =
-      year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
-    return timeFormat;
-  }
+
+//获取歌曲评论，包括精彩评论和最新评论
+export function MusicComment(payload) {
+    return request({
+        url: "/comment/music",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+
+
+//获取歌单评论，包括精彩评论和最新评论
+export function PlayListComment(payload) {
+    return request({
+        url: "/comment/playlist",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+
+
+//获取专辑评论，包括精彩评论和最新评论
+export function AlbumComment(payload) {
+    return request({
+        url: "/comment/album",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+
+//获取mv评论，包括精彩评论和最新评论
+export function MvComment(payload) {
+    return request({
+        url: "/comment/mv",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}

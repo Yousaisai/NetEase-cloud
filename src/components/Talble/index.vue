@@ -2,7 +2,7 @@
  * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-22 10:54:20
+ * @LastEditTime: 2020-10-22 17:22:13
 -->
 
 <template>
@@ -35,6 +35,7 @@
         show-overflow-tooltip
         label="歌曲标题"
         min-width="180"
+        
       >
         <template slot-scope="scope">
           <div>

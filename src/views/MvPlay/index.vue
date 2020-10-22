@@ -2,7 +2,7 @@
  * @Descripttion: 播放
  * @Author: Mr.You
  * @Date: 2020-10-21 20:50:08
- * @LastEditTime: 2020-10-22 10:05:45
+ * @LastEditTime: 2020-10-22 17:13:45
 -->
 <template>
   <div class="content">
@@ -35,17 +35,21 @@
       </div>
     </div>
     <div class="com">简介：{{ mvdata.desc }}</div>
-    <div class="comment"></div>
+    <div class="comment">
+      <comment :commentData="JSON.stringify(commentData)"> </comment>
+    </div>
   </div>
 </template>
 
 <script>
 import MvPlay from "@/components/PlayVideo/index";
-import { MvData, MvUrl } from "@/api/index";
+import { MvData, MvUrl, MvComment } from "@/api/index";
+import comment from "@/components/comment/index";
+
 export default {
-  components: { MvPlay },
+  components: { MvPlay, comment },
   data() {
-    return { mvurl: "", mvdata: {} };
+    return { mvurl: "", mvdata: {}, commentData: {} };
   },
   computed: {
     mvid() {
@@ -53,7 +57,7 @@ export default {
     },
   },
   mounted() {
-    this.getMvData();
+    this.getComment(), this.getMvData();
     this.getMvUrl();
   },
   methods: {
@@ -66,6 +70,11 @@ export default {
       var res = await MvUrl({ id: this.mvid.mvid });
       console.log(res.data.url);
       this.mvurl = res.data.url;
+    },
+    async getComment() {
+      var res = await MvComment({ id: this.mvid.mvid });
+      console.log(res);
+      this.commentData = res;
     },
   },
 };
@@ -101,6 +110,7 @@ export default {
     text-align: left;
   }
   .comment {
+    padding-top: 30px;
   }
 }
 </style>

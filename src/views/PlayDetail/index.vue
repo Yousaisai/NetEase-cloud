@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-20 16:52:32
+ * @LastEditTime: 2020-10-22 17:18:09
 -->
 <template>
   <div class="content">
@@ -102,7 +102,9 @@
           收起
         </li>
       </div>
-      <div class="comment"></div>
+      <div class="comment">
+        <comment :commentData="JSON.stringify(commentData)"> </comment>
+      </div>
     </div>
   </div>
 </template>
@@ -113,11 +115,23 @@ import {
   PlayOneSong,
   SongDetail,
   SongLyric,
+  MusicComment,
 } from "@/api/index";
 
+import comment from "@/components/comment/index";
+
 export default {
+  components: {
+    comment,
+  },
   data() {
-    return { isShow: 10, songDetail: {}, lyric: [], currentLyric: 0 };
+    return {
+      isShow: 10,
+      songDetail: {},
+      lyric: [],
+      currentLyric: 0,
+      commentData: {},
+    };
   },
   computed: {
     Id() {
@@ -136,6 +150,7 @@ export default {
   mounted() {
     this.getPlayOneSong();
     this.getLyric();
+    this.getComment();
   },
   methods: {
     PlayMusic() {
@@ -183,6 +198,11 @@ export default {
       }
       this.lyric = lyric;
     },
+    async getComment() {
+      var res = await MusicComment({ id: this.Id });
+      console.log(res);
+      this.commentData = res;
+    },
   },
 };
 </script>
@@ -202,7 +222,7 @@ export default {
     flex-direction: column;
     right: 2px;
     .detail {
-      padding: 10px;
+      // padding: 10px;
       width: 1080px;
       margin: 0 auto;
       background-color: #fff;
@@ -238,7 +258,7 @@ export default {
       }
     }
     .lyc {
-      padding: 0 10px;
+      // padding: 0 10px;
       width: 1080px;
       margin: 0 auto;
       background-color: #fff;
@@ -248,6 +268,7 @@ export default {
       }
     }
     .comment {
+      
       width: 1080px;
       margin: 0 auto;
       background-color: #fff;

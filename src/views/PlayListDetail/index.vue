@@ -2,7 +2,7 @@
  * @Descripttion: 热门推荐歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-13 18:39:42
- * @LastEditTime: 2020-10-22 09:32:51
+ * @LastEditTime: 2020-10-22 17:02:53
 -->
 <template>
   <div class="content">
@@ -104,6 +104,9 @@
         <eltable :Songs="playListsong" />
       </div>
     </div>
+    <div class="comment">
+      <comment :commentData="JSON.stringify(commentData)"> </comment>
+    </div>
   </div>
 </template>
 
@@ -112,10 +115,15 @@
 
 
 <script>
+import comment from "@/components/comment/index";
 import eltable from "@/components/Talble";
-import { playlistDetail, millisToMinutesAndSeconds } from "@/api/index";
+import {
+  playlistDetail,
+  PlayListComment,
+  millisToMinutesAndSeconds,
+} from "@/api/index";
 export default {
-  components: { eltable },
+  components: { eltable, comment },
   data() {
     return {
       play: false,
@@ -123,6 +131,7 @@ export default {
       playListDetails: [],
       //歌单曲目
       playListsong: [],
+      commentData: {},
     };
   },
   watch: {
@@ -133,19 +142,28 @@ export default {
       }
     },
   },
-
+  computed: {
+    id() {
+      return this.$route.query;
+    },
+  },
   mounted() {
     this.getPlaylistDetail();
+    this.getPlayListComment();
   },
   methods: {
     async getPlaylistDetail() {
-      const id = this.$route.query;
-      var res = await playlistDetail(id);
+      // const id = this.$route.query;
+      var res = await playlistDetail(this.id);
       this.playListDetails = res.playlist;
       console.log(res);
       this.playListsong = res.playlist.tracks;
     },
-
+    async getPlayListComment() {
+      var res = await PlayListComment(this.id);
+      console.log(res);
+      this.commentData = res;
+    },
     playAll() {
       this.$store.dispatch("PlaySongs", {
         oneSong: this.playListsong[0],
@@ -229,6 +247,9 @@ export default {
     }
     .item_table {
     }
+  }
+  .comment {
+    padding-top: 30px;
   }
 }
 </style>
