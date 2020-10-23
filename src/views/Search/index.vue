@@ -117,7 +117,6 @@ export default {
         return;
       }
       var res = await Search(this.payload);
-      console.log(res.result);
       this.searchRe = res.result;
     },
   },

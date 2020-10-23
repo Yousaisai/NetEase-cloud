@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-22 17:09:21
+ * @LastEditTime: 2020-10-22 18:18:00
 -->
 
 <template>
@@ -136,14 +136,11 @@ export default {
     async getPlaylistDetail() {
       const id = this.$route.query;
       var res = await newAlbumDetail({ ...id, limit: 30 });
-      console.log(res);
       this.albumDetails = res.album;
-      console.log(res);
       this.playListsong = res.songs;
     },
     async getComment() {
       var res = await AlbumComment({ id: this.Id });
-      console.log(res);
       this.commentData = res;
     },
     playAll() {

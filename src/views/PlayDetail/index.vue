@@ -200,7 +200,6 @@ export default {
     },
     async getComment() {
       var res = await MusicComment({ id: this.Id });
-      console.log(res);
       this.commentData = res;
     },
   },

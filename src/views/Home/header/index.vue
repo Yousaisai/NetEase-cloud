@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-21 11:25:41
+ * @LastEditTime: 2020-10-22 18:18:08
 -->
 <template>
   <div class="content">
@@ -20,7 +20,7 @@
         </el-row>
       </el-col>
       <el-col :span="4" style="padding: 10px 0; line-height: 40px">
-        <el-search @emitSearch="emitSearch($event)" :width="250"/>
+        <el-search @emitSearch="emitSearch($event)" :width="250" />
       </el-col>
       <el-col :span="16">
         <div
@@ -55,10 +55,10 @@
 
 <script>
 import { SearchSug, DefSearch, HotSearch } from "@/api/index";
-import elSearch from '@/components/Search'
+import elSearch from "@/components/Search";
 export default {
   components: {
-    elSearch
+    elSearch,
   },
   data() {
     return {
@@ -95,14 +95,12 @@ export default {
       this.hotSearch = res;
     },
     async querySearch(val) {
-      console.log(1);
       // 调用 callback 返回建议列表的数据
 
       if (val.trim() == "") {
         return;
       }
       var result = await this.getSearchSug(val);
-      console.log(result);
       this.allSearch = result;
     },
 
@@ -111,11 +109,8 @@ export default {
       return res.result;
     },
 
-    handleSelect(val) {
-      console.log(val);
-    },   emitSearch(val) {
-      console.log(111,val);
-    },
+    handleSelect(val) {},
+    emitSearch(val) {},
   },
 };
 </script>
@@ -138,7 +133,8 @@ li:hover {
     padding: 10px 10px 0 10px;
     margin: 0;
 
-    li { font-size: 12px;
+    li {
+      font-size: 12px;
       list-style: none;
 
       .li {
@@ -147,7 +143,7 @@ li:hover {
           background-color: #f5f5f5;
           border-radius: 20px;
           display: inline-block;
-        
+
           font-weight: 600;
           margin-right: 24px;
           height: 20px;
@@ -159,7 +155,7 @@ li:hover {
           background-color: #314659;
           border-radius: 20px;
           display: inline-block;
-          
+
           font-weight: 600;
           margin-right: 24px;
           height: 20px;

@@ -39,10 +39,8 @@ export default {
 
   methods: {
     async getSingersMv() {
-      console.log(222);
       var id=this.$route.query
       var res = await SingersMv(id);
-      console.log(res.mvs);
       this.mvs=res.mvs
     },
   },

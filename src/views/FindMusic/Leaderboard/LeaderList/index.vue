@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-22 10:55:05
+ * @LastEditTime: 2020-10-22 18:18:22
 -->
 <template>
   <div class="content">
@@ -227,7 +227,6 @@ export default {
       this.currentPage = val;
     },
     PlaySong(song, index) {
-      console.log(this.playListsong);
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.playListsong,

@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-15 10:30:24
+ * @LastEditTime: 2020-10-22 18:24:23
 -->
 <template>
   <div class="home">
@@ -65,10 +65,9 @@ export default {
     display: flex;
     z-index: 2;
     flex-direction: column;
-    .main{
+    .main {
       // width: 1080px;
       // margin: 0 auto;
- 
     }
     .header {
       display: flex;
@@ -80,4 +79,5 @@ export default {
     }
   }
 }
+
 </style>

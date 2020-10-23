@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-21 19:25:42
+ * @LastEditTime: 2020-10-22 18:12:35
 -->
 
 <template>
@@ -28,7 +28,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       @timeupdate="onTimeupdate"
       @loadedmetadata="onLoadedmetadata"
       preload="auto"
-      :autoplay="true"
+      :autoplay="false"
       :muted="false"
       :loop="false"
     ></audio>
@@ -161,6 +161,7 @@ export default {
       lyric: [], //歌词
       currentLyric: 0, //当前歌词行数
       lyricText: "音乐歌词", //当前歌词
+      tit: document.title,
     };
   },
   computed: {
@@ -172,11 +173,13 @@ export default {
       return JSON.parse(localStorage.getItem("SongDetail"));
     },
   },
+  mounted() {
+    this.TitleScrolling();
+  },
   watch: {
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
- 
         for (const key in this.songDetail) {
           this[key] = this.songDetail[key];
         }
@@ -232,6 +235,11 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
+      this.$refs.audio.play();
+      this.playing = true;
+      this.tit = ` 正在播放：${this.name} - ${
+        this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name
+      }  `;
       // this.$refs.audio.play();
       if (this.onesong.id) {
         this.getLyric(this.onesong.id);
@@ -241,6 +249,19 @@ export default {
     //切换歌曲
     SwitchSongs(val) {
       this.$store.dispatch("SwitchSong", val);
+    },
+    TitleScrolling() {
+      setInterval(() => {
+        //ES6箭头函数
+        // 截取首字符串(第一个)
+        var head = this.tit.substring(0, 1);
+        // 截取除首字符串外所有字符串(除第一个所有)
+        var foot = this.tit.substring(1);
+        // 头尾拼接后赋给data => tit属性
+        this.tit = foot + head;
+        // 最后赋给最终显示的标题(标题)
+        document.title = this.tit;
+      }, 800);
     },
     async getLyric(id) {
       //获取歌词

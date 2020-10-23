@@ -2,7 +2,7 @@
  * @Descripttion: 歌手导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:08
- * @LastEditTime: 2020-10-18 16:28:10
+ * @LastEditTime: 2020-10-22 18:17:36
 -->
 <template>
   <div class="content">
@@ -156,7 +156,6 @@ export default {
     async getSingerLeader() {
       var res = await SingerLeader();
       res = res.list.artists;
-      // console.log(res);
       this.singers = res;
     },
 
@@ -209,10 +208,8 @@ export default {
       }
       var res = await CatSingers(this.CatSingersPayload);
       this.singers = res.artists;
-      console.log(res);
     },
     async getOneSinger(item) {
-      console.log(item);
     },
   },
 };

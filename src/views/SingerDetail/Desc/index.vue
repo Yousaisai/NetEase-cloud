@@ -2,7 +2,7 @@
  * @Descripttion: 歌手简介
  * @Author: Mr.You
  * @Date: 2020-10-18 16:29:28
- * @LastEditTime: 2020-10-22 10:41:36
+ * @LastEditTime: 2020-10-22 18:18:54
 -->
 <template>
   <div class="content">
@@ -41,14 +41,10 @@ export default {
   methods: {
     async getSingersDesc() {
       var res = await SingersDesc(this.id);
-      console.log(res);
       this.briefDesc = res.briefDesc;
       res.introduction.map((val) => {
         val.txt = val.txt.split("\n");
       });
-      // var intro=res.introduction.split("/n")
-      // var test=/{\/n}/-g
-      console.log(res.introduction);
       this.introduction = res.introduction;
     },
   },

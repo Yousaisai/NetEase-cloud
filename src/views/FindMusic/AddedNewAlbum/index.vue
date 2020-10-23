@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:06:59
- * @LastEditTime: 2020-10-18 19:37:29
+ * @LastEditTime: 2020-10-22 18:17:27
 -->
 <template>
   <div class="content">
@@ -82,10 +82,8 @@ export default {
     async getnewAllAlbum(val) {
       if (val) {
         this.newTopAlbumPapload.type=val
-        console.log(val);
       }
       var res = await newTopAlbum(this.newTopAlbumPapload);
-      console.log(res);
       this.allMonthData = res.monthData;
     },
     async getnewHotAlbum() {

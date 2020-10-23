@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-21 20:22:33
+ * @LastEditTime: 2020-10-22 18:17:20
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -139,7 +139,6 @@ export default new Vuex.Store({
       commit,
       state
     }, payload) {
-      console.log(3333);
       var songs = await PlayOneSong(payload.id)
       var commSong = {
         url: songs.data[0].url,
@@ -149,7 +148,6 @@ export default new Vuex.Store({
         album: payload.al ? payload.al.name : payload.album.name,
         onesong: payload
       }
-      console.log(commSong);
       commit('ST_SongDetail', commSong)
 
     }

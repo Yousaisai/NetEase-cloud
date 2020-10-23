@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-18 16:29:21
- * @LastEditTime: 2020-10-21 20:18:22
+ * @LastEditTime: 2020-10-22 18:18:46
 -->
 <template>
   <div class="content">
@@ -39,7 +39,6 @@ export default {
   methods: {
     async getSingersAlbum() {
       var res = await SingersAlbum(this.SingersAlbumPayload);
-      console.log(res);
       this.hotAlbums = res.hotAlbums;
     },
   },

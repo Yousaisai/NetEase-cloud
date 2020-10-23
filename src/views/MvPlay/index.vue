@@ -2,7 +2,7 @@
  * @Descripttion: 播放
  * @Author: Mr.You
  * @Date: 2020-10-21 20:50:08
- * @LastEditTime: 2020-10-22 17:13:45
+ * @LastEditTime: 2020-10-22 18:17:52
 -->
 <template>
   <div class="content">
@@ -63,17 +63,14 @@ export default {
   methods: {
     async getMvData() {
       var res = await MvData(this.mvid);
-      console.log(res.data);
       this.mvdata = res.data;
     },
     async getMvUrl() {
       var res = await MvUrl({ id: this.mvid.mvid });
-      console.log(res.data.url);
       this.mvurl = res.data.url;
     },
     async getComment() {
       var res = await MvComment({ id: this.mvid.mvid });
-      console.log(res);
       this.commentData = res;
     },
   },

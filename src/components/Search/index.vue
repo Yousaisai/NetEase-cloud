@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-21 19:39:26
+ * @LastEditTime: 2020-10-22 18:19:04
 -->
 <template>
   <el-popover
@@ -110,7 +110,7 @@
     </div>
 
     <el-input
-    v-on:keyup.enter="emitSearch"
+      v-on:keyup.enter="emitSearch"
       @change="emitSearch"
       v-model="search"
       suffix-icon="el-icon-search"
@@ -118,7 +118,6 @@
       size="small"
       slot="reference"
       @input="querySearch"
-      
     >
     </el-input>
   </el-popover>
@@ -186,7 +185,6 @@ export default {
       }
       var result = await this.getSearchSug(val);
       var obj = Object.keys(result);
-      console.log(obj);
       var obj1 = ["albums", "artists", "songs", "playlists"];
       var objTrue = obj.some((val) => {
         return obj1.includes(val) == true;
@@ -289,7 +287,6 @@ li:hover {
   align-items: center;
 }
 .spanhot {
-   
   background-color: #666;
   color: #fff;
   padding: 2px 5px;
