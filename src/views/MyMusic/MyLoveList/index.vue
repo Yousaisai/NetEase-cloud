@@ -2,7 +2,7 @@
  * @Descripttion: 我创建的歌单
  * @Author: Mr.You
  * @Date: 2020-10-12 20:31:43
- * @LastEditTime: 2020-10-23 17:11:36
+ * @LastEditTime: 2020-10-23 20:57:07
 -->
 <template>
   <div class="content">
@@ -41,6 +41,7 @@
 
 
 <script>
+import { getToken } from "@/utils/cookie.js";
 import { UserPlaylist } from "@/api/index";
 export default {
   data() {
@@ -52,7 +53,7 @@ export default {
 
   computed: {
     account() {
-      return JSON.parse(sessionStorage.getItem("account"));
+      return JSON.parse(getToken("account"));
     },
   },
   mounted() {
@@ -61,7 +62,6 @@ export default {
   methods: {
     async getUserPlaylist() {
       var res = await UserPlaylist({ uid: this.account.id });
-      console.log(res);
       this.userList = res.playlist;
     },
   },
@@ -69,14 +69,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
+
   background-color: #fff;
   min-height: calc(100vh - 130px);
   margin: 0 auto;
   width: 1080px;
+ 
   padding: 10px;
   .content_item {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     .item_img {
       border-radius: 10px;

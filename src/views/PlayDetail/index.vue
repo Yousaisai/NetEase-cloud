@@ -2,109 +2,107 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-23 18:32:39
+ * @LastEditTime: 2020-10-23 21:30:48
 -->
 <template>
-  <div class="content">
-    <div class="content_poab" v-if="songDetail.al">
-      <div class="detail">
-        <div class="pic">
-          <el-image
-            style="border-radius: 180px"
-            :src="songDetail.al.picUrl + '?param=180y180'"
-            fit="fill"
-            :lazy="true"
-          ></el-image>
+  <div class="content" v-if="songDetail.al">
+    <div class="detail">
+      <div class="pic">
+        <el-image
+          style="border-radius: 180px"
+          :src="songDetail.al.picUrl + '?param=180y180'"
+          fit="fill"
+          :lazy="true"
+        ></el-image>
+      </div>
+      <div class="detail_content">
+        <div class="title">
+          <span style="padding-right: 2px; color: #9b0909"
+            ><svg-icon icon-class="音乐"
+          /></span>
+          {{ songDetail.name }}
         </div>
-        <div class="detail_content">
-          <div class="title">
-            <span style="padding-right: 2px; color: #9b0909"
-              ><svg-icon icon-class="音乐"
-            /></span>
-            {{ songDetail.name }}
-          </div>
-          <div class="name">
-            <span>歌手： </span>
-            <router-link
-              style="text-decoration: none"
-              :to="{
-                path: '/SingerDetail/Music',
-                query: { id: songDetail.ar[0].id },
-              }"
-              ><span style="font-size: 15px; color: #409eff; cursor: pointer">{{
-                songDetail.al.name
-              }}</span>
-            </router-link>
-          </div>
-          <div class="album">
-            <span>专辑：</span>
-            <router-link
-              style="text-decoration: none"
-              :to="{ path: '/NewAlbum', query: { id: songDetail.al.id } }"
-              ><span
-                style="
-                  padding: 10px;
-                  font-size: 15px;
-                  color: #409eff;
-                  cursor: pointer;
-                "
-                v-for="item in songDetail.ar"
-                :key="item.id"
-                >{{ item.name }}</span
-              ></router-link
+        <div class="name">
+          <span>歌手： </span>
+          <router-link
+            style="text-decoration: none"
+            :to="{
+              path: '/SingerDetail/Music',
+              query: { id: songDetail.ar[0].id },
+            }"
+            ><span style="font-size: 15px; color: #409eff; cursor: pointer">{{
+              songDetail.al.name
+            }}</span>
+          </router-link>
+        </div>
+        <div class="album">
+          <span>专辑：</span>
+          <router-link
+            style="text-decoration: none"
+            :to="{ path: '/NewAlbum', query: { id: songDetail.al.id } }"
+            ><span
+              style="
+                padding: 10px;
+                font-size: 15px;
+                color: #409eff;
+                cursor: pointer;
+              "
+              v-for="item in songDetail.ar"
+              :key="item.id"
+              >{{ item.name }}</span
+            ></router-link
+          >
+        </div>
+        <div class="btn">
+          <div class="btn_item">
+            <el-button @click="PlayMusic" type="primary" size="mini" plain
+              ><svg-icon icon-class="播放 (3)" /> 播放</el-button
             >
           </div>
-          <div class="btn">
-            <div class="btn_item">
-              <el-button @click="PlayMusic" type="primary" size="mini" plain
-                ><svg-icon icon-class="播放 (3)" /> 播放</el-button
-              >
-            </div>
-            <div class="btn_item">
-              <el-button type="primary" size="mini" plain
-                ><svg-icon icon-class="收 藏 (1)" /> 收藏
-              </el-button>
-            </div>
-            <div class="btn_item">
-              <el-button type="primary" size="mini" plain
-                ><svg-icon icon-class="转发" /> 转发</el-button
-              >
-            </div>
-            <div class="btn_item">
-              <el-button type="primary" size="mini" plain>
-                <svg-icon icon-class="下载" /> 下载
-              </el-button>
-            </div>
-            <div class="btn_item">
-              <el-button type="primary" size="mini" plain
-                ><svg-icon icon-class="评 论" /> 评论
-              </el-button>
-            </div>
+          <div class="btn_item">
+            <el-button type="primary" size="mini" plain
+              ><svg-icon icon-class="收 藏 (1)" /> 收藏
+            </el-button>
+          </div>
+          <div class="btn_item">
+            <el-button type="primary" size="mini" plain
+              ><svg-icon icon-class="转发" /> 转发</el-button
+            >
+          </div>
+          <div class="btn_item">
+            <el-button type="primary" size="mini" plain>
+              <svg-icon icon-class="下载" /> 下载
+            </el-button>
+          </div>
+          <div class="btn_item">
+            <el-button type="primary" size="mini" plain
+              ><svg-icon icon-class="评 论" /> 评论
+            </el-button>
           </div>
         </div>
       </div>
-      <div class="lyc">
-        <li v-for="(item, index) in lyric" v-show="index < isShow" :key="index">
-          {{ item[1] }}
-        </li>
-        <li
-          v-show="isShow == 10"
-          style="color: #409eff; cursor: pointer"
-          @click="isShow = 1000"
-        >
-          展开
-        </li>
-        <li
-          v-show="isShow != 10"
-          style="color: #409eff; cursor: pointer"
-          @click="isShow = 10"
-        >
-          收起
-        </li>
-      </div>
-      <div class="comment">
-        <comment :type="0" :commentData="JSON.stringify(commentData)"> </comment>
-      </div>
+    </div>
+    <div class="lyc">
+      <li v-for="(item, index) in lyric" v-show="index < isShow" :key="index">
+        {{ item[1] }}
+      </li>
+      <li
+        v-show="isShow == 10"
+        style="color: #409eff; cursor: pointer"
+        @click="isShow = 1000"
+      >
+        展开
+      </li>
+      <li
+        v-show="isShow != 10"
+        style="color: #409eff; cursor: pointer"
+        @click="isShow = 10"
+      >
+        收起
+      </li>
+    </div>
+    <div class="comment">
+      <comment :type="0" :commentData="JSON.stringify(commentData)"> </comment>
     </div>
   </div>
 </template>
@@ -210,68 +208,60 @@ export default {
   li {
     list-style: none;
   }
-  position: relative;
-  z-index: 1000000;
-  .content_poab {
-    background-color: #f5f5f5;
-    position: absolute;
-    top: -60px;
-    width: calc(100vw - 130px);
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  right: 2px;
+  .detail {
+    // padding: 10px;
+    width: 1080px;
+    margin: 0 auto;
+    background-color: #fff;
     display: flex;
-    flex-direction: column;
-    right: 2px;
-    .detail {
-      // padding: 10px;
-      width: 1080px;
-      margin: 0 auto;
-      background-color: #fff;
-      display: flex;
-      text-align: left;
-      .pic {
-        padding: 10px 20px;
-      }
+    text-align: left;
+    .pic {
+      padding: 30px 20px 20px 20px;
+    }
 
-      .detail_content {
+    .detail_content {
+      padding: 10px;
+      .title {
         padding: 10px;
-        .title {
-          padding: 10px;
-          font-size: 28px;
-        }
+        font-size: 28px;
+      }
 
-        .name {
-          padding: 10px;
-        }
+      .name {
+        padding: 10px;
+      }
 
-        .album {
-          padding: 10px;
-        }
+      .album {
+        padding: 10px;
+      }
 
-        .btn {
-          padding: 10px;
-          display: flex;
-          align-items: center;
-          .btn_item {
-            padding: 0 20px 0 0;
-          }
+      .btn {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        .btn_item {
+          padding: 0 20px 0 0;
         }
       }
     }
-    .lyc {
-      // padding: 0 10px;
-      width: 1080px;
-      margin: 0 auto;
-      background-color: #fff;
-      li {
-        padding: 5px;
-        font-size: 13px;
-      }
+  }
+  .lyc {
+    // padding: 0 10px;
+    width: 1080px;
+    margin: 0 auto;
+    background-color: #fff;
+    li {
+      padding: 5px;
+      font-size: 13px;
     }
-    .comment {
-      
-      width: 1080px;
-      margin: 0 auto;
-      background-color: #fff;
-    }
+  }
+  .comment {
+    width: 1080px;
+    margin: 0 auto;
+    background-color: #fff;
   }
 }
 </style>

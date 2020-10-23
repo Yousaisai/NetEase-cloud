@@ -2,13 +2,15 @@
  * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-22 17:22:13
+ * @LastEditTime: 2020-10-23 21:48:36
 -->
 
 <template>
   <div>
     <el-table
+      @row-dblclick="dbclick"
       stripe
+      :row-class-name="tableRowClassName"
       :data="Songs.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
       @cell-mouse-enter="cellenter"
       @cell-mouse-leave="cellleave"
@@ -35,7 +37,6 @@
         show-overflow-tooltip
         label="歌曲标题"
         min-width="180"
-        
       >
         <template slot-scope="scope">
           <div>
@@ -159,8 +160,19 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val;
     },
+    dbclick(row) {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: row,
+        allSong: this.Songs,
+        indexSong: row.index,
+      });
+    },
+
+    tableRowClassName({ row, rowIndex }) {
+      // 把每一行的索引放进row
+      row.index = rowIndex;
+    },
     PlaySong(song, index) {
-   
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.Songs,

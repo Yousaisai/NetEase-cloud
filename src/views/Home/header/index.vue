@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-23 16:37:36
+ * @LastEditTime: 2020-10-23 19:54:20
 -->
 <template>
   <div class="content">
@@ -15,7 +15,7 @@
               style="font-size: 3.5em; padding: 0px 0; line-height: 40px"
           /></el-col>
           <el-col :span="16">
-            <div class="title">Mr.You{{ this.$store.state.isLogin }}</div>
+            <div class="title">Mr.You</div>
           </el-col>
         </el-row>
       </el-col>
@@ -46,7 +46,7 @@
         </div>
         <div v-if="auth" class="avt">
           <el-dropdown placement="bottom-start" @command="handleCommand">
-            <span class="el-dropdown-link">
+            <span class="el-dropdown-link" v-if="avt">
               <el-image
                 style="height: 30px; width: 30px; border-radius: 50%"
                 :src="avt.avatarUrl"
@@ -62,6 +62,7 @@
       </el-col>
     </el-row>
     <el-dialog
+      :close-on-click-modal="false"
       title="登录网易云音乐"
       :visible.sync="dialogVisible"
       width="30%"
@@ -90,18 +91,15 @@ export default {
   },
   computed: {
     avt() {
-      return JSON.parse(sessionStorage.getItem("profile"));
+      return JSON.parse(getToken("profile"));
     },
     auth() {
       var isLogin = this.$store.state.isLogin;
       if (isLogin) {
-        console.log(1);
         return isLogin;
       } else if (getToken("auth")) {
-        console.log(2);
         return true;
       } else {
-        console.log(3);
         return false;
       }
     },
@@ -117,7 +115,6 @@ export default {
         this.$store.state.isLogin = true;
         removeCookie("token"), removeCookie("auth");
         this.$store.state.isLogin = false;
-        console.log(this.$store.state.isLogin);
       }
     },
   },

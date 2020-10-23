@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲评论，只需要传来评论参数
  * @Author: Mr.You
  * @Date: 2020-10-22 11:13:17
- * @LastEditTime: 2020-10-23 18:55:33
+ * @LastEditTime: 2020-10-23 19:54:53
 -->
 <template>
   <div class="comcontent">
@@ -221,7 +221,6 @@ export default {
         this.CommentLikePayload.t = 0;
         this.CommentLikePayload.type = this.type;
         var res = await CommentUnLike(this.CommentLikePayload);
-        console.log(res);
       } else {
         val.liked = true;
         val.likedCount++;
@@ -229,10 +228,7 @@ export default {
         this.CommentLikePayload.t = 1;
         this.CommentLikePayload.type = this.type;
         var res = await CommentLike(this.CommentLikePayload);
-        console.log(res);
       }
-
-      console.log(val);
     },
   },
 };

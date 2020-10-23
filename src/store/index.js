@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-23 11:30:14
+ * @LastEditTime: 2020-10-23 21:11:23
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -20,7 +20,7 @@ import {
 
 export default new Vuex.Store({
   state: {
-    isLogin:false,
+    isLogin: false,
     //播放音乐的资源，里面只有音乐ID
     PlaySong: "",
     //需要传到播放界面的参数,包含音乐url、音乐名name、封面cover、时长time、专辑album
@@ -76,25 +76,26 @@ export default new Vuex.Store({
       commit('ST_IndexSong', indexSong)
 
       try {
-        var auth = await AuthSongId(state.PlaySong.id) 
+        var auth = await AuthSongId(state.PlaySong.id) //首先判断音乐是否可用
+        auth = auth.message
+        if (auth != "ok") {
+          Message({
+            message: auth,
+            type: 'warning'
+          })
+          return
 
-        
+        } else {
+          dispatch("AuthSongId", state.PlaySong)
+        }
       } catch (e) {
         console.log(e);
-     
-      }
-      //首先判断音乐是否可用
-      auth = auth.message
-      if (auth != "ok") {
         Message({
-          message: auth,
+          message: "暂无播放资源",
           type: 'warning'
         })
-        return
-
-      } else {
-        dispatch("AuthSongId", state.PlaySong)
       }
+
     },
     async SwitchSong({
       commit,
@@ -121,19 +122,29 @@ export default new Vuex.Store({
         nextSong = state.AllSongs[state.IndexSong]
       }
       //首先判断音乐是否可用
+      try {
+        var auth = await AuthSongId(nextSong.id)
 
-      var auth = await AuthSongId(nextSong.id)
+        auth = auth.message
+        if (auth == "ok") {
+          dispatch("AuthSongId", nextSong)
+        } else {
+          Message({
+            message: auth,
+            type: 'warning'
+          })
+          return
+        }
 
-      auth = auth.message
-      if (auth == "ok") {
-        dispatch("AuthSongId", nextSong)
-      } else {
+      } catch (e) {
+        //TODO handle the exception
+        console.log(e);
         Message({
-          message: auth,
+          message: "暂无播放资源",
           type: 'warning'
         })
-        return
       }
+
     },
     //授权的音乐播放
     async AuthSongId({

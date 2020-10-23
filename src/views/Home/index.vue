@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-22 18:24:23
+ * @LastEditTime: 2020-10-23 21:32:02
 -->
 <template>
   <div class="home">
@@ -13,7 +13,7 @@
       <el-container>
         <el-aside width="130px"><elaside /></el-aside>
         <el-main
-          ><div class="header">
+          ><div class="header" v-if="isShow">
             <elmain />
           </div>
           <div class="main">
@@ -36,6 +36,23 @@ import elaside from "./aside";
 export default {
   name: "Home",
   components: { elheader, elaside, elmain, elfooter },
+  data() {
+    return {
+      path: [
+        "/Recommend",
+        "/Leaderboard",
+        "/SongList",
+        "/Singer",
+        "/AddedNewAlbum",
+      ],
+    };
+  },
+  computed: {
+    isShow() {
+      var path = this.$route.path;
+      return this.path.includes(path);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -58,6 +75,7 @@ export default {
   }
 
   .el-main {
+
     background-color: #f5f5f5;
     color: #333;
     padding: 0px;
@@ -79,5 +97,4 @@ export default {
     }
   }
 }
-
 </style>

@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-23 16:14:16
+ * @LastEditTime: 2020-10-23 21:05:09
 -->
 
 <template>
@@ -28,7 +28,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       @timeupdate="onTimeupdate"
       @loadedmetadata="onLoadedmetadata"
       preload="auto"
-      :autoplay="false"
+      :autoplay="true"
       :muted="false"
       :loop="false"
     ></audio>
@@ -217,7 +217,10 @@ export default {
     onTimeupdate(res) {
       //同步歌词
       if (this.lyric.length != 0) {
-        if ((this.currentLyric != this.lyric.length)&&this.lyric[this.currentLyric]) {
+        if (
+          this.currentLyric != this.lyric.length &&
+          this.lyric[this.currentLyric]
+        ) {
           if (this.lyric[this.currentLyric][0] < this.SongTime) {
             this.currentLyric++;
             this.lyricText = this.lyric[this.currentLyric - 1][1];
@@ -235,7 +238,11 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
-      this.$refs.audio.play();
+      // this.showStart=true
+      if (!this.$refs.audio.paused) {
+        this.showStart = true;
+      } 
+
       this.playing = true;
       this.tit = ` 正在播放：${this.name} - ${
         this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name

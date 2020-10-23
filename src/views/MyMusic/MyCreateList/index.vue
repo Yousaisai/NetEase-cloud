@@ -2,15 +2,20 @@
  * @Descripttion: 我创建的歌单
  * @Author: Mr.You
  * @Date: 2020-10-12 20:31:43
- * @LastEditTime: 2020-10-23 17:11:27
+ * @LastEditTime: 2020-10-23 21:32:13
 -->
 <template>
   <div class="content">
-    <div class="content_item" >
-      <div class="item_img" v-show="!item.ordered" v-for="(item, index) in userList" :key="index">
+    <div class="content_item">
+      <div
+        class="item_img"
+        v-show="!item.ordered"
+        v-for="(item, index) in userList"
+        :key="index"
+      >
         <router-link :to="{ name: 'Playlist', query: { id: item.id } }">
           <div class="image">
-            <img  :src="item.coverImgUrl" :alt="item.name" />
+            <img :src="item.coverImgUrl" :alt="item.name" />
             <div class="imglove">
               <div class="playcount">
                 <svg-icon icon-class="收听量" style="padding-right: 5px" />{{
@@ -36,6 +41,8 @@
 
 
 <script>
+import { getToken } from "@/utils/cookie.js";
+
 import { UserPlaylist } from "@/api/index";
 export default {
   data() {
@@ -47,7 +54,7 @@ export default {
 
   computed: {
     account() {
-      return JSON.parse(sessionStorage.getItem("account"));
+      return JSON.parse(getToken("account"));
     },
   },
   mounted() {
@@ -56,7 +63,6 @@ export default {
   methods: {
     async getUserPlaylist() {
       var res = await UserPlaylist({ uid: this.account.id });
-      console.log(res);
       this.userList = res.playlist;
     },
   },
@@ -64,13 +70,15 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-  background-color: #fff;min-height: calc(100vh - 130px);
+
+  background-color: #fff;
+  min-height: calc(100vh - 130px);
   margin: 0 auto;
   width: 1080px;
   padding: 10px;
   .content_item {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
     .item_img {
       border-radius: 10px;
@@ -79,7 +87,6 @@ export default {
       .image {
         position: relative;
         img {
-     
           width: 100%;
           z-index: 1;
         }
