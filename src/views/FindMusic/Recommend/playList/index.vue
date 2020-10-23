@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-10-21 19:04:46
+ * @LastEditTime: 2020-10-23 11:43:40
 -->
 <template>
   <div class="content">
@@ -36,10 +36,15 @@
     <el-divider></el-divider>
 
     <div class="content_item">
-      <div class="item_img" v-for="(item, index) in playlists" :key="index">
+      <div
+        class="item_img"
+        v-show="index < 10"
+        v-for="(item, index) in playlists"
+        :key="index"
+      >
         <router-link :to="{ name: 'Playlist', query: { id: item.id } }">
           <div class="image">
-            <img :src="item.coverImgUrl" :alt="item.name" />
+            <img :src="item.picUrl" :alt="item.name" />
             <div class="imglove">
               <div class="playcount">
                 <svg-icon icon-class="收听量" style="padding-right: 5px" />{{
@@ -197,7 +202,9 @@
 
 
 <script>
+
 import {
+  Personal,
   playlist,
   resource,
   newAlbum,
@@ -247,8 +254,9 @@ export default {
       }
     },
     async getPlayList() {
-      var res = await playlist(this.playlistPayload);
-      this.playlists = res.playlists;
+        var res = await Personal();
+        this.playlists = res.result;
+
     },
     async getResource() {
       var res = await resource();
@@ -393,8 +401,6 @@ export default {
         position: absolute;
         z-index: 10;
         width: 100%;
-
-        //   background-color: #3b4250;
       }
     }
   }

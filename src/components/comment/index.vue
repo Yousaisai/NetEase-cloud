@@ -2,13 +2,13 @@
  * @Descripttion: 歌曲评论，只需要传来评论参数
  * @Author: Mr.You
  * @Date: 2020-10-22 11:13:17
- * @LastEditTime: 2020-10-22 17:01:29
+ * @LastEditTime: 2020-10-23 18:55:33
 -->
 <template>
   <div class="comcontent">
     <div class="totle">
       <span style="font-size: 22px; padding-right: 10px">评论</span>
-      <span>共{{ comment.total }}条评论</span>
+      <span>共{{ commentdatas.total }}条评论</span>
       <el-divider direction="horizontal" content-position="left"></el-divider>
       <div class="comment">
         <div class="avt">
@@ -33,7 +33,10 @@
         ><el-button type="primary" size="mini" plain>发表评论</el-button></span
       >
     </div>
-    <div class="hotCom">
+    <div
+      class="hotCom"
+      v-if="commentdatas.hotComments && commentdatas.hotComments.length > 0"
+    >
       <span style="color: #9b0909; font-size: 12px; font-weight: bold"
         >精彩评论</span
       >
@@ -41,7 +44,7 @@
 
       <div
         class="comItem"
-        v-for="(item, index) in comment.hotComments"
+        v-for="(item, index) in commentdatas.hotComments"
         :key="index"
       >
         <div class="avt">
@@ -85,7 +88,11 @@
           <div class="like">
             <div class="time">{{ formData(item.time) }}</div>
             <div class="likenum">
-              <svg-icon icon-class="点赞" style="color: 409eff" />
+              <svg-icon
+                @click="like(item)"
+                :icon-class="item.liked ? '点赞' : '点赞 (1)'"
+                style="color: #409eff"
+              />
               <span
                 style="border-right: 2px solid #99b5d7; padding-right: 10px"
               >
@@ -97,7 +104,10 @@
         </div>
       </div>
     </div>
-    <div class="newCom">
+    <div
+      class="newCom"
+      v-if="commentdatas.comments && commentdatas.comments.length > 0"
+    >
       <span style="color: #9b0909; font-size: 12px; font-weight: bold"
         >最新评论</span
       >
@@ -105,7 +115,7 @@
 
       <div
         class="comItem"
-        v-for="(item, index) in comment.comments"
+        v-for="(item, index) in commentdatas.comments"
         :key="index"
       >
         <div class="avt">
@@ -141,7 +151,7 @@
                     icon-class="vip (1)"
                   />
                   ：</span
-                ><span>{{ item.content }}</span>
+                ><span>{{ item1.content }}</span>
               </div>
             </div>
           </div>
@@ -149,7 +159,11 @@
           <div class="like">
             <div class="time">{{ formData(item.time) }}</div>
             <div class="likenum">
-              <svg-icon icon-class="点赞" style="color: 409eff" />
+              <svg-icon
+                @click="like(item)"
+                :icon-class="item.liked ? '点赞' : '点赞 (1)'"
+                style="color: #409eff"
+              />
               <span
                 style="border-right: 2px solid #99b5d7; padding-right: 10px"
               >
@@ -165,20 +179,60 @@
 </template>
 
 <script>
-import { Comment, dataType } from "@/api/index";
+import { Comment, dataType, CommentLike ,CommentUnLike} from "@/api/index";
 export default {
-  props: ["commentData"],
+  props: ["commentData", "type"],
   computed: {
+    typeId() {
+      return this.$route.query.id
+        ? this.$route.query.id
+        : this.$route.query.mvid;
+    },
     comment() {
       return JSON.parse(this.commentData);
     },
   },
+
   data() {
-    return { textarea: "" };
+    return {
+      textarea: "",
+      commentdatas: {},
+      CommentLikePayload: { id: "", cid: "", t: 1, type: 0 },
+    };
+  },
+  watch: {
+    comment: {
+      handler(val) {
+        this.commentdatas = val;
+      },
+      deep: true,
+    },
   },
   methods: {
     formData(val) {
       return dataType(val);
+    },
+    async like(val) {
+      this.CommentLikePayload.id = this.typeId;
+      if (val.liked) {
+        val.liked = false;
+        val.likedCount--;
+        this.CommentLikePayload.cid = val.commentId;
+        this.CommentLikePayload.t = 0;
+        this.CommentLikePayload.type = this.type;
+        var res = await CommentUnLike(this.CommentLikePayload);
+        console.log(res);
+      } else {
+        val.liked = true;
+        val.likedCount++;
+        this.CommentLikePayload.cid = val.commentId;
+        this.CommentLikePayload.t = 1;
+        this.CommentLikePayload.type = this.type;
+        var res = await CommentLike(this.CommentLikePayload);
+        console.log(res);
+      }
+
+      console.log(val);
     },
   },
 };

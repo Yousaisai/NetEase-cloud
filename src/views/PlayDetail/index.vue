@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-22 17:18:09
+ * @LastEditTime: 2020-10-23 18:32:39
 -->
 <template>
   <div class="content">
@@ -103,7 +103,7 @@
         </li>
       </div>
       <div class="comment">
-        <comment :commentData="JSON.stringify(commentData)"> </comment>
+        <comment :type="0" :commentData="JSON.stringify(commentData)"> </comment>
       </div>
     </div>
   </div>

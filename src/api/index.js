@@ -1,33 +1,37 @@
 import request from '@/utils/request'
 
+//   注意：这里需要登陆的接口都需加上参数auth:true
+
+
+
 //传进来的是国际时间转换时间格式, 传入的是十三位的时间戳或者utc	2020-02-15T09:48:38.685Z
 export function dataType(payload) {
     const dateMat = new Date(payload);
     const year = dateMat.getFullYear();
     var month = dateMat.getMonth() + 1;
     if (month < 10) {
-      month = "0" + month
+        month = "0" + month
     }
     var day = dateMat.getDate();
     if (day < 10) {
-      day = "0" + day
+        day = "0" + day
     }
     var hh = dateMat.getHours();
     if (hh < 10) {
-      hh = "0" + hh
+        hh = "0" + hh
     }
     var mm = dateMat.getMinutes();
     if (mm < 10) {
-      mm = "0" + mm
+        mm = "0" + mm
     }
     var ss = dateMat.getSeconds();
     if (ss < 10) {
-      ss = "0" + ss
+        ss = "0" + ss
     }
     var timeFormat =
-      year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
+        year + "-" + month + "-" + day + " " + hh + ":" + mm + ":" + ss;
     return timeFormat;
-  }
+}
 
 
 //获取轮播图
@@ -38,6 +42,17 @@ export function banner() {
     })
 }
 
+
+export function Personal(payload) {
+    return request({
+        url: "/personalized",
+        method: 'get',
+        params: {
+            // auth: true
+        }
+
+    })
+}
 //获取精选碟
 export function playlist(payload) {
     return request({
@@ -126,7 +141,8 @@ export function playlistDetail(payload) {
         url: "/playlist/detail",
         method: 'get',
         params: {
-            ...payload
+            ...payload,
+            auth: true
         }
     })
 }
@@ -169,7 +185,8 @@ export function PlayOneSong(payload) {
         url: "/song/url",
         method: 'get',
         params: {
-            id: payload
+            id: payload,
+            auth: true
         }
     })
 }
@@ -325,7 +342,8 @@ export function MusicComment(payload) {
         url: "/comment/music",
         method: 'get',
         params: {
-            ...payload
+            ...payload,
+            auth:true
         }
     })
 }
@@ -364,6 +382,63 @@ export function MvComment(payload) {
         method: 'get',
         params: {
             ...payload
+        }
+    })
+}
+
+
+
+
+
+
+
+
+/*登录篇 */
+
+// 手机登录
+export function Login(payload) {
+    return request({
+        url: "/login/cellphone",
+        method: 'get',
+        params: {
+            ...payload
+        }
+    })
+}
+
+//获取我的歌单
+export function UserPlaylist(payload) {
+    return request({
+        url: "/user/playlist",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}
+
+
+
+//给评论点赞
+export function CommentLike(payload) {
+    return request({
+        url: "/comment/like",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}
+//给评论取消点赞
+export function CommentUnLike(payload) {
+    return request({
+        url: "/comment/like",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
         }
     })
 }

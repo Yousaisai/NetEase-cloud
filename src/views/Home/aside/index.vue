@@ -2,7 +2,7 @@
  * @Descripttion: 左侧导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 19:38:36
- * @LastEditTime: 2020-10-15 13:57:26
+ * @LastEditTime: 2020-10-23 12:27:21
 -->
 
 <template>
@@ -16,14 +16,13 @@
     <el-menu-item index="/Recommend">
       <span slot="title">发现音乐</span>
     </el-menu-item>
-    <el-submenu index="/MyCreateList">
-      <template slot="title">
-        <span>我的音乐</span>
-      </template>
-
-      <el-menu-item index="/MyCreateList">创建的歌单</el-menu-item>
-      <el-menu-item index="/MyLoveList">收藏的歌单</el-menu-item>
-    </el-submenu>
+    <!-- <el-menu-item index="/MyCreateList">
+      <span slot="title">我的歌单</span>
+        <el-menu-item index="/MyCreateList">我的歌单</el-menu-item>
+    </el-menu-item> -->
+    <el-menu-item v-show="!auth" index="/MyMuisc">我的音乐</el-menu-item>
+    <el-menu-item v-show="auth" index="/MyCreateList">我的歌单</el-menu-item>
+    <el-menu-item v-show="auth" index="/MyLoveList">收藏歌单</el-menu-item>
   </el-menu>
 </template>
 
@@ -32,20 +31,33 @@
 
 
 <script>
+import { getToken, removeCookie } from "@/utils/cookie";
+
 export default {
   data() {
     return {
-      initMenu:["/Recommend","/MyCreateList","/MyLoveList"]
+      initMenu: ["/Recommend", "/MyMuisc", "/MyCreateList", "/MyLoveList"],
     };
   },
   computed: {
+    auth() {
+      var isLogin = this.$store.state.isLogin;
+      if (isLogin) {
+        return isLogin;
+      } else if (getToken("auth")) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
+   
       if (this.initMenu.includes(path)) {
-         return path;
+        return path;
       }
-     return "/Recommend"
+      return "/Recommend";
     },
   },
   methods: {
@@ -67,10 +79,10 @@ export default {
 /deep/.el-icon-arrow-down:before {
   content: none !important;
 }
-.el-submenu .el-menu-item {
-  // height: 50px;
-  // line-height: 50px;
-  padding: 0;
-  min-width: 0;
-}
+// .el-submenu .el-menu-item {
+//   // height: 50px;
+//   // line-height: 50px;
+//   padding: 0;
+//   min-width: 0;
+// }
 </style>

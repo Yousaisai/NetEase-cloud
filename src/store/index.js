@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-22 18:17:20
+ * @LastEditTime: 2020-10-23 11:30:14
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -20,6 +20,7 @@ import {
 
 export default new Vuex.Store({
   state: {
+    isLogin:false,
     //播放音乐的资源，里面只有音乐ID
     PlaySong: "",
     //需要传到播放界面的参数,包含音乐url、音乐名name、封面cover、时长time、专辑album

@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-22 18:18:08
+ * @LastEditTime: 2020-10-23 16:37:36
 -->
 <template>
   <div class="content">
@@ -15,12 +15,12 @@
               style="font-size: 3.5em; padding: 0px 0; line-height: 40px"
           /></el-col>
           <el-col :span="16">
-            <div class="title">Mr.You</div>
+            <div class="title">Mr.You{{ this.$store.state.isLogin }}</div>
           </el-col>
         </el-row>
       </el-col>
       <el-col :span="4" style="padding: 10px 0; line-height: 40px">
-        <el-search @emitSearch="emitSearch($event)" :width="250" />
+        <el-search :width="250" />
       </el-col>
       <el-col :span="16">
         <div
@@ -32,20 +32,43 @@
             color: #f3f3f3;
           "
         >
-          <span>登录</span>
+          <span
+            @click="dialogVisible = !dialogVisible"
+            style="font-size: 12px; cursor: pointer"
+            >登 录</span
+          >
+          /
+          <span
+            @click="dialogVisible = !dialogVisible"
+            style="font-size: 12px; cursor: pointer"
+            >注 册</span
+          >
         </div>
-
-        <div
-          v-if="auth"
-          style="float: right; padding: 10px 0; line-height: 40px"
-        >
-          <svg-icon
-            icon-class="网易云"
-            style="font-size: 3.5em; padding: 10px 0; line-height: 40px"
-          />
+        <div v-if="auth" class="avt">
+          <el-dropdown placement="bottom-start" @command="handleCommand">
+            <span class="el-dropdown-link">
+              <el-image
+                style="height: 30px; width: 30px; border-radius: 50%"
+                :src="avt.avatarUrl"
+                :lazy="true"
+              ></el-image>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="home">我的主页</el-dropdown-item>
+              <el-dropdown-item command="logout" divided>退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
       </el-col>
     </el-row>
+    <el-dialog
+      title="登录网易云音乐"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose"
+    >
+      <login @logout="dialogVisible = !dialogVisible"></login>
+    </el-dialog>
   </div>
 </template>
 
@@ -54,119 +77,59 @@
 
 
 <script>
-import { SearchSug, DefSearch, HotSearch } from "@/api/index";
+import { getToken, removeCookie } from "@/utils/cookie";
+import login from "./login/index";
 import elSearch from "@/components/Search";
 export default {
   components: {
     elSearch,
+    login,
   },
   data() {
-    return {
-      search: "",
-      auth: false,
-      DefPlaceHoder: "音乐/视频/电台/用户",
-      hotSearch: [],
-      allSearch: {},
-    };
+    return { dialogVisible: false };
   },
   computed: {
-    searchtext() {
-      return `<span style='color:#3E8CD7'>${this.search}</span>`;
+    avt() {
+      return JSON.parse(sessionStorage.getItem("profile"));
     },
-  },
-  mounted() {
-    this.getDefSearch();
-    this.getHotSearch();
-  },
-  methods: {
-    //默认搜索词
-    async getDefSearch() {
-      var res = await DefSearch();
-      this.DefPlaceHoder = res.data.realkeyword;
-    },
-
-    async getHotSearch() {
-      var res = await HotSearch();
-      res = res.result.hots;
-      res.map((val, index) => {
-        val["value"] = val.first;
-        val["index"] = index;
-      });
-      this.hotSearch = res;
-    },
-    async querySearch(val) {
-      // 调用 callback 返回建议列表的数据
-
-      if (val.trim() == "") {
-        return;
+    auth() {
+      var isLogin = this.$store.state.isLogin;
+      if (isLogin) {
+        console.log(1);
+        return isLogin;
+      } else if (getToken("auth")) {
+        console.log(2);
+        return true;
+      } else {
+        console.log(3);
+        return false;
       }
-      var result = await this.getSearchSug(val);
-      this.allSearch = result;
     },
-
-    async getSearchSug(val) {
-      var res = await SearchSug(val);
-      return res.result;
+  },
+  mounted() {},
+  methods: {
+    handleClose(done) {
+      done();
     },
-
-    handleSelect(val) {},
-    emitSearch(val) {},
+    handleCommand(command) {
+      if (command == "logout") {
+        //下面赋值为true是因为如果刷新了页面就会把vuex的isLogin设置为false如果下面直接赋值法拉瑟就不会检测到改变，
+        this.$store.state.isLogin = true;
+        removeCookie("token"), removeCookie("auth");
+        this.$store.state.isLogin = false;
+        console.log(this.$store.state.isLogin);
+      }
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
+span:hover {
+  color: #dac5c5;
+}
 li:hover {
   cursor: pointer;
   background-color: #f5f5f5;
-}
-.defsearch {
-  // background-color: #f5f5f5;
-  // display: flex;
-  // flex-wrap: wrap;
-
-  .seatitle {
-    font-size: 18px;
-    color: black;
-    padding-bottom: 120px;
-  }
-  ul {
-    padding: 10px 10px 0 10px;
-    margin: 0;
-
-    li {
-      font-size: 12px;
-      list-style: none;
-
-      .li {
-        padding: 10px 0;
-        .index1 {
-          background-color: #f5f5f5;
-          border-radius: 20px;
-          display: inline-block;
-
-          font-weight: 600;
-          margin-right: 24px;
-          height: 20px;
-          line-height: 20px;
-          width: 20px;
-          text-align: center;
-        }
-        .index2 {
-          background-color: #314659;
-          border-radius: 20px;
-          display: inline-block;
-
-          font-weight: 600;
-          margin-right: 24px;
-          height: 20px;
-          line-height: 20px;
-          width: 20px;
-          text-align: center;
-          color: #fff;
-        }
-      }
-    }
-  }
 }
 
 .title {
@@ -179,82 +142,12 @@ li:hover {
   justify-content: center;
   align-items: center;
 }
-.spanhot {
-  background-color: #666;
-  color: #fff;
-  padding: 2px 5px;
-  border-radius: 50%;
-  font-size: 10px;
-}
-.span {
-  padding: 2px 5px;
-  border-radius: 50%;
-  font-size: 10px;
-}
-
-.searchall {
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  li {
-    overflow: hidden;
-    list-style: none;
-    width: 180px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    padding: 10px 0;
-  }
-
-  .singer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .seatitle {
-      color: #666;
-      flex: 1;
-      // border-top: 2px solid #f5f5f5;
-
-      padding: 15px 0px;
-    }
-    .item {
-      // border-top: 2px solid #f5f5f5;
-      // border-bottom: 2px solid #f5f5f5;
-      border-left: 2px solid #f5f5f5;
-      padding: 2px 5px;
-      flex: 3;
-    }
-  }
-  .album {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .seatitle {
-      color: #666;
-      flex: 1;
-    }
-    .item {
-      border-left: 2px solid #f5f5f5;
-      // border-bottom: 2px solid #f5f5f5;
-      padding: 2px 5px;
-      flex: 3;
-    }
-  }
-  .songs {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    .seatitle {
-      color: #666;
-      flex: 1;
-    }
-    .item {
-      border-left: 2px solid #f5f5f5;
-      // border-bottom: 2px solid #f5f5f5;
-      padding: 2px 5px;
-      flex: 3;
-    }
-  }
+.avt {
+  float: right;
+  padding: 10px 0;
+  margin-right: 30px;
+  line-height: 40px;
+  color: #f3f3f3;
+  cursor: pointer;
 }
 </style>

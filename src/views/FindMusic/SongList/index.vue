@@ -2,7 +2,7 @@
  * @Descripttion: 歌单导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:11
- * @LastEditTime: 2020-10-15 15:50:34
+ * @LastEditTime: 2020-10-23 17:30:35
 -->
 <template>
   <div class="content">
@@ -96,7 +96,7 @@ export default {
   mounted() {
     var CAT = this.$route.query.cat;
     if (CAT) {
-     this.playlistPayload.cat = CAT;
+      this.playlistPayload.cat = CAT;
     }
     this.getPlayList();
     this.getPlayListCat();
@@ -188,8 +188,8 @@ export default {
       .image:hover {
         transform: scale(1.02);
       }
-
       .titledetail {
+        padding-top: 5px;
         text-align: left;
         font-size: 13px;
       }

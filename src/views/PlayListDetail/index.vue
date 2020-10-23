@@ -2,7 +2,7 @@
  * @Descripttion: 热门推荐歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-13 18:39:42
- * @LastEditTime: 2020-10-22 18:18:29
+ * @LastEditTime: 2020-10-23 18:33:34
 -->
 <template>
   <div class="content">
@@ -105,7 +105,7 @@
       </div>
     </div>
     <div class="comment">
-      <comment :commentData="JSON.stringify(commentData)"> </comment>
+      <comment :type="2" :commentData="JSON.stringify(commentData)"> </comment>
     </div>
   </div>
 </template>

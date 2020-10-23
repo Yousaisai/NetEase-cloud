@@ -2,12 +2,12 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 21:34:39
- * @LastEditTime: 2020-10-22 17:28:48
+ * @LastEditTime: 2020-10-23 16:15:29
  */
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 // import store from '@/store'
-// import { getToken } from '@/utils/auth'
+import { getToken } from '@/utils/cookie'
 
 // create an axios instance
 const service = axios.create({
@@ -28,6 +28,12 @@ service.interceptors.request.use(
       // please modify it according to the actual situation
       // config.headers['token'] = getToken()
     // }
+    if (config&&config.params&&config.params.auth) {
+      // config.headers['token'] = getToken("token")
+
+      config.params["cookie"]=getToken("token")
+    }
+    
     return config
   },
   error => {
@@ -58,8 +64,8 @@ service.interceptors.response.use(
       return res
     // }
   },
-  error => {
-    console.log('err' + error) // for debug
+  (error,val) => {
+    console.log('err' + error,val) // for debug
     // Message({
     //   message: error.message,
     //   type: 'error',

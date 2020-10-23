@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-22 18:12:35
+ * @LastEditTime: 2020-10-23 16:14:16
 -->
 
 <template>
@@ -217,7 +217,7 @@ export default {
     onTimeupdate(res) {
       //同步歌词
       if (this.lyric.length != 0) {
-        if (this.currentLyric != this.lyric.length) {
+        if ((this.currentLyric != this.lyric.length)&&this.lyric[this.currentLyric]) {
           if (this.lyric[this.currentLyric][0] < this.SongTime) {
             this.currentLyric++;
             this.lyricText = this.lyric[this.currentLyric - 1][1];

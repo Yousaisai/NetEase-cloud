@@ -1,19 +1,9 @@
-# cloud
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<!--
+ * @Descripttion: 
+ * @Author: Mr.You
+ * @Date: 2020-10-12 14:47:49
+ * @LastEditTime: 2020-10-23 16:45:20
+-->
+## 有待学习
+- 正则表达式
+- css动画等 

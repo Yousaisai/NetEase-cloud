@@ -2,7 +2,7 @@
  * @Descripttion: 播放
  * @Author: Mr.You
  * @Date: 2020-10-21 20:50:08
- * @LastEditTime: 2020-10-22 18:17:52
+ * @LastEditTime: 2020-10-23 18:32:49
 -->
 <template>
   <div class="content">
@@ -36,7 +36,7 @@
     </div>
     <div class="com">简介：{{ mvdata.desc }}</div>
     <div class="comment">
-      <comment :commentData="JSON.stringify(commentData)"> </comment>
+      <comment :type="1" :commentData="JSON.stringify(commentData)"> </comment>
     </div>
   </div>
 </template>

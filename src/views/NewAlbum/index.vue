@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-22 18:18:00
+ * @LastEditTime: 2020-10-23 18:32:57
 -->
 
 <template>
@@ -87,7 +87,7 @@
       <div class="item_table"><eltable :Songs="playListsong" /></div>
     </div>
     <div class="comment">
-      <comment :commentData="JSON.stringify(commentData)"> </comment>
+      <comment  :type="3" :commentData="JSON.stringify(commentData)"> </comment>
     </div>
   </div>
 </template>

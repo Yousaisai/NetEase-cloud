@@ -158,12 +158,12 @@ const routes = [{
     }
   ]
 }, {
-  path: '/',
+  path: '/MyMuisc',
   name: 'Mymuisc',
   meta: {
     title: '我的歌单'
   },
-  redirect: "/MyCreateList",
+ 
   component: () => import('../views/MyMusic/index.vue'),
   children: [{
     path: '/MyCreateList',
