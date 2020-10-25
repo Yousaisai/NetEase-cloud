@@ -442,3 +442,14 @@ export function CommentUnLike(payload) {
         }
     })
 }
+//给评论回复
+export function ReplyComment(payload) {
+    return request({
+        url: "/comment",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}

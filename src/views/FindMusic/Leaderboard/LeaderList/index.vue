@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-22 18:18:22
+ * @LastEditTime: 2020-10-23 21:56:16
 -->
 <template>
   <div class="content">
@@ -93,6 +93,8 @@
       <el-divider></el-divider>
       <div class="item_table">
         <el-table
+          :row-class-name="tableRowClassName"
+          @row-dblclick="dbclick"
           stripe
           :data="
             playListsong.slice(
@@ -120,21 +122,21 @@
             </template>
           </el-table-column>
           <el-table-column prop="name" show-overflow-tooltip label="歌曲标题">
-          <template slot-scope="scope">
-          <div>
-            {{ scope.row.name }}
-            <router-link
-              :to="{
-                path: '/PlayMv',
-                query: { mvid: scope.row.mv },
-              }"
-            >
-              <span
-                ><svg-icon v-show="scope.row.mv != 0" icon-class="MV"
-              /></span>
-            </router-link>
-          </div>
-        </template>
+            <template slot-scope="scope">
+              <div>
+                {{ scope.row.name }}
+                <router-link
+                  :to="{
+                    path: '/PlayMv',
+                    query: { mvid: scope.row.mv },
+                  }"
+                >
+                  <span
+                    ><svg-icon v-show="scope.row.mv != 0" icon-class="MV"
+                  /></span>
+                </router-link>
+              </div>
+            </template>
           </el-table-column>
           <el-table-column prop="ar[0].name" show-overflow-tooltip label="歌手">
           </el-table-column>
@@ -225,6 +227,18 @@ export default {
     },
     handleCurrentChange(val) {
       this.currentPage = val;
+    },
+    dbclick(row) {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: row,
+        allSong: this.playListsong,
+        indexSong: row.index,
+      });
+    },
+
+    tableRowClassName({ row, rowIndex }) {
+      // 把每一行的索引放进row
+      row.index = rowIndex;
     },
     PlaySong(song, index) {
       this.$store.dispatch("PlaySongs", {

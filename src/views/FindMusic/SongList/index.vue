@@ -2,7 +2,7 @@
  * @Descripttion: 歌单导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:11
- * @LastEditTime: 2020-10-23 17:30:35
+ * @LastEditTime: 2020-10-25 14:52:09
 -->
 <template>
   <div class="content">
@@ -16,7 +16,6 @@
             :key="index"
             style="
               text-align: center;
-
               border-right: 1px solid aliceblue;
               border-left: 1px solid aliceblue;
             "

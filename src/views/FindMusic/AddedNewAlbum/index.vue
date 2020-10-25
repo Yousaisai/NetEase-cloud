@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:06:59
- * @LastEditTime: 2020-10-22 18:17:27
+ * @LastEditTime: 2020-10-25 14:57:42
 -->
 <template>
   <div class="content">
@@ -30,7 +30,7 @@
     <div class="all">
       <div class="title">
         <span style="padding-right: 20px">全部新碟 </span>
-        <span @click="getnewAllAlbum(item)" class="span" v-for="(item, index) in type" :key="index"
+        <span @click="getnewAllAlbum(item)" class="span" v-for="(item, index) in area" :key="index"
           >{{ index }} <span class="line">|</span>
         </span>
       </div>
@@ -70,7 +70,7 @@ export default {
         type: "new",
         limit: 66,
       },
-      type: {"全部":"ALL", "华语":"ZH", "欧美":"", "韩国":"KR", "日本":"JP"},
+      area: {"全部":"ALL", "华语":"ZH", "欧美":"", "韩国":"KR", "日本":"JP"},
       allMonthData: [],
       hotMonthData: [],
     };
@@ -81,7 +81,7 @@ export default {
   methods: {
     async getnewAllAlbum(val) {
       if (val) {
-        this.newTopAlbumPapload.type=val
+        this.newTopAlbumPapload.area=val
       }
       var res = await newTopAlbum(this.newTopAlbumPapload);
       this.allMonthData = res.monthData;

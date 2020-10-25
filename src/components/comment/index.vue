@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲评论，只需要传来评论参数
  * @Author: Mr.You
  * @Date: 2020-10-22 11:13:17
- * @LastEditTime: 2020-10-23 19:54:53
+ * @LastEditTime: 2020-10-25 16:30:09
 -->
 <template>
   <div class="comcontent">
@@ -30,7 +30,9 @@
     </div>
     <div class="com">
       <span
-        ><el-button type="primary" size="mini" plain>发表评论</el-button></span
+        ><el-button type="primary" @click="PutComment" size="mini" plain
+          >发表评论</el-button
+        ></span
       >
     </div>
     <div
@@ -80,7 +82,7 @@
                     icon-class="vip (1)"
                   />
                   ：</span
-                ><span>{{ item.content }}</span>
+                ><span>{{ item1.content }}</span>
               </div>
             </div>
           </div>
@@ -98,7 +100,7 @@
               >
                 ({{ item.likedCount }})</span
               >
-              <span style="padding-left: 10px">回复</span>
+              <span style="padding-left: 10px; cursor: pointer">回复</span>
             </div>
           </div>
         </div>
@@ -169,7 +171,27 @@
               >
                 ({{ item.likedCount }})</span
               >
-              <span style="padding-left: 10px">回复</span>
+              <span
+                style="padding-left: 10px; cursor: pointer"
+                @click="isShowReply(item)"
+                >回复</span
+              >
+            </div>
+          </div>
+          <div class="reply1" v-show="item.reply">
+            <div class="inp">
+              <el-input
+                type="textarea"
+                :placeholder="replyTextareaPlace"
+                v-model="replyTextarea"
+                maxlength="140"
+                show-word-limit
+              ></el-input>
+            </div>
+            <div class="btn">
+              <el-button type="primary" size="mini" @click="reply(item)"
+                >回复</el-button
+              >
             </div>
           </div>
         </div>
@@ -179,7 +201,13 @@
 </template>
 
 <script>
-import { Comment, dataType, CommentLike ,CommentUnLike} from "@/api/index";
+import {
+  Comment,
+  dataType,
+  CommentLike,
+  CommentUnLike,
+  ReplyComment,
+} from "@/api/index";
 export default {
   props: ["commentData", "type"],
   computed: {
@@ -196,6 +224,8 @@ export default {
   data() {
     return {
       textarea: "",
+      replyTextarea: "",
+      replyTextareaPlace: "",
       commentdatas: {},
       CommentLikePayload: { id: "", cid: "", t: 1, type: 0 },
     };
@@ -213,6 +243,7 @@ export default {
       return dataType(val);
     },
     async like(val) {
+      console.log(val);
       this.CommentLikePayload.id = this.typeId;
       if (val.liked) {
         val.liked = false;
@@ -229,6 +260,49 @@ export default {
         this.CommentLikePayload.type = this.type;
         var res = await CommentLike(this.CommentLikePayload);
       }
+    },
+    isShowReply(val) {
+      console.log(val);
+      this.replyTextareaPlace = `回复${val.user.nickname}：`;
+      this.$set(val, "reply", true);
+    },
+    async PutComment() {
+      //回复t=2,评论t=1,删除t=0
+      this.CommentLikePayload.id = this.typeId;
+      this.CommentLikePayload.t = 1;
+      this.CommentLikePayload["content"] = this.textarea;
+      this.CommentLikePayload.type = this.type;
+      var res = await ReplyComment(this.CommentLikePayload);
+      console.log(res);
+    },
+    async reply(val) {
+      //回复t=2,评论t=1,删除t=0
+      this.CommentLikePayload.id = this.typeId;
+      this.CommentLikePayload.t = 2;
+      this.CommentLikePayload.commentId = val.commentId;
+      this.CommentLikePayload["content"] = this.replyTextarea;
+      this.CommentLikePayload.type = this.type;
+      var res = await ReplyComment(this.CommentLikePayload);
+      console.log(res);
+      if (res.code != 200) {
+        this.$message({
+          message: "评论失败",
+          type: "warning",
+        });
+        return;
+      }
+      this.$message({
+        message: "评论成功",
+        type: "success",
+      });
+      this.$set(val, "reply", false);
+      val.beReplied[0] = {};
+      val.beReplied[0] = {
+        content: "",
+        user: {},
+      };
+      this.$set(val.beReplied[0], "content", this.replyTextarea);
+      this.$set(val.beReplied[0].user, "nickname", "自己");
     },
   },
 };
@@ -304,7 +378,32 @@ export default {
             left: 20px;
           }
         }
-
+        .reply1 {
+          position: relative;
+          background-color: #f5f5f5;
+          padding: 10px 20px;
+          margin: 10px;
+          .inp {
+            font-size: 12px;
+            line-height: 20px;
+          }
+          .btn {
+            text-align: right;
+            padding: 10px 0 0 0;
+          }
+        }
+        .reply1:before {
+          content: "";
+          width: 0px;
+          border-top: 10px solid transparent;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 10px solid #f4f5f7;
+          position: absolute;
+          top: -18px;
+          border-radius: 3px;
+          right: 2px;
+        }
         .like {
           padding: 10px 0 0 0;
           display: flex;

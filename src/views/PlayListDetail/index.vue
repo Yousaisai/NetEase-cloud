@@ -2,7 +2,7 @@
  * @Descripttion: 热门推荐歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-13 18:39:42
- * @LastEditTime: 2020-10-23 18:33:34
+ * @LastEditTime: 2020-10-25 14:47:35
 -->
 <template>
   <div class="content">
@@ -71,13 +71,15 @@
           </div>
         </div>
         <div class="label">
-          标签：<el-button
+          标签：
+          <router-link
             v-for="(item, index) in playListDetails.tags"
+            :to="{ path: '/SongList', query: { cat: item } }"
             :key="index"
-            type="info"
-            size="mini"
-            plain
-            >{{ item }}</el-button
+          >
+            <el-button type="info" size="mini" plain>{{
+              item
+            }}</el-button></router-link
           >
         </div>
         <div class="desc">

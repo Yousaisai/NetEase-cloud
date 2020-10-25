@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-23 21:05:09
+ * @LastEditTime: 2020-10-23 21:58:27
 -->
 
 <template>
@@ -416,6 +416,7 @@ export default {
       transform: scale(1.4);
     }
     .love:hover {
+      cursor: pointer;
       color: #b7b4b4;
     }
     .volume {
