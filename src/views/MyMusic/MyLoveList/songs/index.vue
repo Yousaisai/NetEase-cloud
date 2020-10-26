@@ -2,7 +2,7 @@
  * @Descripttion: 收藏歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-26 13:45:09
+ * @LastEditTime: 2020-10-26 15:21:38
 -->
 <template>
   <div class="content">
@@ -70,20 +70,10 @@
             >
           </div>
         </div>
-
-        <!-- <div class="desc">
-          <el-collapse value="string" accordion>
-            <el-collapse-item :title="'简介：' + playListDetails.name" name="1">
-              {{ playListDetails.description }}
-            </el-collapse-item>
-          </el-collapse>
-        </div> -->
       </div>
     </div>
     <div class="content_list_item">
       <div class="item_title">
-        <!-- <span style="font-size: 20px; font-weight: bold">歌曲列表</span
-        > -->
         <span style="float: right; font-size: 15px"
           >播放
           <span style="color: red; font-size: 10px">
@@ -135,8 +125,12 @@ export default {
   watch: {
     id(val) {
       this.getPlaylistDetail(val);
-      this.getPlayListComment(val);
+   
     },
+  },
+  mounted() {
+    var id=this.$route.query.id
+        this.getPlayListComment(id);
   },
   methods: {
     async getPlaylistDetail(val) {

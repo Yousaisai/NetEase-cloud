@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-23 21:11:23
+ * @LastEditTime: 2020-10-26 15:36:06
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -10,7 +10,7 @@ Vue.use(Vuex)
 
 import {
   PlayOneSong,
-  AuthSongId
+  AuthSongId,
 } from '@/api/index'
 
 import {
@@ -162,7 +162,8 @@ export default new Vuex.Store({
       }
       commit('ST_SongDetail', commSong)
 
-    }
+    },
+
   },
   modules: {}
 })

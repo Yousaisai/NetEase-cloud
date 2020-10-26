@@ -2,7 +2,7 @@
  * @Descripttion: 我创建的歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-26 13:56:53
+ * @LastEditTime: 2020-10-26 15:12:02
 -->
 <template>
   <div class="content">
@@ -70,8 +70,6 @@
             >
           </div>
         </div>
-
-  
       </div>
     </div>
     <div class="content_list_item">
@@ -130,6 +128,10 @@ export default {
     id(val) {
       this.getPlaylistDetail(val);
     },
+  },
+  mounted() {
+    var id = this.$route.query.id;
+    this.getPlayListComment(id);
   },
   methods: {
     async getPlaylistDetail(val) {

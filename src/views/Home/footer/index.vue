@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-23 21:58:27
+ * @LastEditTime: 2020-10-26 15:20:53
 -->
 
 <template>
@@ -118,7 +118,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       {{ milltosecond(SongTime) }}/{{ milltosecond(time) }}
     </div>
     <div class="other">
-      <div class="love"><svg-icon icon-class="心 爱心 (3)" /></div>
+      <div class="love"><svg-icon @click="getLikeMusic(onesong)" icon-class="心 爱心 (3)" /></div>
       <div class="volume">
         <div
           :style="{ visibility: showVol == false ? 'hidden' : 'visible' }"
@@ -270,6 +270,7 @@ export default {
         document.title = this.tit;
       }, 800);
     },
+    getLikeMusic(val){console.log(val);},
     async getLyric(id) {
       //获取歌词
       this.currentLyric = 0;

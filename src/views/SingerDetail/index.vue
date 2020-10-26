@@ -2,7 +2,7 @@
  * @Descripttion: 歌手详情
  * @Author: Mr.You
  * @Date: 2020-10-18 13:24:07
- * @LastEditTime: 2020-10-25 17:45:38
+ * @LastEditTime: 2020-10-26 15:35:54
 -->
 <template>
   <div class="content">
@@ -117,6 +117,7 @@ export default {
       this.hotSongs = res.hotSongs;
     },
     async getSubArtist(val) {
+
       if (!val.followed) {
         var res = await SubArtist({ id: this.singerId.id, t: 1 });
         if (res.code != 200) {

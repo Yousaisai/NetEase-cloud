@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-25 17:39:09
+ * @LastEditTime: 2020-10-26 15:39:17
 -->
 <template>
   <div class="content" v-if="songDetail.al">
@@ -60,7 +60,7 @@
             >
           </div>
           <div class="btn_item">
-            <el-button type="primary" size="mini" plain
+            <el-button type="primary" disabled size="mini" plain
               ><svg-icon icon-class="收 藏 (1)" /> 收藏
             </el-button>
           </div>

@@ -163,7 +163,7 @@ export function AuthSongId(payload) {
         url: "/check/music",
         method: 'get',
         params: {
-            id: payload
+            id: payload, auth: true
         }
     })
 }
@@ -174,7 +174,8 @@ export function SongDetail(payload) {
         url: "/song/detail",
         method: 'get',
         params: {
-            ids: payload
+            ids: payload,
+            auth: true
         }
     })
 }
@@ -197,7 +198,7 @@ export function SongLyric(payload) {
         url: "/lyric",
         method: 'get',
         params: {
-            id: payload
+            id: payload, auth: true
         }
     })
 }
@@ -229,7 +230,7 @@ export function SingersOne(payload) {
         url: "/artists",
         method: 'get',
         params: {
-            ...payload
+            ...payload, auth: true
         }
     })
 }
@@ -343,7 +344,7 @@ export function MusicComment(payload) {
         method: 'get',
         params: {
             ...payload,
-            auth:true
+            auth: true
         }
     })
 }
@@ -496,6 +497,20 @@ export function SubMv(payload) {
 export function SubAlbum(payload) {
     return request({
         url: "/album/sub",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}
+
+
+
+//喜欢音乐
+export function LoveMusic(payload) {
+    return request({
+        url: "/like",
         method: 'get',
         params: {
             ...payload,

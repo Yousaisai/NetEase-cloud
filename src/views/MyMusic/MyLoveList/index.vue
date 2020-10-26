@@ -2,7 +2,7 @@
  * @Descripttion: 收藏歌单
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-10-26 13:50:51
+ * @LastEditTime: 2020-10-26 15:21:51
 -->
 <template>
   <div class="content1">
@@ -81,7 +81,6 @@ export default {
   methods: {
     async getUserPlaylist() {
       var res = await UserPlaylist({ uid: this.account.id });
-      console.log(res);
       this.userList = res.playlist;
     },
 
