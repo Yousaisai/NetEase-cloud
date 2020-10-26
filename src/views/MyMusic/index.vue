@@ -2,16 +2,11 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-23 20:50:47
+ * @LastEditTime: 2020-10-26 11:30:04
 -->
 <template>
   <div class="home">
     <el-container>
-      <!-- <el-header style="height: 60px">
-        <elheader />
-      </el-header>
-      <el-container>
-        <el-aside width="130px"><elaside /></el-aside> -->
       <el-main :class="auth ? 'none' : 'main'"
         ><div class="animate box" v-if="!auth">
           <div class="title"><span>私人的音乐空间，听我想听的歌</span></div>
@@ -35,7 +30,7 @@
       <!-- </el-container>
       <el-footer style="height: 50px"><elfooter /></el-footer> -->
     </el-container>
-    <el-dialog
+    <el-dialog :modal="false"
       title="登录网易云音乐"
       :visible.sync="dialogVisible"
       width="30%"
@@ -80,20 +75,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-  position: relative;
   width: calc(100vw - 130px);
   height: calc(100vh - 180px);
-  z-index: 100000000;
-
   .main {
-    position: absolute;
     width: 100%;
     height: calc(100vh - 110px);
-    top: -61px;
     background-image: url("../../icons/pic/hai.jpg");
     background-size: cover;
   }
-
   .animate {
     font-size: 50px;
     margin: 100px 0 0;

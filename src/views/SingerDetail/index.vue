@@ -2,7 +2,7 @@
  * @Descripttion: 歌手详情
  * @Author: Mr.You
  * @Date: 2020-10-18 13:24:07
- * @LastEditTime: 2020-10-20 16:48:40
+ * @LastEditTime: 2020-10-25 17:45:38
 -->
 <template>
   <div class="content">
@@ -30,8 +30,10 @@
           </div>
 
           <div class="btn_item">
-            <el-button type="primary" size="mini" plain
-              ><svg-icon icon-class="收 藏 (1)" /> 收藏
+            <el-button type="primary" size="mini" plain    @click="getSubArtist(artist)"
+              ><svg-icon icon-class="收 藏 (1)" />
+              <span v-show="artist.followed">已收藏</span>
+              <span v-show="!artist.followed">收藏</span>
             </el-button>
           </div>
         </div>
@@ -78,7 +80,7 @@
 <script>
 import eltable from "@/components/Talble";
 
-import { SingersOne } from "@/api/index";
+import { SingersOne, SubArtist } from "@/api/index";
 export default {
   components: { eltable },
   data() {
@@ -110,8 +112,41 @@ export default {
     async getSingersOne() {
       var id = this.$route.query;
       var res = await SingersOne(id);
+      console.log(res);
       this.artist = res.artist;
       this.hotSongs = res.hotSongs;
+    },
+    async getSubArtist(val) {
+      if (!val.followed) {
+        var res = await SubArtist({ id: this.singerId.id, t: 1 });
+        if (res.code != 200) {
+          this.$message({
+            message: "收藏失败",
+            type: "warning",
+          });
+          return;
+        }
+        this.$message({
+          message: "收藏成功",
+          type: "success",
+        });
+        this.$set(val, "followed", true);
+        return;
+      } else {
+        var res = await SubArtist({ id: this.singerId.id, t: 0 });
+        if (res.code != 200) {
+          this.$message({
+            message: "取消收藏失败",
+            type: "warning",
+          });
+          return;
+        }
+        this.$message({
+          message: "已取消",
+          type: "success",
+        });
+        this.$set(val, "followed", false);
+      }
     },
     playAll() {
       this.$store.dispatch("PlaySongs", {

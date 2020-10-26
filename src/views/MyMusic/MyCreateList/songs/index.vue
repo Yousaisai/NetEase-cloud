@@ -1,16 +1,16 @@
 <!--
- * @Descripttion: 热门推荐歌单详情
+ * @Descripttion: 我创建的歌单详情
  * @Author: Mr.You
- * @Date: 2020-10-13 18:39:42
- * @LastEditTime: 2020-10-26 13:40:13
+ * @Date: 2020-10-14 20:43:36
+ * @LastEditTime: 2020-10-26 13:56:53
 -->
 <template>
   <div class="content">
     <div class="content_detail">
       <div class="detail_pic">
         <el-image
-          style="border-radius: 50%"
-          :src="playListDetails.coverImgUrl"
+          style="border-radius: 30%"
+          :src="playListDetails.coverImgUrl + '?param=120y120'"
           :lazy="true"
         ></el-image>
       </div>
@@ -39,20 +39,15 @@
         </div>
         <div class="btn">
           <div class="btn_item">
-            <el-button type="primary" size="mini" @click="playAll" plain
+            <el-button type="primary" size="mini" plain @click="playAll"
               ><svg-icon icon-class="播放 (3)" /> 全部播放</el-button
             >
           </div>
           <div class="btn_item">
-            <el-button
-              type="primary"
-              size="mini"
-              plain
-              @click="getSubPlaylist(playListDetails)"
-              ><svg-icon icon-class="收 藏 (1)" />
-              <span v-show="playListDetails.subscribed">已收藏</span>
-              <span v-show="!playListDetails.subscribed">收藏</span>
-              ({{ playListDetails.subscribedCount }})
+            <el-button type="primary" size="mini" plain
+              ><svg-icon icon-class="收 藏 (1)" /> 收藏 ({{
+                playListDetails.subscribedCount
+              }})
             </el-button>
           </div>
           <div class="btn_item">
@@ -75,31 +70,15 @@
             >
           </div>
         </div>
-        <div class="label">
-          标签：
-          <router-link
-            v-for="(item, index) in playListDetails.tags"
-            :to="{ path: '/SongList', query: { cat: item } }"
-            :key="index"
-          >
-            <el-button type="info" size="mini" plain>{{
-              item
-            }}</el-button></router-link
-          >
-        </div>
-        <div class="desc">
-          <el-collapse value="string" accordion>
-            <el-collapse-item :title="'简介：' + playListDetails.name" name="1">
-              {{ playListDetails.description }}
-            </el-collapse-item>
-          </el-collapse>
-        </div>
+
+  
       </div>
     </div>
     <div class="content_list_item">
       <div class="item_title">
-        <span style="font-size: 20px; font-weight: bold">歌曲列表</span
-        ><span style="float: right; font-size: 15px"
+        <!-- <span style="font-size: 20px; font-weight: bold">歌曲列表</span
+        > -->
+        <span style="float: right; font-size: 15px"
           >播放
           <span style="color: red; font-size: 10px">
             ({{ playListDetails.playCount }}次)</span
@@ -110,9 +89,10 @@
       <div class="item_table">
         <eltable :Songs="playListsong" />
       </div>
-    </div>
-    <div class="comment">
-      <comment :type="2" :commentData="JSON.stringify(commentData)"> </comment>
+      <div class="comment">
+        <comment :type="2" :commentData="JSON.stringify(commentData)">
+        </comment>
+      </div>
     </div>
   </div>
 </template>
@@ -122,13 +102,12 @@
 
 
 <script>
-import comment from "@/components/comment/index";
 import eltable from "@/components/Talble";
+import comment from "@/components/comment/index";
 import {
   playlistDetail,
-  SubPlaylist,
-  PlayListComment,
   millisToMinutesAndSeconds,
+  PlayListComment,
 } from "@/api/index";
 export default {
   components: { eltable, comment },
@@ -140,68 +119,35 @@ export default {
       //歌单曲目
       playListsong: [],
       commentData: {},
- 
     };
   },
-  watch: {
-    $route(to, from) {
-      if (to.query.id != from.query.id) {
-        //加载数据
-        this.getPlaylistDetail();
-      }
-    },
-  },
   computed: {
-    id() {
-      return this.$route.query;
+    total() {
+      return this.playListsong.length;
     },
   },
-  mounted() {
-    this.getPlaylistDetail();
-    this.getPlayListComment();
+  watch: {
+    id(val) {
+      this.getPlaylistDetail(val);
+    },
   },
   methods: {
-    async getPlaylistDetail() {
-      // const id = this.$route.query;
-      var res = await playlistDetail(this.id);
+    async getPlaylistDetail(val) {
+      var res = await playlistDetail({ id: val });
       this.playListDetails = res.playlist;
       this.playListsong = res.playlist.tracks;
     },
-    async getPlayListComment() {
-      var res = await PlayListComment(this.id);
+
+    async getPlayListComment(val) {
+      var res = await PlayListComment({ id: val });
       this.commentData = res;
     },
-    async getSubPlaylist(val) {
-      if (!val.subscribed) {
-        var res = await SubPlaylist({ id: this.id.id, t: 1 });
-        if (res.code != 200) {
-          this.$message({
-            message: "收藏失败",
-            type: "warning",
-          });
-          return;
-        }
-        this.$message({
-          message: "收藏成功",
-          type: "success",
-        });
-        this.$set(val, "subscribed", true);
-        return;
-      } else {
-        var res = await SubPlaylist({ id: this.id.id, t: 0 });
-        if (res.code != 200) {
-          this.$message({
-            message: "取消收藏失败",
-            type: "warning",
-          });
-          return;
-        }
-        this.$message({
-          message: "已取消",
-          type: "success",
-        });
-        this.$set(val, "subscribed", false);
-      }
+    PlaySong(song, index) {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: song,
+        allSong: this.playListsong,
+        indexSong: index,
+      });
     },
     playAll() {
       this.$store.dispatch("PlaySongs", {
@@ -211,17 +157,16 @@ export default {
       });
     },
   },
+  props: ["id"],
 };
 </script>
 <style lang="scss" scoped>
 .content {
-  margin: 0 auto;
   background-color: #ffffff;
-  width: 1080px;
-  height: 100%;
-  display: flex;
+
   flex-direction: column;
   .content_detail {
+    // position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -232,12 +177,11 @@ export default {
       padding: 5px;
       flex: 1;
     }
-
     .detail_item {
       border-radius: 2px;
       display: flex;
       flex-direction: column;
-      margin: 25px;
+      //   margin: 25px;
       text-align: left;
       flex: 4;
       .title {
@@ -253,6 +197,7 @@ export default {
         }
       }
       .btn {
+        cursor: pointer;
         display: flex;
         align-items: center;
         .btn_item {
@@ -270,7 +215,7 @@ export default {
       .desc {
         margin: 20px 0 0 0;
         font-size: 13px;
-        width: 35vw;
+        width: 600px;
       }
     }
   }
@@ -279,16 +224,14 @@ export default {
     span {
       cursor: pointer;
     }
-    margin: 10px 50px;
-    .item_title {
-      margin: 10px 0 0 0;
-      text-align: left;
-    }
-    .item_table {
-    }
+  }
+  .item_table {
+    width: 100%;
+    margin: 0 auto;
   }
   .comment {
-    padding-top: 30px;
+    width: 100%;
+    margin: 0 auto;
   }
 }
 </style>

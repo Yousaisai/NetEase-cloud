@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架详情
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-23 18:32:57
+ * @LastEditTime: 2020-10-26 12:18:14
 -->
 
 <template>
@@ -33,8 +33,16 @@
             >
           </div>
           <div class="btn_item">
-            <el-button type="primary" size="mini" plain
-              ><svg-icon icon-class="收 藏 (1)" /> 收藏 ({{
+            <el-button
+              type="primary"
+              size="mini"
+              plain
+              @click="getSubAlbum(albumDetails.info)"
+              ><svg-icon icon-class="收 藏 (1)" /><span
+                v-show="albumDetails.info.liked"
+                >已收藏</span
+              >
+              <span v-show="!albumDetails.info.liked">收藏</span> ({{
                 albumDetails.info.likedCount
               }})
             </el-button>
@@ -87,7 +95,7 @@
       <div class="item_table"><eltable :Songs="playListsong" /></div>
     </div>
     <div class="comment">
-      <comment  :type="3" :commentData="JSON.stringify(commentData)"> </comment>
+      <comment :type="3" :commentData="JSON.stringify(commentData)"> </comment>
     </div>
   </div>
 </template>
@@ -103,6 +111,7 @@ import {
   newAlbumDetail,
   dataType,
   AlbumComment,
+  SubAlbum,
 } from "@/api/index";
 import comment from "@/components/comment/index";
 
@@ -127,7 +136,7 @@ export default {
 
   mounted() {
     this.getPlaylistDetail();
-    this.getComment()
+    this.getComment();
   },
   methods: {
     dataForm(val) {
@@ -142,6 +151,38 @@ export default {
     async getComment() {
       var res = await AlbumComment({ id: this.Id });
       this.commentData = res;
+    },
+    async getSubAlbum(val) {
+      if (!val.liked) {
+        var res = await SubAlbum({ id: this.Id, t: 1 });
+        if (res.code != 200) {
+          this.$message({
+            message: "收藏失败",
+            type: "warning",
+          });
+          return;
+        }
+        this.$message({
+          message: "收藏成功",
+          type: "success",
+        });
+        this.$set(val, "liked", true);
+        return;
+      } else {
+        var res = await SubAlbum({ id: this.Id, t: 0 });
+        if (res.code != 200) {
+          this.$message({
+            message: "取消收藏失败",
+            type: "warning",
+          });
+          return;
+        }
+        this.$message({
+          message: "已取消",
+          type: "success",
+        });
+        this.$set(val, "liked", false);
+      }
     },
     playAll() {
       this.$store.dispatch("PlaySongs", {
@@ -228,7 +269,7 @@ export default {
     .item_table {
     }
   }
-  .comment{
+  .comment {
     padding-top: 30px;
   }
 }

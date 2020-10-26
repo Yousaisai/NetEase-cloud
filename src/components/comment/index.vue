@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲评论，只需要传来评论参数
  * @Author: Mr.You
  * @Date: 2020-10-22 11:13:17
- * @LastEditTime: 2020-10-25 16:30:09
+ * @LastEditTime: 2020-10-26 14:45:26
 -->
 <template>
   <div class="comcontent">
@@ -20,8 +20,9 @@
         <div class="textarea">
           <el-input
             type="textarea"
-            :autosize="{ minRows: 2, maxRows: 4 }"
+            maxlength="140"
             placeholder="请输入内容"
+            show-word-limit
             v-model="textarea"
           >
           </el-input>
@@ -100,7 +101,27 @@
               >
                 ({{ item.likedCount }})</span
               >
-              <span style="padding-left: 10px; cursor: pointer">回复</span>
+              <span
+                @click="isShowReply(item)"
+                style="padding-left: 10px; cursor: pointer"
+                >回复</span
+              >
+            </div>
+          </div>
+          <div class="reply1" v-show="item.reply">
+            <div class="inp">
+              <el-input
+                type="textarea"
+                :placeholder="replyTextareaPlace"
+                v-model="replyTextarea"
+                maxlength="140"
+                show-word-limit
+              ></el-input>
+            </div>
+            <div class="btn">
+              <el-button type="primary" size="mini" @click="reply(item)"
+                >回复</el-button
+              >
             </div>
           </div>
         </div>
@@ -243,7 +264,6 @@ export default {
       return dataType(val);
     },
     async like(val) {
-      console.log(val);
       this.CommentLikePayload.id = this.typeId;
       if (val.liked) {
         val.liked = false;
@@ -273,17 +293,6 @@ export default {
       this.CommentLikePayload["content"] = this.textarea;
       this.CommentLikePayload.type = this.type;
       var res = await ReplyComment(this.CommentLikePayload);
-      console.log(res);
-    },
-    async reply(val) {
-      //回复t=2,评论t=1,删除t=0
-      this.CommentLikePayload.id = this.typeId;
-      this.CommentLikePayload.t = 2;
-      this.CommentLikePayload.commentId = val.commentId;
-      this.CommentLikePayload["content"] = this.replyTextarea;
-      this.CommentLikePayload.type = this.type;
-      var res = await ReplyComment(this.CommentLikePayload);
-      console.log(res);
       if (res.code != 200) {
         this.$message({
           message: "评论失败",
@@ -293,6 +302,27 @@ export default {
       }
       this.$message({
         message: "评论成功",
+        type: "success",
+      });
+    },
+    async reply(val) {
+      console.log(val);
+      //回复t=2,评论t=1,删除t=0
+      this.CommentLikePayload.id = this.typeId;
+      this.CommentLikePayload.t = 2;
+      this.CommentLikePayload.commentId = val.commentId;
+      this.CommentLikePayload["content"] = this.replyTextarea;
+      this.CommentLikePayload.type = this.type;
+      var res = await ReplyComment(this.CommentLikePayload);
+      if (res.code != 200) {
+        this.$message({
+          message: "回复失败",
+          type: "warning",
+        });
+        return;
+      }
+      this.$message({
+        message: "回复成功",
         type: "success",
       });
       this.$set(val, "reply", false);
@@ -312,7 +342,6 @@ export default {
   .el-divider {
     margin: 10px 0;
   }
-  width: 1020px;
   background-color: #fff;
   text-align: left;
   padding: 10px 30px;

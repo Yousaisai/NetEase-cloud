@@ -1,38 +1,35 @@
 <!--
  * @Descripttion: 我创建的歌单
  * @Author: Mr.You
- * @Date: 2020-10-12 20:31:43
- * @LastEditTime: 2020-10-23 21:32:13
+ * @Date: 2020-10-12 16:07:04
+ * @LastEditTime: 2020-10-26 13:34:50
 -->
 <template>
-  <div class="content">
-    <div class="content_item">
-      <div
-        class="item_img"
-        v-show="!item.ordered"
-        v-for="(item, index) in userList"
-        :key="index"
-      >
-        <router-link :to="{ name: 'Playlist', query: { id: item.id } }">
-          <div class="image">
-            <img :src="item.coverImgUrl" :alt="item.name" />
-            <div class="imglove">
-              <div class="playcount">
-                <svg-icon icon-class="收听量" style="padding-right: 5px" />{{
-                  item.playCount > 100000
-                    ? parseInt(item.playCount / 10000) + "W"
-                    : item.playCount
-                }}<svg-icon icon-class="播放" style="float: right" />
-              </div>
-              <div class="player"></div>
-            </div></div
-        ></router-link>
-
-        <div class="titledetail">
-          <span>{{ item.name }}</span>
-        </div>
-      </div>
+  <div class="content1">
+    <div class="content_menu">
+      <h3 style="padding-left: 12px">我创建的歌单</h3>
+      <el-menu :default-active="initMenu" @select="handleSelect">
+        <el-menu-item
+          v-for="(item, index) in userList"
+          :key="index"
+          :index="item.id.toString()"
+          v-show="!item.ordered"
+        >
+          <el-image
+            :src="item.coverImgUrl"
+            style="width: 50px; padding-right: 10px"
+            :lazy="true"
+          ></el-image>
+          <span slot="title"
+            >{{ item.name.slice(0, 5) }}
+            <span v-show="item.name.length > 5" style="font-size: 15px"
+              >...</span
+            >
+          </span>
+        </el-menu-item>
+      </el-menu>
     </div>
+    <div class="content_detail"><songs :id="initId" /></div>
   </div>
 </template>
 
@@ -42,19 +39,40 @@
 
 <script>
 import { getToken } from "@/utils/cookie.js";
-
+import { topList } from "@/api/index.js";
+import songs from "./songs";
 import { UserPlaylist } from "@/api/index";
 export default {
+  components: {
+    songs,
+    // LeaderList,
+  },
+
   data() {
     return {
       userList: [],
-      userListPayload: {},
+      NewId: "",
     };
   },
-
   computed: {
     account() {
       return JSON.parse(getToken("account"));
+    },
+    initId() {
+      if (this.NewId == "") {
+        return this.userList.length != 0 && this.userList[0].id;
+      } else {
+        return this.NewId;
+      }
+    },
+    initMenu() {
+      var ID = this.$route.query.id;
+      if (ID) {
+        return ID;
+      }
+      if (this.userList.length != 0) {
+        return this.userList[0].id.toString();
+      }
     },
   },
   mounted() {
@@ -63,60 +81,41 @@ export default {
   methods: {
     async getUserPlaylist() {
       var res = await UserPlaylist({ uid: this.account.id });
+      console.log(res);
       this.userList = res.playlist;
+    },
+
+    handleSelect(key, keyPath) {
+      this.$router.push({ path: "/MyCreateList", query: { id: key } });
+      this.NewId = key;
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-.content {
+.content1 {
+  // width: 70vw;
 
   background-color: #fff;
-  min-height: calc(100vh - 130px);
-  margin: 0 auto;
-  width: 1080px;
-  padding: 10px;
-  .content_item {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    .item_img {
-      border-radius: 10px;
-      padding: 10px;
-      width: 18%;
-      .image {
-        position: relative;
-        img {
-          width: 100%;
-          z-index: 1;
-        }
+  display: flex;
+  .content_menu {
+    // margin: 0 10px 0 0;
 
-        .imglove {
-          height: 27px;
-          text-align: left;
-          position: absolute;
-          z-index: 10;
-          width: 100%;
-          transform: translateY(-30px);
-          background-color: #3b4250;
-          opacity: 0.5;
-          color: #fff;
-          backdrop-filter: 0.5;
-          .playcount {
-            margin: 4px;
-          }
-        }
-      }
-      .image:hover {
-        transform: scale(1.02);
-      }
-
-      .titledetail {
-        text-align: center;
-        padding-top: 5px;
-        font-size: 13px;
-      }
+    // display: -webkit-box;
+    // -webkit-line-clamp: 1;
+    // -webkit-box-orient: vertical;
+    // margin: 10px;
+    // width: 120px;
+    flex: 1;
+    text-align: left;
+    .el-image {
+      border-radius: 5px;
     }
+  }
+  .content_detail {
+    // padding-right: 100px;
+    margin: 10px;
+    flex: 6;
   }
 }
 </style>

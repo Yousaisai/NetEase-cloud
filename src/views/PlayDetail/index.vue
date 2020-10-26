@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-23 21:30:48
+ * @LastEditTime: 2020-10-25 17:39:09
 -->
 <template>
   <div class="content" v-if="songDetail.al">
@@ -30,16 +30,6 @@
               path: '/SingerDetail/Music',
               query: { id: songDetail.ar[0].id },
             }"
-            ><span style="font-size: 15px; color: #409eff; cursor: pointer">{{
-              songDetail.al.name
-            }}</span>
-          </router-link>
-        </div>
-        <div class="album">
-          <span>专辑：</span>
-          <router-link
-            style="text-decoration: none"
-            :to="{ path: '/NewAlbum', query: { id: songDetail.al.id } }"
             ><span
               style="
                 padding: 10px;
@@ -52,6 +42,16 @@
               >{{ item.name }}</span
             ></router-link
           >
+        </div>
+        <div class="album">
+          <span>专辑：</span>
+          <router-link
+            style="text-decoration: none"
+            :to="{ path: '/NewAlbum', query: { id: songDetail.al.id } }"
+            ><span style="font-size: 15px; color: #409eff; cursor: pointer">{{
+              songDetail.al.name
+            }}</span>
+          </router-link>
         </div>
         <div class="btn">
           <div class="btn_item">

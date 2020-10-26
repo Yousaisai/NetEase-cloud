@@ -17,7 +17,6 @@ const routes = [{
         meta: {
           title: '我的音乐'
         },
-
         component: () => import('../views/MyMusic/index.vue'),
       },
       {
@@ -179,28 +178,7 @@ const routes = [{
       }
     ]
   },
-  //  {
-  //   path: '/Mymuisc',
-  //   name: 'Mymuisc',
-  //   meta: {
-  //     title: '我的歌单'
-  //   },
 
-  //   component: () => import('../views/MyMusic/index.vue'),
-  //   children: [{
-  //     path: '/MyCreateList',
-  //     component: () => import('../views/MyMusic/MyCreateList/index.vue'),
-  //     meta: {
-  //       title: '我的歌单'
-  //     },
-  //   }, {
-  //     path: '/MyLoveList',
-  //     component: () => import('../views/MyMusic/MyLoveList/index.vue'),
-  //     meta: {
-  //       title: '收藏歌单'
-  //     },
-  //   }]
-  // },
 ]
 
 const router = new VueRouter({

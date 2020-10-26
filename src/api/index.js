@@ -453,3 +453,53 @@ export function ReplyComment(payload) {
         }
     })
 }
+
+//收藏/取消歌单
+export function SubPlaylist(payload) {
+    return request({
+        url: "/playlist/subscribe",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}
+
+//收藏/取消  歌手
+export function SubArtist(payload) {
+    return request({
+        url: "/artist/sub",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}
+
+
+//收藏/取消  MV
+export function SubMv(payload) {
+    return request({
+        url: "/mv/sub",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}
+
+
+//收藏/取消  专辑
+export function SubAlbum(payload) {
+    return request({
+        url: "/album/sub",
+        method: 'get',
+        params: {
+            ...payload,
+            auth: true
+        }
+    })
+}
