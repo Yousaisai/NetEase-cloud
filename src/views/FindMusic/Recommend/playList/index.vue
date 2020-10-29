@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-10-23 11:43:40
+ * @LastEditTime: 2020-10-29 10:25:23
 -->
 <template>
   <div class="content">
@@ -170,7 +170,11 @@
                   style="padding: 0 5px"
                   icon-class="播放 (6)"
                 />
-                <svg-icon style="padding: 0 5px" icon-class="加好 2-01" />
+                <svg-icon
+                  style="padding: 0 5px"
+                  @click="AddMusic(item)"
+                  icon-class="加好 2-01"
+                />
                 <svg-icon style="padding: 0 5px" icon-class="心 爱心 (2)" />
                 <svg-icon style="padding: 0 5px" icon-class="下载 (1)" />
               </div>
@@ -202,7 +206,6 @@
 
 
 <script>
-
 import {
   Personal,
   playlist,
@@ -254,9 +257,8 @@ export default {
       }
     },
     async getPlayList() {
-        var res = await Personal();
-        this.playlists = res.result;
-
+      var res = await Personal();
+      this.playlists = res.result;
     },
     async getResource() {
       var res = await resource();
@@ -278,6 +280,13 @@ export default {
           this.$set(this.topListDetail, index, res.playlist.tracks);
         }
       }
+    },
+    AddMusic(song) {
+      this.$store.dispatch("AddMusic", song);
+      this.$message({
+        message: "添加成功",
+        type: "success",
+      });
     },
     PlaySong(song, allsong, index) {
       this.$store.dispatch("PlaySongs", {

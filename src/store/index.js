@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-26 15:36:06
+ * @LastEditTime: 2020-10-29 12:54:05
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -36,7 +36,9 @@ export default new Vuex.Store({
     AllSongs: [],
     //播放的第几个歌曲，哦那个与切换下一首
     IndexSong: 0,
-    BannerUrl: ""
+    BannerUrl: "",
+    index: 1, //这个是添加音乐，插入播放
+    currentLyric:0
   },
   mutations: {
     ST_PlaySong: (state, payload) => {
@@ -62,6 +64,7 @@ export default new Vuex.Store({
       dispatch,
       state
     }, payload) {
+
       /*调用方式
         this.$store.dispatch("PlaySongs", {
         oneSong: 单条歌,
@@ -71,6 +74,7 @@ export default new Vuex.Store({
       var oneSong = payload.oneSong
       var allSong = payload.allSong
       var indexSong = payload.indexSong
+      console.log(indexSong);
       commit('ST_AllSongs', allSong)
       commit('ST_PlaySong', oneSong)
       commit('ST_IndexSong', indexSong)
@@ -102,6 +106,7 @@ export default new Vuex.Store({
       state,
       dispatch
     }, payload) {
+      console.log(state.IndexSong);
       var nextSong = {}
       if (state.AllSongs.length == 0) {
         state.AllSongs = JSON.parse(localStorage.getItem("AllSongs"))
@@ -163,6 +168,14 @@ export default new Vuex.Store({
       commit('ST_SongDetail', commSong)
 
     },
+    //往播放列表中加入歌曲
+    AddMusic({
+      commit,
+      state
+    }, payload) {
+      state.AllSongs.splice(state.IndexSong + state.index, 0, payload)
+      state.index++
+    }
 
   },
   modules: {}

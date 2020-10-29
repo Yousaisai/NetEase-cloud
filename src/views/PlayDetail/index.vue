@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-26 15:39:17
+ * @LastEditTime: 2020-10-29 13:04:31
 -->
 <template>
   <div class="content" v-if="songDetail.al">
@@ -65,6 +65,7 @@
             </el-button>
           </div>
           <div class="btn_item">
+            ·
             <el-button type="primary" size="mini" plain
               ><svg-icon icon-class="转发" /> 转发</el-button
             >
@@ -83,7 +84,12 @@
       </div>
     </div>
     <div class="lyc">
-      <li v-for="(item, index) in lyric" v-show="index < isShow" :key="index">
+      <li
+        v-for="(item, index) in lyric"
+        :class="index == currentLyric ? 'corly' : 'none'"
+        v-show="index > currentLyric - 5 && index < currentLyric + 5"
+        :key="index"
+      >
         {{ item[1] }}
       </li>
       <li
@@ -127,11 +133,15 @@ export default {
       isShow: 10,
       songDetail: {},
       lyric: [],
-      currentLyric: 0,
+      // currentLyric: 0,
       commentData: {},
     };
   },
   computed: {
+    currentLyric() {
+      console.log(this.$store.state.currentLyric);
+      return this.$store.state.currentLyric - 1;
+    },
     Id() {
       return this.$route.query.id;
     },
@@ -249,6 +259,9 @@ export default {
     }
   }
   .lyc {
+    .corly {
+      color: #00a4ff;
+    }
     // padding: 0 10px;
     width: 1080px;
     margin: 0 auto;

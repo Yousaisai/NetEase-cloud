@@ -2,7 +2,7 @@
  * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-26 12:56:16
+ * @LastEditTime: 2020-10-28 16:12:58
 -->
 
 <template>
@@ -78,7 +78,11 @@
               <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
             </span>
             <span style="padding: 10px">
-              <svg-icon style="font-size: 16px" icon-class="加好 2-01" />
+              <svg-icon
+                style="font-size: 16px"
+                @click="AddMusic(scope.row)"
+                icon-class="加好 2-01"
+              />
             </span>
             <span style="padding: 10px">
               <svg-icon
@@ -179,6 +183,14 @@ export default {
         indexSong: index,
       });
     },
+    AddMusic(song) {
+
+      this.$store.dispatch("AddMusic",song)
+      this.$message({
+      message: '添加成功',
+      type: 'success'
+       });
+    }
   },
 };
 </script>

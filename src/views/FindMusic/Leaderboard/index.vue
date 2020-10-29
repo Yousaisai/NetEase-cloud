@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-10-18 16:08:02
+ * @LastEditTime: 2020-10-29 12:37:08
 -->
 <template>
   <div class="content1">
@@ -77,7 +77,10 @@ export default {
       }
     },
     handleSelect(key, keyPath) {
-      this.$router.push({ path: "/Leaderboard", query: { id: key } });
+      if (this.$route.query.id == key) {
+        return;
+      }
+      this.$router.push({ query: { id: key } });
       this.NewId = key;
     },
   },

@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-26 15:20:53
+ * @LastEditTime: 2020-10-29 13:19:38
 -->
 
 <template>
@@ -118,12 +118,22 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       {{ milltosecond(SongTime) }}/{{ milltosecond(time) }}
     </div>
     <div class="other">
-      <div class="love"><svg-icon @click="getLikeMusic(onesong)" icon-class="心 爱心 (3)" /></div>
+      <div class="playlist">
+        <div class="listdata" v-show="showList">
+       
+          <play-list></play-list>
+      
+        </div>
+        <svg-icon icon-class="播放列表" @click="showList = !showList" />
+      </div>
+      <div class="love">
+        <svg-icon @click="getLikeMusic(onesong)" icon-class="心 爱心 (3)" />
+      </div>
       <div class="volume">
-        <div
-          :style="{ visibility: showVol == false ? 'hidden' : 'visible' }"
-          class="slider"
-        >
+        <div class="svg" @click="showVol = !showVol">
+          <svg-icon style="font-size: 1.5em" icon-class="喇叭广播 (1)" />
+        </div>
+        <div class="slider" v-show="showVol">
           <el-slider
             v-model="volume"
             :show-tooltip="false"
@@ -133,9 +143,6 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
           >
           </el-slider>
         </div>
-        <div class="svg" @click="showVol = !showVol">
-          <svg-icon style="font-size: 1.5em" icon-class="喇叭广播 (1)" />
-        </div>
       </div>
     </div>
   </div>
@@ -143,11 +150,15 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 
 <script>
 import { millisToMinutesAndSeconds, SongLyric } from "@/api/index";
-
+import playList from "./playList/index";
 export default {
+  components: {
+    playList,
+  },
   data() {
     return {
       SongTime: 1,
+      showList: false,
       volume: 50, //声音
       showVol: false,
       showStart: false,
@@ -177,6 +188,15 @@ export default {
     this.TitleScrolling();
   },
   watch: {
+    // SongTime() {
+    //   //由于数据是毫秒级别监听不到，所以只需要监听到秒数相等就播放下一首
+    //   if (parseInt(this.time / 1000) == parseInt(this.SongTime / 1000)) {
+    //     this.SwitchSongs("next");
+    //     console.log(1);
+    //     return;
+    //   }
+    // },
+
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
@@ -223,31 +243,34 @@ export default {
         ) {
           if (this.lyric[this.currentLyric][0] < this.SongTime) {
             this.currentLyric++;
+            this.$store.state.currentLyric= this.currentLyric
             this.lyricText = this.lyric[this.currentLyric - 1][1];
           }
         }
       }
       if (this.$refs.audio.currentTime) {
+        if (
+          parseInt(this.time) == parseInt(this.$refs.audio.currentTime * 1000)
+        ) {
+          this.SwitchSongs("next");
+        }
         this.SongTime = this.$refs.audio.currentTime * 1000;
-      }
-      //由于数据是毫秒级别监听不到，所以只需要监听到秒数相等就播放下一首
-      if (parseInt(this.time / 1000) <= parseInt(this.SongTime / 1000)) {
-        this.SwitchSongs("next");
       }
     },
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
+      console.log(res);
+      this.time = parseInt(res.target.duration * 1000);
       // this.showStart=true
       if (!this.$refs.audio.paused) {
         this.showStart = true;
-      } 
+      }
 
       this.playing = true;
       this.tit = ` 正在播放：${this.name} - ${
         this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name
       }  `;
-      // this.$refs.audio.play();
       if (this.onesong.id) {
         this.getLyric(this.onesong.id);
         this.lyric = [];
@@ -270,7 +293,9 @@ export default {
         document.title = this.tit;
       }, 800);
     },
-    getLikeMusic(val){console.log(val);},
+    getLikeMusic(val) {
+      console.log(val);
+    },
     async getLyric(id) {
       //获取歌词
       this.currentLyric = 0;
@@ -407,42 +432,75 @@ export default {
   .other {
     flex: 1;
     color: #fff;
-    margin: auto 10px;
     display: flex;
+    align-items: center;
     position: relative;
-    .love {
+    width: 200px;
+    justify-content: space-between;
+    .playlist {
+      padding: 0 10px 0 0;
+      font-size: 25px;
       flex: 1;
       text-align: left;
       color: #666666;
-      transform: scale(1.4);
+      position: relative;
+      z-index: 1000000000000;
+      .listdata {
+        border-radius: 10px 10px 0 0;
+        width: 410px;
+        height: 280px;
+        background-color: #1f1f1f;
+        position: absolute;
+        top: -290px;
+        left: -200px;
+        color: #000;
+        overflow: auto;
+        padding:0  10px;
+      }
+      .listdata::-webkit-scrollbar {
+        width: 1px;
+      }
+    }
+    .playlist:hover {
+      cursor: pointer;
+      color: #b7b4b4;
+    }
+    .love {
+      padding: 0 10px 0 0;
+      font-size: 22px;
+      flex: 1;
+      color: #666666;
     }
     .love:hover {
       cursor: pointer;
       color: #b7b4b4;
     }
     .volume {
+      font-size: 16px;
       flex: 1;
-      position: absolute;
-      top: -95px;
-      left: 20px;
-      z-index: 1000000;
+      position: relative;
+      z-index: 100000000000;
+      .slider {
+        position: absolute;
+        z-index: 10000000;
+        top: -92px;
+        width: 40px;
+        left: -10px;
+        background-color: #2d2c2c;
+        opacity: 0.8;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+      .svg {
+        cursor: pointer;
+        color: #666666;
+      }
     }
-    .svg {
-      cursor: pointer;
-      padding: 10px;
-      top: 0;
-      color: #666666;
-    }
+
     .svg:hover {
       color: #b7b4b4;
     }
-    .slider {
-      width: 40px;
-      background-color: #2d2c2c;
-      opacity: 0.8;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-    }
+
     /deep/ .el-slider__bar {
       height: 6px;
       background-color: #666 !important;
