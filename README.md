@@ -2,7 +2,7 @@
  * @Descripttion: 项目介绍
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:49
- * @LastEditTime: 2020-11-04 15:35:17
+ * @LastEditTime: 2020-11-04 15:49:40
 -->
 # 使用Vue.js写的网易云音乐播放器
 
@@ -33,15 +33,15 @@
 - 其他：热门榜、歌手榜、新碟上架、歌单、推荐、歌单详情，MV详情，歌手详情，歌曲详情等
 
 ## 页面展示
-- 首页：![首页](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-28-30.png)
-- 排行榜：![排行榜](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-29-08.png)
-- 歌单：![歌单](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-29-18.png)
-- 歌手：![歌手](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-29-28.png)
-- 新碟上架：![新碟上架](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-29-38.png)
-- 歌手详情：![歌手详情](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-30-00.png)
-- MV详情：![MV详情](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-30-11.png)
-- 评论详情：![评论详情](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-30-59.png)
-- 搜索详情： ![搜索详情](https://git.ahusmart.com/Mr.You/netease-cloud/-/blob/master/src/icons/pic/Snipaste_2020-10-22_18-31-25.png)
+- 首页：![首页](./src/icons/pic/Snipaste_2020-10-22_18-28-30.png)
+- 排行榜：![排行榜](./src/icons/pic/Snipaste_2020-10-22_18-29-08.png)
+- 歌单：![歌单](./src/icons/pic/Snipaste_2020-10-22_18-29-18.png)
+- 歌手：![歌手](./src/icons/pic/Snipaste_2020-10-22_18-29-28.png)
+- 新碟上架：![新碟上架](./src/icons/pic/Snipaste_2020-10-22_18-29-38.png)
+- 歌手详情：![歌手详情](./src/icons/pic/Snipaste_2020-10-22_18-30-00.png)
+- MV详情：![MV详情](./src/icons/pic/Snipaste_2020-10-22_18-30-11.png)
+- 评论详情：![评论详情](./src/icons/pic/Snipaste_2020-10-22_18-30-59.png)
+- 搜索详情： ![搜索详情](./src/icons/pic/Snipaste_2020-10-22_18-31-25.png)
 
 ## 项目运行
 ```
