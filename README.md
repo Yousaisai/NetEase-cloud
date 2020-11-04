@@ -2,7 +2,7 @@
  * @Descripttion: 项目介绍
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:49
- * @LastEditTime: 2020-11-04 15:56:32
+ * @LastEditTime: 2020-11-04 16:01:24
 -->
 # 使用Vue.js写的网易云音乐播放器
 
@@ -59,6 +59,8 @@
 - 搜索详情： ![搜索详情](./src/icons/pic/Snipaste_2020-10-22_18-31-25.png)
 
 ## 项目运行
+
+
 ```
 # clone the project
 git clone https://git.ahusmart.com/Mr.You/netease-cloud.git
