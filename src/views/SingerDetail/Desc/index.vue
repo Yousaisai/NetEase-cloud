@@ -56,10 +56,10 @@ export default {
 
   li {
     list-style: none;
-    padding: 10px;
-    font-size: 13px;
+    padding: 10rem;
+    font-size: 13rem;
     color: #666;
-    text-indent: 2em;line-height:25px
+    text-indent: 2em;line-height:25rem
   }
 }
 </style>

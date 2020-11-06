@@ -7,7 +7,7 @@
 <template>
   <div class="comcontent">
     <div class="totle">
-      <span style="font-size: 22px; padding-right: 10px">评论</span>
+      <span style="font-size: 22rem; padding-right: 10rem">评论</span>
       <span>共{{ commentdatas.total }}条评论</span>
       <el-divider direction="horizontal" content-position="left"></el-divider>
       <div class="comment">
@@ -40,7 +40,7 @@
       class="hotCom"
       v-if="commentdatas.hotComments && commentdatas.hotComments.length > 0"
     >
-      <span style="color: #9b0909; font-size: 12px; font-weight: bold"
+      <span style="color: #9b0909; font-size: 12rem; font-weight: bold"
         >精彩评论</span
       >
       <el-divider direction="horizontal"></el-divider>
@@ -97,13 +97,13 @@
                 style="color: #409eff"
               />
               <span
-                style="border-right: 2px solid #99b5d7; padding-right: 10px"
+                style="border-right: 2rem solid #99b5d7; padding-right: 10rem"
               >
                 ({{ item.likedCount }})</span
               >
               <span
                 @click="isShowReply(item)"
-                style="padding-left: 10px; cursor: pointer"
+                style="padding-left: 10rem; cursor: pointer"
                 >回复</span
               >
             </div>
@@ -131,7 +131,7 @@
       class="newCom"
       v-if="commentdatas.comments && commentdatas.comments.length > 0"
     >
-      <span style="color: #9b0909; font-size: 12px; font-weight: bold"
+      <span style="color: #9b0909; font-size: 12rem; font-weight: bold"
         >最新评论</span
       >
       <el-divider direction="horizontal"></el-divider>
@@ -188,12 +188,12 @@
                 style="color: #409eff"
               />
               <span
-                style="border-right: 2px solid #99b5d7; padding-right: 10px"
+                style="border-right: 2rem solid #99b5d7; padding-right: 10rem"
               >
                 ({{ item.likedCount }})</span
               >
               <span
-                style="padding-left: 10px; cursor: pointer"
+                style="padding-left: 10rem; cursor: pointer"
                 @click="isShowReply(item)"
                 >回复</span
               >
@@ -340,17 +340,17 @@ export default {
 <style lang="scss" scoped>
 .comcontent {
   .el-divider {
-    margin: 10px 0;
+    margin: 10rem 0;
   }
   background-color: #fff;
   text-align: left;
-  padding: 10px 30px;
+  padding: 10rem 30rem;
   span {
-    font-size: 12px;
-    line-height: 20px;
+    font-size: 12rem;
+    line-height: 20rem;
   }
   .comment {
-    padding: 10px 0px 10px 10px;
+    padding: 10rem 0rem 10rem 10rem;
     display: flex;
     .avt {
       flex: 1;
@@ -361,18 +361,18 @@ export default {
   }
   .com {
     text-align: right;
-    padding-right: 10px;
-    padding-bottom: 10px;
+    padding-right: 10rem;
+    padding-bottom: 10rem;
   }
   .newCom {
-    padding: 20px 0;
+    padding: 20rem 0;
   }
   .hotCom,
   .newCom {
     .comItem {
       display: flex;
-      border-bottom: 1px dashed #dcdfe6;
-      padding: 10px;
+      border-bottom: 1rem dashed #dcdfe6;
+      padding: 10rem;
       .avt {
         flex: 1;
         font-weight: bold;
@@ -384,63 +384,63 @@ export default {
         flex-direction: column;
         justify-content: space-between;
         .con {
-          padding: 0 0 10px 0;
+          padding: 0 0 10rem 0;
           .title {
           }
 
           .reply {
             position: relative;
             background-color: #f5f5f5;
-            padding: 10px 20px;
-            margin: 10px;
+            padding: 10rem 20rem;
+            margin: 10rem;
           }
           .reply:before {
             content: "";
-            width: 0px;
-            border-top: 10px solid transparent;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid #f4f5f7;
+            width: 0rem;
+            border-top: 10rem solid transparent;
+            border-left: 10rem solid transparent;
+            border-right: 10rem solid transparent;
+            border-bottom: 10rem solid #f4f5f7;
             position: absolute;
-            top: -18px;
-            border-radius: 3px;
-            left: 20px;
+            top: -18rem;
+            border-radius: 3rem;
+            left: 20rem;
           }
         }
         .reply1 {
           position: relative;
           background-color: #f5f5f5;
-          padding: 10px 20px;
-          margin: 10px;
+          padding: 10rem 20rem;
+          margin: 10rem;
           .inp {
-            font-size: 12px;
-            line-height: 20px;
+            font-size: 12rem;
+            line-height: 20rem;
           }
           .btn {
             text-align: right;
-            padding: 10px 0 0 0;
+            padding: 10rem 0 0 0;
           }
         }
         .reply1:before {
           content: "";
-          width: 0px;
-          border-top: 10px solid transparent;
-          border-left: 10px solid transparent;
-          border-right: 10px solid transparent;
-          border-bottom: 10px solid #f4f5f7;
+          width: 0rem;
+          border-top: 10rem solid transparent;
+          border-left: 10rem solid transparent;
+          border-right: 10rem solid transparent;
+          border-bottom: 10rem solid #f4f5f7;
           position: absolute;
-          top: -18px;
-          border-radius: 3px;
-          right: 2px;
+          top: -18rem;
+          border-radius: 3rem;
+          right: 2rem;
         }
         .like {
-          padding: 10px 0 0 0;
+          padding: 10rem 0 0 0;
           display: flex;
           width: 100%;
           .time {
             justify-self: start;
             flex: 1;
-            font-size: 10px;
+            font-size: 10rem;
             color: #99b5d7;
           }
           .likenum {

@@ -29,7 +29,7 @@
     </div>
     <div class="all">
       <div class="title">
-        <span style="padding-right: 20px">全部新碟 </span>
+        <span style="padding-right: 20rem">全部新碟 </span>
         <span @click="getnewAllAlbum(item)" class="span" v-for="(item, index) in area" :key="index"
           >{{ index }} <span class="line">|</span>
         </span>
@@ -96,9 +96,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-  width: 1080px;
+  width: 1080rem;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20rem;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -108,15 +108,15 @@ export default {
     cursor: pointer;
   }
   .el-divider {
-    // padding: 0.5px;
-    margin-top: 10px;
+    // padding: 0.5rem;
+    margin-top: 10rem;
   }
   .hot {
     display: flex;
     flex-direction: column;
     .title {
       text-align: left;
-      font-size: 25px;
+      font-size: 25rem;
     }
     .hotimg {
       display: flex;
@@ -126,13 +126,13 @@ export default {
       .item {
         width: 16%;
         .img {
-          padding: 10px;
+          padding: 10rem;
         }
 
         .name {
-          font-size: 13px;
+          font-size: 13rem;
           .alname {
-            padding: 5px;
+            padding: 5rem;
           }
           .songname {
           }
@@ -142,20 +142,20 @@ export default {
   }
 
   .all {
-    padding: 10px 0;
-    margin-top: 20px;
+    padding: 10rem 0;
+    margin-top: 20rem;
     display: flex;
     flex-direction: column;
     .title {
       text-align: left;
 
-      font-size: 25px;
+      font-size: 25rem;
 
       .span {
-        font-size: 13px;
-        // padding: 15px;
+        font-size: 13rem;
+        // padding: 15rem;
         .line {
-          padding: 10px;
+          padding: 10rem;
           color: #666;
         }
       }
@@ -172,14 +172,14 @@ export default {
       .item {
         width: 16%;
         .img {
-          padding: 10px;
+          padding: 10rem;
         }
       }
     }
     .name {
-      font-size: 13px;
+      font-size: 13rem;
       .alname {
-        padding: 5px;
+        padding: 5rem;
       }
       .songname {
       }

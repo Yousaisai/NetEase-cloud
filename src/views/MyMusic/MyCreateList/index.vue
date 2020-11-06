@@ -7,7 +7,7 @@
 <template>
   <div class="content1">
     <div class="content_menu">
-      <h3 style="padding-left: 12px">我创建的歌单</h3>
+      <h3 style="padding-left: 12rem">我创建的歌单</h3>
       <el-menu :default-active="initMenu" @select="handleSelect">
         <el-menu-item
           v-for="(item, index) in userList"
@@ -17,12 +17,12 @@
         >
           <el-image
             :src="item.coverImgUrl"
-            style="width: 50px; padding-right: 10px"
+            style="width: 50rem; padding-right: 10rem"
             :lazy="true"
           ></el-image>
           <span slot="title"
             >{{ item.name.slice(0, 5) }}
-            <span v-show="item.name.length > 5" style="font-size: 15px"
+            <span v-show="item.name.length > 5" style="font-size: 15rem"
               >...</span
             >
           </span>
@@ -98,22 +98,22 @@ export default {
   background-color: #fff;
   display: flex;
   .content_menu {
-    // margin: 0 10px 0 0;
+    // margin: 0 10rem 0 0;
 
     // display: -webkit-box;
     // -webkit-line-clamp: 1;
     // -webkit-box-orient: vertical;
-    // margin: 10px;
-    // width: 120px;
+    // margin: 10rem;
+    // width: 120rem;
     flex: 1;
     text-align: left;
     .el-image {
-      border-radius: 5px;
+      border-radius: 5rem;
     }
   }
   .content_detail {
-    // padding-right: 100px;
-    margin: 10px;
+    // padding-right: 100rem;
+    margin: 10rem;
     flex: 6;
   }
 }

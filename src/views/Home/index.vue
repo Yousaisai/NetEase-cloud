@@ -7,11 +7,11 @@
 <template>
   <div class="home">
     <el-container>
-      <el-header style="height: 60px">
+      <el-header style="height: 60rem">
         <elheader />
       </el-header>
       <el-container>
-        <el-aside width="130px"><elaside /></el-aside>
+        <el-aside width="130rem"><elaside /></el-aside>
         <el-main
           ><div class="header" v-if="isShow">
             <elmain />
@@ -22,7 +22,7 @@
             </transition></div
         ></el-main>
       </el-container>
-      <el-footer style="height: 50px"><elfooter /></el-footer>
+      <el-footer style="height: 50rem"><elfooter /></el-footer>
     </el-container>
   </div>
 </template>
@@ -71,20 +71,20 @@ export default {
     background-color: #ffffff;
     color: #333;
 
-    height: calc(100vh - 110px);
+    height: calc(100vh - 110rem);
   }
 
   .el-main {
 
     background-color: #f5f5f5;
     color: #333;
-    padding: 0px;
-    height: calc(100vh - 110px);
+    padding: 0rem;
+    height: calc(100vh - 110rem);
     display: flex;
     z-index: 2;
     flex-direction: column;
     .main {
-      // width: 1080px;
+      // width: 1080rem;
       // margin: 0 auto;
     }
     .header {

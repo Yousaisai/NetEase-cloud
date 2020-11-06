@@ -2,13 +2,13 @@
  * @Descripttion: 全局引入
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-21 20:56:54
+ * @LastEditTime: 2020-11-06 15:12:58
  */
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
+import 'lib-flexible'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

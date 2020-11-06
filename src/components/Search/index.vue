@@ -232,42 +232,42 @@ li:hover {
   // flex-wrap: wrap;
 
   .seatitle {
-    font-size: 18px;
+    font-size: 18rem;
     color: black;
-    padding-bottom: 120px;
+    padding-bottom: 120rem;
   }
   ul {
-    padding: 10px 10px 0 10px;
+    padding: 10rem 10rem 0 10rem;
     margin: 0;
 
     li {
-      font-size: 12px;
+      font-size: 12rem;
       list-style: none;
 
       .li {
-        padding: 10px 0;
+        padding: 10rem 0;
         .index1 {
           background-color: #f5f5f5;
-          border-radius: 20px;
+          border-radius: 20rem;
           display: inline-block;
 
           font-weight: 600;
-          margin-right: 24px;
-          height: 20px;
-          line-height: 20px;
-          width: 20px;
+          margin-right: 24rem;
+          height: 20rem;
+          line-height: 20rem;
+          width: 20rem;
           text-align: center;
         }
         .index2 {
           background-color: #314659;
-          border-radius: 20px;
+          border-radius: 20rem;
           display: inline-block;
 
           font-weight: 600;
-          margin-right: 24px;
-          height: 20px;
-          line-height: 20px;
-          width: 20px;
+          margin-right: 24rem;
+          height: 20rem;
+          line-height: 20rem;
+          width: 20rem;
           text-align: center;
           color: #fff;
         }
@@ -279,8 +279,8 @@ li:hover {
 .title {
   display: flex;
   margin: auto 0;
-  height: 60px;
-  font-size: 25px;
+  height: 60rem;
+  font-size: 25rem;
   color: #fff;
   width: 100%;
   justify-content: center;
@@ -289,28 +289,28 @@ li:hover {
 .spanhot {
   background-color: #666;
   color: #fff;
-  padding: 2px 5px;
+  padding: 2rem 5rem;
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 10rem;
 }
 .span {
-  padding: 2px 5px;
+  padding: 2rem 5rem;
   border-radius: 50%;
-  font-size: 10px;
+  font-size: 10rem;
 }
 
 .searchall {
-  font-size: 12px;
+  font-size: 12rem;
   display: flex;
   flex-direction: column;
   li {
     overflow: hidden;
     list-style: none;
-    // width:180px;
+    // width:180rem;
     // text-overflow: ellipsis;
     // white-space: nowrap;
     // overflow: hidden;
-    padding: 10px 0;
+    padding: 10rem 0;
   }
 
   .singer {
@@ -321,13 +321,13 @@ li:hover {
     .seatitle {
       color: #666;
       flex: 1;
-      // border-top: 2px solid #f5f5f5;
+      // border-top: 2rem solid #f5f5f5;
 
-      padding: 15px 0px;
+      padding: 15rem 0rem;
     }
     .item {
-      border-left: 2px solid #f5f5f5;
-      padding: 2px 5px;
+      border-left: 2rem solid #f5f5f5;
+      padding: 2rem 5rem;
       flex: 3;
     }
   }
@@ -340,9 +340,9 @@ li:hover {
       flex: 1;
     }
     .item {
-      border-left: 2px solid #f5f5f5;
-      // border-bottom: 2px solid #f5f5f5;
-      padding: 2px 5px;
+      border-left: 2rem solid #f5f5f5;
+      // border-bottom: 2rem solid #f5f5f5;
+      padding: 2rem 5rem;
       flex: 3;
     }
   }
@@ -355,9 +355,9 @@ li:hover {
       flex: 1;
     }
     .item {
-      border-left: 2px solid #f5f5f5;
-      // border-bottom: 2px solid #f5f5f5;
-      padding: 2px 5px;
+      border-left: 2rem solid #f5f5f5;
+      // border-bottom: 2rem solid #f5f5f5;
+      padding: 2rem 5rem;
       flex: 3;
     }
   }

@@ -53,7 +53,7 @@ export default {
  
   .item {
     width: 18%;
-    padding: 10px 10px;
+    padding: 10rem 10rem;
     .img {
     }
     .img:hover {
@@ -61,7 +61,7 @@ export default {
       transform: scale(1.02);
     }
     .name {
-      padding: 10px;
+      padding: 10rem;
     }
   }
 }

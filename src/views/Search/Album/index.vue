@@ -70,9 +70,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-width: 1080px;
+width: 1080rem;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20rem;
   background-color: #fff;
   display: flex;
 
@@ -82,21 +82,21 @@ width: 1080px;
   }
 
   .all {
-    // padding: 10px 0;
-    // margin-top: 20px;
+    // padding: 10rem 0;
+    // margin-top: 20rem;
     display: flex;
    justify-content: center;
     flex-wrap: wrap;
     .title {
       text-align: left;
 
-      font-size: 25px;
+      font-size: 25rem;
 
       .span {
-        font-size: 13px;
-        // padding: 15px;
+        font-size: 13rem;
+        // padding: 15rem;
         .line {
-          padding: 10px;
+          padding: 10rem;
           color: #666;
         }
       }
@@ -113,14 +113,14 @@ width: 1080px;
       .item {
         width: 20%;
         .img {
-          padding: 10px;
+          padding: 10rem;
         }
       }
     }
     .name {
-      font-size: 13px;
+      font-size: 13rem;
       .alname {
-        padding: 5px;
+        padding: 5rem;
       }
       .songname {
       }

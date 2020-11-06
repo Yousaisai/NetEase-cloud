@@ -7,7 +7,7 @@
 <template>
   <div class="content1">
     <div class="content_menu">
-      <h3 style="padding-left: 12px">网易云音乐榜</h3>
+      <h3 style="padding-left: 12rem">网易云音乐榜</h3>
       <el-menu :default-active="initMenu" @select="handleSelect">
         <el-menu-item
           v-for="(item, index) in topList"
@@ -16,7 +16,7 @@
         >
           <el-image
             :src="item.coverImgUrl"
-            style="width: 50px; padding: 0 10px"
+            style="width: 50rem; padding: 0 10rem"
             :lazy="true"
           ></el-image>
           <span slot="title">{{ item.name }}</span>
@@ -90,22 +90,22 @@ export default {
 .content1 {
   width: 70vw;
   margin: 0 auto;
-  padding: 0 10px 0 0;
+  padding: 0 10rem 0 0;
 
   background-color: #fff;
   display: flex;
   .content_menu {
-    margin: 10px;
+    margin: 10rem;
 
     flex: 1;
     text-align: left;
     .el-image {
-      border-radius: 5px;
+      border-radius: 5rem;
     }
   }
   .content_detail {
-    // padding-right: 100px;
-    margin: 10px;
+    // padding-right: 100rem;
+    margin: 10rem;
     flex: 4;
   }
 }

@@ -36,12 +36,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .cotent {
-  width: 1080px;
+  width: 1080rem;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   .item {
-    margin: 10px;
+    margin: 10rem;
     width: 20%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -53,7 +53,7 @@ export default {
       color: #b7b4b4;
       position: absolute;
       z-index: 100000;
-      font-size: 35px;
+      font-size: 35rem;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
@@ -70,7 +70,7 @@ export default {
     .mvname {
       width: 85%;
       margin: 0 auto;
-      font-size: 13px;
+      font-size: 13rem;
     }
   }
 }

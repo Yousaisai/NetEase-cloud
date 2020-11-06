@@ -19,13 +19,13 @@
       <el-table-column label="序号" align="center" min-width="80">
         <template slot-scope="scope">
           <div v-if="scope.$index + (currentPage - 1) * pageSize == 0">
-            <svg-icon style="font-size: 35px" icon-class="金牌" />
+            <svg-icon style="font-size: 35rem" icon-class="金牌" />
           </div>
           <div v-else-if="scope.$index + (currentPage - 1) * pageSize == 1">
-            <svg-icon style="font-size: 35px" icon-class="银牌" />
+            <svg-icon style="font-size: 35rem" icon-class="银牌" />
           </div>
           <div v-else-if="scope.$index + (currentPage - 1) * pageSize == 2">
-            <svg-icon style="font-size: 35px" icon-class="铜牌" />
+            <svg-icon style="font-size: 35rem" icon-class="铜牌" />
           </div>
           <div v-else>
             <span> {{ scope.$index + (currentPage - 1) * pageSize + 1 }}</span>
@@ -73,25 +73,25 @@
           <div v-if="scope.row.play">
             <span
               @click="PlaySong(scope.row, scope.$index)"
-              style="padding: 10px"
+              style="padding: 10rem"
             >
-              <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
+              <svg-icon style="font-size: 18rem" icon-class="播放 (6)" />
             </span>
-            <span style="padding: 10px">
+            <span style="padding: 10rem">
               <svg-icon
-                style="font-size: 16px"
+                style="font-size: 16rem"
                 @click="AddMusic(scope.row)"
                 icon-class="加好 2-01"
               />
             </span>
-            <span style="padding: 10px">
+            <span style="padding: 10rem">
               <svg-icon
-                style="font-size: 16px; color: #909399"
+                style="font-size: 16rem; color: #909399"
                 icon-class="心 爱心 (2)"
               />
             </span>
-            <span style="padding: 10px">
-              <svg-icon style="font-size: 16px" icon-class="下载 (1)" />
+            <span style="padding: 10rem">
+              <svg-icon style="font-size: 16rem" icon-class="下载 (1)" />
             </span>
           </div>
           <div v-if="!scope.row.play">

@@ -18,9 +18,9 @@
         <div class="title">
           <svg-icon
             icon-class="歌单"
-            style="font-size: 28px; padding-right: 5px"
+            style="font-size: 28rem; padding-right: 5rem"
           />
-          <span style="font-size: 20px; font-weight: bold">{{
+          <span style="font-size: 20rem; font-weight: bold">{{
             playListDetails.name
           }}</span>
         </div>
@@ -74,11 +74,11 @@
     </div>
     <div class="content_list_item">
       <div class="item_title">
-        <!-- <span style="font-size: 20px; font-weight: bold">歌曲列表</span
+        <!-- <span style="font-size: 20rem; font-weight: bold">歌曲列表</span
         > -->
-        <span style="float: right; font-size: 15px"
+        <span style="float: right; font-size: 15rem"
           >播放
-          <span style="color: red; font-size: 10px">
+          <span style="color: red; font-size: 10rem">
             ({{ playListDetails.playCount }}次)</span
           ></span
         >
@@ -174,28 +174,28 @@ export default {
     justify-content: left;
     align-items: center;
     .detail_pic {
-      margin: 25px 10px;
-      // border: 1px solid #f5f5f5;
-      padding: 5px;
+      margin: 25rem 10rem;
+      // border: 1rem solid #f5f5f5;
+      padding: 5rem;
       flex: 1;
     }
     .detail_item {
-      border-radius: 2px;
+      border-radius: 2rem;
       display: flex;
       flex-direction: column;
-      //   margin: 25px;
+      //   margin: 25rem;
       text-align: left;
       flex: 4;
       .title {
       }
       .nickname {
-        margin: 20px 0;
+        margin: 20rem 0;
         display: flex;
         align-items: center;
         .img {
         }
         .span {
-          padding-left: 10px;
+          padding-left: 10rem;
         }
       }
       .btn {
@@ -203,21 +203,21 @@ export default {
         display: flex;
         align-items: center;
         .btn_item {
-          padding: 0 20px 0 0;
+          padding: 0 20rem 0 0;
         }
       }
       .label {
-        font-size: 13px;
-        margin: 30px 0 0 0;
-        padding: 0 10px 0 0;
+        font-size: 13rem;
+        margin: 30rem 0 0 0;
+        padding: 0 10rem 0 0;
         .el-button {
           transform: scale(0.8);
         }
       }
       .desc {
-        margin: 20px 0 0 0;
-        font-size: 13px;
-        width: 600px;
+        margin: 20rem 0 0 0;
+        font-size: 13rem;
+        width: 600rem;
       }
     }
   }

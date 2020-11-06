@@ -2,14 +2,14 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-10-29 13:04:31
+ * @LastEditTime: 2020-11-06 15:29:56
 -->
 <template>
   <div class="content" v-if="songDetail.al">
     <div class="detail">
       <div class="pic">
         <el-image
-          style="border-radius: 180px"
+          style="border-radius: 180rem"
           :src="songDetail.al.picUrl + '?param=180y180'"
           fit="fill"
           :lazy="true"
@@ -17,7 +17,7 @@
       </div>
       <div class="detail_content">
         <div class="title">
-          <span style="padding-right: 2px; color: #9b0909"
+          <span style="padding-right: 2rem; color: #9b0909"
             ><svg-icon icon-class="音乐"
           /></span>
           {{ songDetail.name }}
@@ -32,8 +32,8 @@
             }"
             ><span
               style="
-                padding: 10px;
-                font-size: 15px;
+                padding: 10rem;
+                font-size: 15rem;
                 color: #409eff;
                 cursor: pointer;
               "
@@ -48,7 +48,7 @@
           <router-link
             style="text-decoration: none"
             :to="{ path: '/NewAlbum', query: { id: songDetail.al.id } }"
-            ><span style="font-size: 15px; color: #409eff; cursor: pointer">{{
+            ><span style="font-size: 15rem; color: #409eff; cursor: pointer">{{
               songDetail.al.name
             }}</span>
           </router-link>
@@ -84,10 +84,22 @@
       </div>
     </div>
     <div class="lyc">
+      <!-- 这个是显示收起的时候十行 -->
       <li
         v-for="(item, index) in lyric"
         :class="index == currentLyric ? 'corly' : 'none'"
-        v-show="index > currentLyric - 5 && index < currentLyric + 5"
+        v-show="
+          index > currentLyric - 5 && index < currentLyric + 5 && isShow <= 10
+        "
+        :key="index"
+      >
+        {{ item[1] }}
+      </li>
+      <!-- 这个显示展开的所有 -->
+      <li
+        v-for="(item, index) in lyric"
+        :class="index == currentLyric ? 'corly' : 'none'"
+        v-show="index <= isShow && isShow > 10"
         :key="index"
       >
         {{ item[1] }}
@@ -221,39 +233,39 @@ export default {
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;
-  right: 2px;
+  right: 2rem;
   .detail {
-    // padding: 10px;
-    width: 1080px;
+    // padding: 10rem;
+    width: 1080rem;
     margin: 0 auto;
     background-color: #fff;
     display: flex;
     text-align: left;
     .pic {
-      padding: 30px 20px 20px 20px;
+      padding: 30rem 20rem 20rem 20rem;
     }
 
     .detail_content {
-      padding: 10px;
+      padding: 10rem;
       .title {
-        padding: 10px;
-        font-size: 28px;
+        padding: 10rem;
+        font-size: 28rem;
       }
 
       .name {
-        padding: 10px;
+        padding: 10rem;
       }
 
       .album {
-        padding: 10px;
+        padding: 10rem;
       }
 
       .btn {
-        padding: 10px;
+        padding: 10rem;
         display: flex;
         align-items: center;
         .btn_item {
-          padding: 0 20px 0 0;
+          padding: 0 20rem 0 0;
         }
       }
     }
@@ -262,17 +274,17 @@ export default {
     .corly {
       color: #00a4ff;
     }
-    // padding: 0 10px;
-    width: 1080px;
+    // padding: 0 10rem;
+    width: 1080rem;
     margin: 0 auto;
     background-color: #fff;
     li {
-      padding: 5px;
-      font-size: 13px;
+      padding: 5rem;
+      font-size: 13rem;
     }
   }
   .comment {
-    width: 1080px;
+    width: 1080rem;
     margin: 0 auto;
     background-color: #fff;
   }

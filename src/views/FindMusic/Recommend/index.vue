@@ -46,7 +46,7 @@ export default {
     bannerStyle(val) {
       return {
         "background-image": `url(${val.imageUrl + "?imageView&blur=40x20"})`,
-        "background-size": "6000px",
+        "background-size": "6000rem",
         "background-position": "center center",
       };
     },
@@ -66,7 +66,7 @@ export default {
     margin: 0 auto;
     text-align: center;
     background-color: #ffffff;
-    width: 1080px;
+    width: 1080rem;
     height: 100%;
   }
 }

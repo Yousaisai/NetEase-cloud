@@ -10,8 +10,8 @@
     <div class="content_sort">
       <el-row type="flex">
         <el-col :span="24"
-          ><svg-icon style="font-size: 20px" icon-class="碟片" />
-          <span style="font-size: 25px; padding-right: 5px"> 热门推荐</span>
+          ><svg-icon style="font-size: 20rem" icon-class="碟片" />
+          <span style="font-size: 25rem; padding-right: 5rem"> 热门推荐</span>
           <span
             v-for="(item, index) in ['华语', '流行', '摇滚', '民谣', '电子']"
             :key="index"
@@ -20,13 +20,13 @@
               style="text-decoration: none"
               :to="{ path: '/SongList', query: { cat: item } }"
             >
-              <span class="more" style="color: #666; font-size: 13px"
+              <span class="more" style="color: #666; font-size: 13rem"
                 >{{ item }}
               </span> </router-link
-            ><span style="padding: 0 0 0 5px">|</span>
+            ><span style="padding: 0 0 0 5rem">|</span>
           </span>
           <router-link to="/SongList">
-            <span class="more" style="float: right; font-size: 12px"
+            <span class="more" style="float: right; font-size: 12rem"
               >更多 <svg-icon icon-class="前进" /></span
           ></router-link>
         </el-col>
@@ -47,7 +47,7 @@
             <img :src="item.picUrl" :alt="item.name" />
             <div class="imglove">
               <div class="playcount">
-                <svg-icon icon-class="收听量" style="padding-right: 5px" />{{
+                <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
                   item.playCount > 100000
                     ? parseInt(item.playCount / 10000) + "W"
                     : item.playCount
@@ -67,10 +67,10 @@
     <div class="content_sort">
       <el-row type="flex">
         <el-col :span="24"
-          ><svg-icon style="font-size: 20px" icon-class="碟片" />
-          <span style="font-size: 25px; padding-right: 5px">新碟上架</span>
+          ><svg-icon style="font-size: 20rem" icon-class="碟片" />
+          <span style="font-size: 25rem; padding-right: 5rem">新碟上架</span>
           <router-link to="/AddedNewAlbum">
-            <span class="more" style="float: right; font-size: 12px"
+            <span class="more" style="float: right; font-size: 12rem"
               >更多 <svg-icon icon-class="前进" /></span
           ></router-link>
         </el-col>
@@ -109,10 +109,10 @@
     <div class="content_sort">
       <el-row type="flex">
         <el-col :span="24"
-          ><svg-icon style="font-size: 20px" icon-class="碟片" />
-          <span style="font-size: 25px; padding-right: 5px">榜单</span>
+          ><svg-icon style="font-size: 20rem" icon-class="碟片" />
+          <span style="font-size: 25rem; padding-right: 5rem">榜单</span>
           <router-link to="/Leaderboard">
-            <span class="more" style="float: right; font-size: 12px"
+            <span class="more" style="float: right; font-size: 12rem"
               >更多 <svg-icon icon-class="前进" /></span
           ></router-link>
         </el-col>
@@ -127,7 +127,7 @@
           >
             <el-image
               :src="topList[TopItem].coverImgUrl"
-              style="width: 100px; height: 100px; float: left"
+              style="width: 100rem; height: 100rem; float: left"
               fit="fill"
               :lazy="true"
             ></el-image>
@@ -138,7 +138,7 @@
             </div>
             <div class="svg">
               <span>
-                <svg-icon style="padding: 0 10px" icon-class="收听量" />{{
+                <svg-icon style="padding: 0 10rem" icon-class="收听量" />{{
                   topList[TopItem].playCount > 10000
                     ? parseInt(topList[TopItem].playCount / 10000) + "万"
                     : "topList[TopItem].playCount"
@@ -167,16 +167,16 @@
               <div class="svghide">
                 <svg-icon
                   @click="PlaySong(item, topListDetail[TopItem], index)"
-                  style="padding: 0 5px"
+                  style="padding: 0 5rem"
                   icon-class="播放 (6)"
                 />
                 <svg-icon
-                  style="padding: 0 5px"
+                  style="padding: 0 5rem"
                   @click="AddMusic(item)"
                   icon-class="加好 2-01"
                 />
-                <svg-icon style="padding: 0 5px" icon-class="心 爱心 (2)" />
-                <svg-icon style="padding: 0 5px" icon-class="下载 (1)" />
+                <svg-icon style="padding: 0 5rem" icon-class="心 爱心 (2)" />
+                <svg-icon style="padding: 0 5rem" icon-class="下载 (1)" />
               </div>
             </li>
             <router-link
@@ -185,8 +185,8 @@
               <span
                 class="more"
                 style="
-                  font-size: 12px;
-                  padding: 10px;
+                  font-size: 12rem;
+                  padding: 10rem;
                   float: right;
                   color: #666;
                 "
@@ -304,11 +304,11 @@ export default {
     font-weight: bold;
     cursor: pointer;
   }
-  padding: 15px;
+  padding: 15rem;
   .content_sort {
     display: flex;
     justify-content: left;
-    padding-bottom: 10px;
+    padding-bottom: 10rem;
     .el-row {
       width: 100%;
       .el-col {
@@ -316,19 +316,19 @@ export default {
       }
     }
     span {
-      padding: 10px;
+      padding: 10rem;
     }
   }
   .el-divider {
-    margin: 2px;
+    margin: 2rem;
   }
   .content_item {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     .item_img {
-      border-radius: 10px;
-      padding: 10px;
+      border-radius: 10rem;
+      padding: 10rem;
       width: 18%;
       .image {
         position: relative;
@@ -338,18 +338,18 @@ export default {
         }
 
         .imglove {
-          height: 27px;
+          height: 27rem;
           text-align: left;
           position: absolute;
           z-index: 10;
           width: 100%;
-          transform: translateY(-30px);
+          transform: translateY(-30rem);
           background-color: #3b4250;
           opacity: 0.5;
           color: #fff;
           backdrop-filter: 0.5;
           .playcount {
-            margin: 4px;
+            margin: 4rem;
           }
         }
       }
@@ -359,14 +359,14 @@ export default {
 
       .titledetail {
         text-align: left;
-        font-size: 13px;
+        font-size: 13rem;
       }
     }
   }
   .content_newitem {
-    border: 1px solid #f5f5f5;
+    border: 1rem solid #f5f5f5;
     background-color: #f5f5f5;
-    margin: 10px 0;
+    margin: 10rem 0;
     width: 100%;
     display: flex;
     // flex-wrap: wrap;
@@ -375,7 +375,7 @@ export default {
     .newitem_img {
       width: 10.5vw;
       height: 10.5vw;
-      padding: 10px 2px;
+      padding: 10rem 2rem;
 
       .image {
         position: relative;
@@ -395,8 +395,8 @@ export default {
         transform: scale(1.02);
       }
       .titledetail {
-        margin: 0 20px;
-        font-size: 6px;
+        margin: 0 20rem;
+        font-size: 6rem;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -414,8 +414,8 @@ export default {
     }
   }
   .icon {
-    margin: auto 5px;
-    padding: 5px;
+    margin: auto 5rem;
+    padding: 5rem;
 
     cursor: pointer;
     display: hidder;
@@ -432,18 +432,18 @@ export default {
     }
   }
   .toplist {
-    padding-top: 10px;
+    padding-top: 10rem;
     display: flex;
     .topone {
       background-color: #f4f4f4;
       flex: 1;
-      border: 2px solid #f5f5f5;
+      border: 2rem solid #f5f5f5;
       .span {
         font-weight: bold;
       }
       .img {
-        height: 100px;
-        padding: 10px;
+        height: 100rem;
+        padding: 10rem;
 
         .imgtitle {
           display: flex;
@@ -459,22 +459,22 @@ export default {
             // position: absolute;
             // top: 4em;
             // left: 2em;
-            font-size: 12px;
-            padding: 50px 10px;
+            font-size: 12rem;
+            padding: 50rem 10rem;
           }
         }
         // flex-direction: column;
       }
       .rank {
-        padding: 0px 0px 0px;
+        padding: 0rem 0rem 0rem;
 
         .list {
-          // margin: 25px 0 0;
+          // margin: 25rem 0 0;
           padding: 0;
           list-style: none;
           text-align: left;
           li {
-            padding: 5px;
+            padding: 5rem;
             width: 15vw;
             display: flex;
             .spanhide {
@@ -489,19 +489,19 @@ export default {
             }
             span {
               color: #666;
-              font-size: 12px;
-              line-height: 22px;
+              font-size: 12rem;
+              line-height: 22rem;
 
               &:first-child {
                 background-color: #f5f5f5;
-                border-radius: 20px;
+                border-radius: 20rem;
                 display: inline-block;
-                font-size: 12px;
+                font-size: 12rem;
                 font-weight: 600;
-                margin-right: 24px;
-                height: 20px;
-                line-height: 20px;
-                width: 20px;
+                margin-right: 24rem;
+                height: 20rem;
+                line-height: 20rem;
+                width: 20rem;
                 text-align: center;
               }
               &.active {
@@ -530,18 +530,18 @@ export default {
           background-color: #fcfcfc;
           span {
             color: #666;
-            font-size: 12px;
-            line-height: 22px;
+            font-size: 12rem;
+            line-height: 22rem;
             &:first-child {
               background-color: #f5f5f5;
-              // border-radius: 20px;
+              // border-radius: 20rem;
               display: inline-block;
-              font-size: 15px;
+              font-size: 15rem;
               font-weight: 600;
-              margin-right: 24px;
-              height: 20px;
-              line-height: 20px;
-              width: 20px;
+              margin-right: 24rem;
+              height: 20rem;
+              line-height: 20rem;
+              width: 20rem;
               text-align: center;
             }
             &.active {

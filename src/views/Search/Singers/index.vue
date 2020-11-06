@@ -52,20 +52,20 @@ export default {
 .content {
   display: flex;
   flex-direction: column;
-  width: 1080px;
+  width: 1080rem;
   margin: 0 auto;
-  padding: 10px;
+  padding: 10rem;
   background-color: #fff;
   color: #939090;
   // margin: auto 0;
   .abcleader {
     text-align: left;
-    padding: 20px 10px;
+    padding: 20rem 10rem;
     span {
       cursor: pointer;
-      padding: 8px 12px;
-      width: 12px;
-      height: 12px;
+      padding: 8rem 12rem;
+      width: 12rem;
+      height: 12rem;
     }
     span:hover {
       color: #b7b4b4;
@@ -74,7 +74,7 @@ export default {
     .active {
       background-color: #b21212;
       color: #fff;
-      border-radius: 14px;
+      border-radius: 14rem;
     }
     span:active {
       // color: yellow;
@@ -103,7 +103,7 @@ export default {
       // text-align: center;
       flex-wrap: wrap;
       .singer {
-        padding: 10px;
+        padding: 10rem;
         .img,
         .img11:hover {
           transform: scale(1.15);
@@ -113,9 +113,9 @@ export default {
         .img10 {
           color: #b7b4b4;
           font-weight: 500;
-          padding: 0 0 10px 0;
+          padding: 0 0 10rem 0;
           .img {
-            padding: 20px 0;
+            padding: 20rem 0;
           }
           .img :hover {
             transform: scale(1.05);
@@ -126,18 +126,18 @@ export default {
               color: black;
             }
             .num {
-              font-size: 12px;
-              padding: 5px;
+              font-size: 12rem;
+              padding: 5rem;
             }
           }
         }
         .img11 {
-          font-size: 10px;
+          font-size: 10rem;
           display: flex;
           align-items: center;
-          padding: 0 10px 0 50px;
+          padding: 0 10rem 0 50rem;
           .img {
-            padding: 0 10px 0 0px;
+            padding: 0 10rem 0 0rem;
           }
           .detail {
           }

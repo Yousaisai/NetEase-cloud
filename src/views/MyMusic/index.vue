@@ -28,7 +28,7 @@
           </transition></div
       ></el-main>
       <!-- </el-container>
-      <el-footer style="height: 50px"><elfooter /></el-footer> -->
+      <el-footer style="height: 50rem"><elfooter /></el-footer> -->
     </el-container>
     <el-dialog :modal="false"
       title="登录网易云音乐"
@@ -75,26 +75,26 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-  width: calc(100vw - 130px);
-  height: calc(100vh - 180px);
+  width: calc(100vw - 130rem);
+  height: calc(100vh - 180rem);
   .main {
     width: 100%;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 110rem);
     background-image: url("../../icons/pic/hai.jpg");
     background-size: cover;
   }
   .animate {
-    font-size: 50px;
-    margin: 100px 0 0;
+    font-size: 50rem;
+    margin: 100rem 0 0;
     color: #fff;
     .title {
     }
     .title1 {
-      padding-top: 30px;
-      font-size: 30px;
+      padding-top: 30rem;
+      font-size: 30rem;
     }
     .btn {
-      padding-top: 20px;
+      padding-top: 20rem;
       .el-button {
         transform: scale(1.3);
       }
@@ -108,13 +108,13 @@ export default {
   .box span {
     color: #fff;
     opacity: 0;
-    transform: translate(0, 100px) scale(0.5);
+    transform: translate(0, 100rem) scale(0.5);
     animation: leftRight 2s forwards;
   }
 
   @keyframes leftRight {
     40% {
-      transform: translate(0px, 10px) scale(0.7);
+      transform: translate(0rem, 10rem) scale(0.7);
       opacity: 1;
     }
 

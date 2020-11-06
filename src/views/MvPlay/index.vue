@@ -119,35 +119,35 @@ export default {
 <style lang="scss" scoped>
 .content {
   background-color: #fff;
-  width: 1080px;
+  width: 1080rem;
   margin: 0 auto;
   .title {
     text-align: left;
-    padding: 20px 10px;
-    font-size: 25px;
+    padding: 20rem 10rem;
+    font-size: 25rem;
   }
 
   .mv {
     margin: 0 auto;
-    width: 900px;
+    width: 900rem;
   }
 
   .btn {
-    padding: 10px 90px;
+    padding: 10rem 90rem;
     display: flex;
     align-items: center;
-    margin: 20px 0 0 0;
+    margin: 20rem 0 0 0;
     .btn_item {
-      padding: 0 20px 0 0;
+      padding: 0 20rem 0 0;
     }
   }
   .com {
-    padding: 10px 90px;
-    font-size: 15px;
+    padding: 10rem 90rem;
+    font-size: 15rem;
     text-align: left;
   }
   .comment {
-    padding-top: 30px;
+    padding-top: 30rem;
   }
 }
 </style>

@@ -11,7 +11,7 @@
       status-icon
       :rules="rules"
       ref="ruleForm"
-      label-width="0px"
+      label-width="0rem"
       class="demo-ruleForm"
     >
       <el-form-item prop="phone">
@@ -28,9 +28,9 @@
         <el-button
           @click="login"
           type="primary"
-          style="width: 100%; margin-top: 30px"
+          style="width: 100%; margin-top: 30rem"
           size="default"
-          >登 <span style="padding: 0 10px"></span> 录</el-button
+          >登 <span style="padding: 0 10rem"></span> 录</el-button
         >
       </el-form-item>
     </el-form>

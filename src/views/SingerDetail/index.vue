@@ -161,14 +161,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-  width: 1080px;
+  width: 1080rem;
   margin: 0 auto;
   background-color: #fff;
   display: flex;
-  padding: 10px;
+  padding: 10rem;
   flex-direction: column;
   .content_detail {
-    margin: 10px 50px;
+    margin: 10rem 50rem;
     flex: 1;
     display: flex;
     align-items: center;
@@ -183,43 +183,43 @@ export default {
       text-align: left;
       .name {
         flex: 2;
-        font-size: 30px;
+        font-size: 30rem;
         font-weight: 500;
-        padding: 10px 0;
+        padding: 10rem 0;
       }
 
       .descnum {
-        font-size: 18px;
+        font-size: 18rem;
         color: #999;
         flex: 1;
-        padding: 10px 0;
+        padding: 10rem 0;
         span {
-          margin-right: 30px;
+          margin-right: 30rem;
           color: #666;
         }
       }
       .btn {
         display: flex;
         align-items: center;
-        margin: 20px 0 0 0;
+        margin: 20rem 0 0 0;
         .btn_item {
-          padding: 0 20px 0 0;
+          padding: 0 20rem 0 0;
         }
       }
       .singerdesc {
-        margin: 20px 0 10px 0;
+        margin: 20rem 0 10rem 0;
         flex: 2;
       }
     }
   }
 
   .content_songs {
-    margin: 10px 50px;
+    margin: 10rem 50rem;
     flex: 1;
     .menu {
     }
     .menuItem {
-      margin: 20px 0;
+      margin: 20rem 0;
       .item_table {
       }
     }

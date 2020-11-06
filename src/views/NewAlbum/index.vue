@@ -19,9 +19,9 @@
         <div class="title">
           <svg-icon
             icon-class="歌单"
-            style="font-size: 28px; padding-right: 5px"
+            style="font-size: 28rem; padding-right: 5rem"
           />
-          <span style="font-size: 20px; font-weight: bold">{{
+          <span style="font-size: 20rem; font-weight: bold">{{
             albumDetails.name
           }}</span>
         </div>
@@ -68,13 +68,13 @@
           </div>
         </div>
         <div class="label">
-          <div style="padding: 5px 0">
+          <div style="padding: 5rem 0">
             <span>歌手：{{ albumDetails.artist.name }}</span>
           </div>
-          <div style="padding: 5px 0">
+          <div style="padding: 5rem 0">
             <span>发行时间：{{ dataForm(albumDetails.publishTime) }}</span>
           </div>
-          <div style="padding: 5px 0">
+          <div style="padding: 5rem 0">
             <span>发行公司：{{ albumDetails.company }}</span>
           </div>
         </div>
@@ -89,7 +89,7 @@
     </div>
     <div class="content_list_item">
       <div class="item_title">
-        <span style="font-size: 20px; font-weight: bold">歌曲列表</span>
+        <span style="font-size: 20rem; font-weight: bold">歌曲列表</span>
       </div>
       <el-divider></el-divider>
       <div class="item_table"><eltable :Songs="playListsong" /></div>
@@ -198,7 +198,7 @@ export default {
 .content {
   margin: 0 auto;
   background-color: #ffffff;
-  width: 1080px;
+  width: 1080rem;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -209,68 +209,68 @@ export default {
     flex-direction: row;
     justify-content: left;
     .detail_pic {
-      margin: 25px 10px;
-      //   border: 1px solid #f5f5f5;
-      padding: 5px;
+      margin: 25rem 10rem;
+      //   border: 1rem solid #f5f5f5;
+      padding: 5rem;
       flex: 1;
     }
 
     .detail_item {
-      border-radius: 2px;
+      border-radius: 2rem;
       display: flex;
       flex-direction: column;
-      margin: 25px;
+      margin: 25rem;
       text-align: left;
       flex: 4;
       .title {
       }
       .nickname {
-        margin: 20px 0;
+        margin: 20rem 0;
         display: flex;
         align-items: center;
         .img {
         }
         .span {
-          padding-left: 10px;
+          padding-left: 10rem;
         }
       }
       .btn {
         display: flex;
         align-items: center;
-        margin: 20px 0 0 0;
+        margin: 20rem 0 0 0;
         .btn_item {
-          padding: 0 20px 0 0;
+          padding: 0 20rem 0 0;
         }
       }
       .label {
-        font-size: 13px;
-        margin: 30px 0 0 0;
+        font-size: 13rem;
+        margin: 30rem 0 0 0;
         display: flex;
         flex-direction: column;
       }
       .desc {
-        margin: 20px 0 0 0;
-        font-size: 13px;
+        margin: 20rem 0 0 0;
+        font-size: 13rem;
         width: 35vw;
       }
     }
   }
 
   .content_list_item {
-    margin: 10px 50px;
+    margin: 10rem 50rem;
     span {
       cursor: pointer;
     }
 
     .item_title {
-      margin: 10px 0 0 0;
+      margin: 10rem 0 0 0;
       text-align: left;
     }
     .item_table {
     }
   }
   .comment {
-    padding-top: 30px;
+    padding-top: 30rem;
   }
 }
 </style>

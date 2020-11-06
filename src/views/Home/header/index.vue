@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-23 19:54:20
+ * @LastEditTime: 2020-11-06 15:22:53
 -->
 <template>
   <div class="content">
@@ -12,14 +12,14 @@
           <el-col :span="8">
             <svg-icon
               icon-class="网易云"
-              style="font-size: 3.5em; padding: 0px 0; line-height: 40px"
+              style="font-size: 3.5em; padding: 10rem 0; line-height: 40rem"
           /></el-col>
           <el-col :span="16">
             <div class="title">Mr.You</div>
           </el-col>
         </el-row>
       </el-col>
-      <el-col :span="4" style="padding: 10px 0; line-height: 40px">
+      <el-col :span="4" style="padding: 10rem 0; line-height: 40rem">
         <el-search :width="250" />
       </el-col>
       <el-col :span="16">
@@ -27,20 +27,20 @@
           v-if="!auth"
           style="
             float: right;
-            padding: 10px 0;
-            line-height: 40px;
+            padding: 10rem 0;
+            line-height: 40rem;
             color: #f3f3f3;
           "
         >
           <span
             @click="dialogVisible = !dialogVisible"
-            style="font-size: 12px; cursor: pointer"
+            style="font-size: 12rem; cursor: pointer"
             >登 录</span
           >
           /
           <span
             @click="dialogVisible = !dialogVisible"
-            style="font-size: 12px; cursor: pointer"
+            style="font-size: 12rem; cursor: pointer"
             >注 册</span
           >
         </div>
@@ -48,7 +48,7 @@
           <el-dropdown placement="bottom-start" @command="handleCommand">
             <span class="el-dropdown-link" v-if="avt">
               <el-image
-                style="height: 30px; width: 30px; border-radius: 50%"
+                style="height: 30rem; width: 30rem; border-radius: 50%"
                 :src="avt.avatarUrl"
                 :lazy="true"
               ></el-image>
@@ -132,8 +132,8 @@ li:hover {
 .title {
   display: flex;
   margin: auto 0;
-  height: 60px;
-  font-size: 25px;
+  height: 60rem;
+  font-size: 25rem;
   color: #fff;
   width: 100%;
   justify-content: center;
@@ -141,9 +141,9 @@ li:hover {
 }
 .avt {
   float: right;
-  padding: 10px 0;
-  margin-right: 30px;
-  line-height: 40px;
+  padding: 10rem 0;
+  margin-right: 30rem;
+  line-height: 40rem;
   color: #f3f3f3;
   cursor: pointer;
 }

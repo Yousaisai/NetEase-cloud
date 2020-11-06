@@ -18,11 +18,11 @@
         class="cor"
       >
         <div class="spanhide">
-          <span v-show="PlayIndex != index" style="padding: 0 10px 0 0">{{
+          <span v-show="PlayIndex != index" style="padding: 0 10rem 0 0">{{
             index + 1
           }}</span>
           <img
-            style="color: #666666; padding: 0 5px 0 0"
+            style="color: #666666; padding: 0 5rem 0 0"
             v-show="PlayIndex == index"
             src="@/icons/pic/wave.gif"
           />
@@ -32,10 +32,10 @@
         <div class="svghide">
           <svg-icon
             @click="PlaySong(item, PlayList, index)"
-            style="padding: 0 5px"
+            style="padding: 0 5rem"
             icon-class="播放 (6)"
           />
-          <svg-icon style="padding: 0 5px" icon-class="下载 (1)" />
+          <svg-icon style="padding: 0 5rem" icon-class="下载 (1)" />
         </div>
         <div class="other">
           <div class="name">{{ item.ar[0].name }}</div>
@@ -86,10 +86,10 @@ export default {
     top: 0;
     background-color: #1f1f1f;
     margin: auto 0;
-    font-size: 14px;
+    font-size: 14rem;
     color: #666666;
-    padding: 10px 0;
-    width: 400px;
+    padding: 10rem 0;
+    width: 400rem;
   }
   ul {
     padding: 0;
@@ -101,11 +101,11 @@ export default {
     list-style: none;
 
     li {
-      padding: 2px 10px;
+      padding: 2rem 10rem;
       display: flex;
       .spanhide {
         flex: 5;
-        font-size: 12px;
+        font-size: 12rem;
         // width: 15vw;
         margin: auto 0;
         text-overflow: ellipsis;
@@ -117,11 +117,11 @@ export default {
         color: #666666;
         color: #1f1f1f;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 14rem;
         margin: auto 0;
       }
       .other {
-        font-size: 12px;
+        font-size: 12rem;
         flex: 3;
         float: right;
         display: flex;
@@ -129,7 +129,7 @@ export default {
         margin: auto 0;
         position: relative;
         .name {
-          padding: 0 10px;
+          padding: 0 10rem;
           text-overflow: ellipsis;
           width: 50%;
           white-space: nowrap;
@@ -137,14 +137,14 @@ export default {
         }
         .time {
           position: absolute;
-          right: 1px;
-          padding: 0 10px;
+          right: 1rem;
+          padding: 0 10rem;
         }
       }
       span {
         color: #666;
-        font-size: 12px;
-        line-height: 22px;
+        font-size: 12rem;
+        line-height: 22rem;
         &.active {
           background-color: #314659;
           color: #fff;
@@ -161,7 +161,7 @@ export default {
     .svghide {
       color: #666666;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 14rem;
       margin: auto 0;
     }
   }

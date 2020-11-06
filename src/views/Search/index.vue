@@ -8,8 +8,8 @@
   <div class="content">
     <div class="search">
       <div class="elsearch">
-        <div style="padding: 10px">
-          <span style="color: #666; font-size: 20px">音乐搜索</span>
+        <div style="padding: 10rem">
+          <span style="color: #666; font-size: 20rem">音乐搜索</span>
         </div>
         <el-search :width="500" />
       </div>
@@ -130,9 +130,9 @@ export default {
   .search {
     position: absolute;
     z-index: 10000000000;
-    top: -61px;
+    top: -61rem;
     width: 100%;
-    height: 200px;
+    height: 200rem;
     background-color: #ffffff;
     display: flex;
     justify-content: center;
@@ -145,7 +145,7 @@ export default {
   }
 
   .search_content {
-    top: 140px;
+    top: 140rem;
     background-color: #ffffff;
     width: 100%;
     z-index: 10000000000;

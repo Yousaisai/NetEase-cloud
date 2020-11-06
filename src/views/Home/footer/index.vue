@@ -64,7 +64,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       >
         <el-image
           v-if="cover"
-          style="width: 35px; border-radius: 30%; height: 35px"
+          style="width: 35rem; border-radius: 30%; height: 35rem"
           :src="cover"
           :lazy="true"
         ></el-image>
@@ -138,7 +138,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
             v-model="volume"
             :show-tooltip="false"
             vertical
-            height="80px"
+            height="80rem"
             @change="editVol"
           >
           </el-slider>
@@ -364,12 +364,12 @@ export default {
     display: flex;
     flex: 15;
     align-items: center;
-    margin: auto 0px;
+    margin: auto 0rem;
 
     .title {
       flex: 1;
       color: #939090;
-      font-size: 12px;
+      font-size: 12rem;
       font-weight: blod;
       //下面控制最多两行
       overflow: hidden;
@@ -381,18 +381,18 @@ export default {
     .slider {
       flex: 6;
       width: 100%;
-      margin: 0 0 0 10px;
+      margin: 0 0 0 10rem;
       position: relative;
       .songer {
         position: absolute;
         color: #939090;
-        font-size: 12px;
+        font-size: 12rem;
         font-weight: blod;
-        top: -5px;
-        padding-top: 10px;
+        top: -5rem;
+        padding-top: 10rem;
 
         span {
-          padding-right: 20px;
+          padding-right: 20rem;
           color: #939090;
         }
         span:hover {
@@ -400,20 +400,20 @@ export default {
         }
       }
       .slider_detail {
-        padding-top: 10px;
+        padding-top: 10rem;
         width: 100%;
       }
     }
     /deep/ .el-slider__bar {
-      height: 6px;
+      height: 6rem;
       background-color: #666 !important;
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3rem;
+      border-bottom-left-radius: 3rem;
     }
     /deep/.el-slider__button {
-      width: 16px;
-      height: 16px;
-      border: 2px solid #666;
+      width: 16rem;
+      height: 16rem;
+      border: 2rem solid #666;
       background-color: #fff;
       border-radius: 50%;
       transition: 0.2s;
@@ -426,8 +426,8 @@ export default {
   .time {
     color: #fff;
     flex: 2;
-    margin: auto 0px;
-    font-size: 13px;
+    margin: auto 0rem;
+    font-size: 13rem;
   }
   .other {
     flex: 1;
@@ -435,30 +435,30 @@ export default {
     display: flex;
     align-items: center;
     position: relative;
-    width: 200px;
+    width: 200rem;
     justify-content: space-between;
     .playlist {
-      padding: 0 10px 0 0;
-      font-size: 25px;
+      padding: 0 10rem 0 0;
+      font-size: 25rem;
       flex: 1;
       text-align: left;
       color: #666666;
       position: relative;
       z-index: 1000000000000;
       .listdata {
-        border-radius: 10px 10px 0 0;
-        width: 410px;
-        height: 280px;
+        border-radius: 10rem 10rem 0 0;
+        width: 410rem;
+        height: 280rem;
         background-color: #1f1f1f;
         position: absolute;
-        top: -290px;
-        left: -200px;
+        top: -290rem;
+        left: -200rem;
         color: #000;
         overflow: auto;
-        padding:0  10px;
+        padding:0  10rem;
       }
       .listdata::-webkit-scrollbar {
-        width: 1px;
+        width: 1rem;
       }
     }
     .playlist:hover {
@@ -466,8 +466,8 @@ export default {
       color: #b7b4b4;
     }
     .love {
-      padding: 0 10px 0 0;
-      font-size: 22px;
+      padding: 0 10rem 0 0;
+      font-size: 22rem;
       flex: 1;
       color: #666666;
     }
@@ -476,20 +476,20 @@ export default {
       color: #b7b4b4;
     }
     .volume {
-      font-size: 16px;
+      font-size: 16rem;
       flex: 1;
       position: relative;
       z-index: 100000000000;
       .slider {
         position: absolute;
         z-index: 10000000;
-        top: -92px;
-        width: 40px;
-        left: -10px;
+        top: -92rem;
+        width: 40rem;
+        left: -10rem;
         background-color: #2d2c2c;
         opacity: 0.8;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        border-top-left-radius: 5rem;
+        border-top-right-radius: 5rem;
       }
       .svg {
         cursor: pointer;
@@ -502,14 +502,14 @@ export default {
     }
 
     /deep/ .el-slider__bar {
-      height: 6px;
+      height: 6rem;
       background-color: #666 !important;
     }
     /deep/.el-slider__button {
-      width: 12px;
-      height: 1px;
+      width: 12rem;
+      height: 1rem;
       visibility: hidden;
-      border: 1px solid #666;
+      border: 1rem solid #666;
       background-color: #fff;
       // border-radius: 50%;
       transition: 0.2s;

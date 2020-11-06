@@ -16,20 +16,20 @@
             :key="index"
             style="
               text-align: center;
-              border-right: 1px solid aliceblue;
-              border-left: 1px solid aliceblue;
+              border-right: 1rem solid aliceblue;
+              border-left: 1rem solid aliceblue;
             "
           >
-            <div class="title" style="padding: 10px 0; font-weight: bolder">
+            <div class="title" style="padding: 10rem 0; font-weight: bolder">
               <span>{{ item }}</span>
             </div>
             <div
               class="cat_content"
-              style="text-align: left; padding: 0 10px 0 0"
+              style="text-align: left; padding: 0 10rem 0 0"
             >
               <el-radio-group @change="checkCat" v-model="checkList">
                 <el-radio
-                  style="width: 50px; padding-left: 10px"
+                  style="width: 50rem; padding-left: 10rem"
                   v-for="item in detailCat"
                   :key="item.name"
                   v-show="item.category == index"
@@ -51,7 +51,7 @@
             <img :src="item.coverImgUrl" :alt="item.name" />
             <div class="imglove">
               <div class="playcount">
-                <svg-icon icon-class="收听量" style="padding-right: 5px" />{{
+                <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
                   item.playCount > 100000
                     ? parseInt(item.playCount / 10000) + "W"
                     : item.playCount
@@ -119,28 +119,28 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-  width: 1080px;
+  width: 1080rem;
   margin: 0 auto;
   background-color: #ffffff;
   .el-divider {
-    margin: 10px 0;
+    margin: 10rem 0;
   }
   .content_title {
     text-align: left;
-    padding: 10px 10px 0 10px;
+    padding: 10rem 10rem 0 10rem;
     .el-button {
       float: right;
       transform: scale(0.8);
     }
     span {
-      font-size: 22px;
+      font-size: 22rem;
       color: #666;
       font-weight: bold;
     }
     //注意这里的class无效，转移到style上生效
     .sort_item {
       justify-content: space-around;
-      border-right: 2px solid aliceblue;
+      border-right: 2rem solid aliceblue;
       display: flex;
       // flex-direction: column;
       .cat_title {
@@ -158,8 +158,8 @@ export default {
     justify-content: center;
     flex-wrap: wrap;
     .item_img {
-      border-radius: 10px;
-      padding: 10px;
+      border-radius: 10rem;
+      padding: 10rem;
       width: 18%;
       .image {
         position: relative;
@@ -169,18 +169,18 @@ export default {
         }
 
         .imglove {
-          height: 27px;
+          height: 27rem;
           text-align: left;
           position: absolute;
           z-index: 10;
           width: 100%;
-          transform: translateY(-30px);
+          transform: translateY(-30rem);
           background-color: #3b4250;
           opacity: 0.5;
           color: #fff;
           backdrop-filter: 0.5;
           .playcount {
-            margin: 4px;
+            margin: 4rem;
           }
         }
       }
@@ -188,9 +188,9 @@ export default {
         transform: scale(1.02);
       }
       .titledetail {
-        padding-top: 5px;
+        padding-top: 5rem;
         text-align: left;
-        font-size: 13px;
+        font-size: 13rem;
       }
     }
   }
