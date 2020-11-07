@@ -2,65 +2,42 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-11-06 15:22:53
+ * @LastEditTime: 2020-11-07 18:52:32
 -->
 <template>
   <div class="content">
-    <el-row type="flex" align="center">
-      <el-col :span="4">
-        <el-row>
-          <el-col :span="8">
-            <svg-icon
-              icon-class="网易云"
-              style="font-size: 3.5em; padding: 10rem 0; line-height: 40rem"
-          /></el-col>
-          <el-col :span="16">
-            <div class="title">Mr.You</div>
-          </el-col>
-        </el-row>
-      </el-col>
-      <el-col :span="4" style="padding: 10rem 0; line-height: 40rem">
-        <el-search :width="250" />
-      </el-col>
-      <el-col :span="16">
-        <div
-          v-if="!auth"
-          style="
-            float: right;
-            padding: 10rem 0;
-            line-height: 40rem;
-            color: #f3f3f3;
-          "
-        >
-          <span
-            @click="dialogVisible = !dialogVisible"
-            style="font-size: 12rem; cursor: pointer"
-            >登 录</span
-          >
-          /
-          <span
-            @click="dialogVisible = !dialogVisible"
-            style="font-size: 12rem; cursor: pointer"
-            >注 册</span
-          >
-        </div>
-        <div v-if="auth" class="avt">
-          <el-dropdown placement="bottom-start" @command="handleCommand">
-            <span class="el-dropdown-link" v-if="avt">
-              <el-image
-                style="height: 30rem; width: 30rem; border-radius: 50%"
-                :src="avt.avatarUrl"
-                :lazy="true"
-              ></el-image>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="home">我的主页</el-dropdown-item>
-              <el-dropdown-item command="logout" divided>退出</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
-      </el-col>
-    </el-row>
+    <div class="nateasepic">
+      <svg-icon
+        icon-class="网易云"
+        style="font-size: 40rem; line-height: 40rem"
+      />
+    </div>
+
+    <div class="mr">Mr.You</div>
+
+    <div class="search"><el-search :width="250" /></div>
+    <div class="none"></div>
+    <div v-if="!auth" class="register">
+      <div><span @click="dialogVisible = !dialogVisible">登 录</span></div>
+      <div style="margin:auto 10rem;transform: rotate(10deg);width:1px;height:12px;background-color:#fff;"></div>
+      <div><span @click="dialogVisible = !dialogVisible">注 册</span></div>
+    </div>
+    <div v-if="auth" class="avt">
+      <el-dropdown placement="bottom-start" @command="handleCommand">
+        <span class="el-dropdown-link" v-if="avt">
+          <el-image
+            style="height: 30rem; width: 30rem; border-radius: 50%"
+            :src="avt.avatarUrl"
+            :lazy="true"
+          ></el-image>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="home">我的主页</el-dropdown-item>
+          <el-dropdown-item command="logout" divided>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+
     <el-dialog
       :close-on-click-modal="false"
       title="登录网易云音乐"
@@ -128,23 +105,39 @@ li:hover {
   cursor: pointer;
   background-color: #f5f5f5;
 }
-
-.title {
+.content {
   display: flex;
-  margin: auto 0;
-  height: 60rem;
-  font-size: 25rem;
-  color: #fff;
-  width: 100%;
-  justify-content: center;
   align-items: center;
-}
-.avt {
-  float: right;
-  padding: 10rem 0;
-  margin-right: 30rem;
-  line-height: 40rem;
-  color: #f3f3f3;
-  cursor: pointer;
+  align-content: center;
+  height: 100%;
+  // span {
+  //   font-size: 12px;
+  //   cursor: pointer;
+  // }
+  .nateasepic {
+    flex: 1;
+  }
+  .mr {
+    flex: 2;
+    color: #fff;
+    font-size: 25rem;
+  }
+  .search {
+    padding-left: 10rem;
+    flex: 3;
+  }
+  .none {
+    flex: 12;
+  }
+  .register {
+    display: flex;
+    font-size: 12rem;
+    cursor: pointer;
+    flex: 1.2;
+    color: #fff;
+  }
+  .avt {
+    flex: 1;
+  }
 }
 </style>

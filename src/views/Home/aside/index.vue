@@ -2,7 +2,7 @@
  * @Descripttion: 左侧导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 19:38:36
- * @LastEditTime: 2020-10-23 12:27:21
+ * @LastEditTime: 2020-11-07 18:40:35
 -->
 
 <template>
@@ -68,21 +68,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 /deep/.el-submenu {
+  
   padding: 0 !important;
 }
-.el-menu-item {
+.el-menu-item { font-size: 14rem!important;
   padding-left: 0 !important;
 }
 /deep/.el-submenu__title {
   padding-left: 0 !important;
+ 
 }
 /deep/.el-icon-arrow-down:before {
   content: none !important;
 }
-// .el-submenu .el-menu-item {
-//   // height: 50rem;
-//   // line-height: 50rem;
-//   padding: 0;
-//   min-width: 0;
-// }
+
 </style>

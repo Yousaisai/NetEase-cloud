@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-11-06 15:29:56
+ * @LastEditTime: 2020-11-07 18:58:32
 -->
 <template>
   <div class="content" v-if="songDetail.al">
@@ -65,7 +65,7 @@
             </el-button>
           </div>
           <div class="btn_item">
-            ·
+            
             <el-button type="primary" size="mini" plain
               ><svg-icon icon-class="转发" /> 转发</el-button
             >
@@ -91,7 +91,7 @@
         v-show="
           index > currentLyric - 5 && index < currentLyric + 5 && isShow <= 10
         "
-        :key="index"
+        :key="index+'1'"
       >
         {{ item[1] }}
       </li>
@@ -100,7 +100,7 @@
         v-for="(item, index) in lyric"
         :class="index == currentLyric ? 'corly' : 'none'"
         v-show="index <= isShow && isShow > 10"
-        :key="index"
+        :key="index+'2'"
       >
         {{ item[1] }}
       </li>
@@ -151,7 +151,6 @@ export default {
   },
   computed: {
     currentLyric() {
-      console.log(this.$store.state.currentLyric);
       return this.$store.state.currentLyric - 1;
     },
     Id() {

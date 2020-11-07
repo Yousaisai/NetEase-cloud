@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-10-29 13:19:38
+ * @LastEditTime: 2020-11-07 19:06:35
 -->
 
 <template>
@@ -36,28 +36,28 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       <span>
         <svg-icon
           @click="SwitchSongs('last')"
-          style="font-size: 1.5em"
+          style="font-size: 18px"
           icon-class="上一首" /></span
       ><span>
         <svg-icon
           v-if="showStart"
-          style="font-size: 2.5em"
+          style="font-size: 30px"
           @click="end"
           icon-class="暂停" />
         <svg-icon
           v-if="!showStart"
           @click="start"
-          style="font-size: 2.5em"
+          style="font-size: 30px"
           icon-class="开始 (1)" /></span
       ><span>
         <svg-icon
           @click="SwitchSongs('next')"
-          style="font-size: 1.5em"
+          style="font-size: 18px"
           icon-class="下一首"
       /></span>
     </div>
     <div class="pic">
-      <svg-icon v-if="!cover" style="font-size: 2.5em" icon-class="网易云" />
+      <svg-icon v-if="!cover" style="font-size: 18rem" icon-class="网易云" />
       <router-link
         style="text-decoration: none"
         :to="{ path: '/PlayDetail', query: { id: onesong.id } }"
@@ -120,9 +120,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
     <div class="other">
       <div class="playlist">
         <div class="listdata" v-show="showList">
-       
           <play-list></play-list>
-      
         </div>
         <svg-icon icon-class="播放列表" @click="showList = !showList" />
       </div>
@@ -243,7 +241,7 @@ export default {
         ) {
           if (this.lyric[this.currentLyric][0] < this.SongTime) {
             this.currentLyric++;
-            this.$store.state.currentLyric= this.currentLyric
+            this.$store.state.currentLyric = this.currentLyric;
             this.lyricText = this.lyric[this.currentLyric - 1][1];
           }
         }
@@ -260,7 +258,6 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
-      console.log(res);
       this.time = parseInt(res.target.duration * 1000);
       // this.showStart=true
       if (!this.$refs.audio.paused) {
@@ -336,12 +333,14 @@ export default {
 .content {
   // font-size: 2em;
   width: 75%;
-  height: 100%;
+  height: 50px;
+
   margin: 0 auto;
   li {
     list-style: none;
   }
   display: flex;
+
   .btn {
     flex: 3;
     display: flex;
@@ -358,6 +357,7 @@ export default {
   .pic {
     flex: 1;
     display: flex;
+margin: 0 auto;
     align-items: center;
   }
   .border {
@@ -439,7 +439,7 @@ export default {
     justify-content: space-between;
     .playlist {
       padding: 0 10rem 0 0;
-      font-size: 25rem;
+      font-size: 25px;
       flex: 1;
       text-align: left;
       color: #666666;
@@ -455,7 +455,7 @@ export default {
         left: -200rem;
         color: #000;
         overflow: auto;
-        padding:0  10rem;
+        padding: 0 10rem;
       }
       .listdata::-webkit-scrollbar {
         width: 1rem;
@@ -467,7 +467,7 @@ export default {
     }
     .love {
       padding: 0 10rem 0 0;
-      font-size: 22rem;
+      font-size: 22px;
       flex: 1;
       color: #666666;
     }
@@ -476,7 +476,7 @@ export default {
       color: #b7b4b4;
     }
     .volume {
-      font-size: 16rem;
+      font-size: 16px;
       flex: 1;
       position: relative;
       z-index: 100000000000;
