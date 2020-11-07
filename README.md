@@ -2,7 +2,7 @@
  * @Descripttion: 项目介绍
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:49
- * @LastEditTime: 2020-11-04 16:01:24
+ * @LastEditTime: 2020-11-07 19:17:35
 -->
 # 使用Vue.js写的网易云音乐播放器
 
@@ -23,6 +23,7 @@
 - ElementUi UI组件
 - VideoPlayer MV播放组件
 - Iconfont 字体图标库
+- Flexible 自适应
   
 ## 功能
 
