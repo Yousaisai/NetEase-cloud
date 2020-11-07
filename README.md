@@ -3,7 +3,7 @@
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:49
 <<<<<<< HEAD
- * @LastEditTime: 2020-11-07 19:17:35
+ * @LastEditTime: 2020-11-07 19:19:12
 =======
  * @LastEditTime: 2020-11-07 19:16:07
 >>>>>>> 60c491be623add2d220d9625c085b30f8654c781
@@ -27,12 +27,8 @@
 - ElementUi UI组件
 - VideoPlayer MV播放组件
 - Iconfont 字体图标库
-<<<<<<< HEAD
 - Flexible 自适应
-=======
-- flexible 自适应
->>>>>>> 60c491be623add2d220d9625c085b30f8654c781
-  
+
 ## 功能
 
 - 搜索：可以搜索歌手、歌曲、Mv、专辑、歌单
