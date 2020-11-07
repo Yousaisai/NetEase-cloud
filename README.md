@@ -2,7 +2,11 @@
  * @Descripttion: 项目介绍
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:49
+<<<<<<< HEAD
  * @LastEditTime: 2020-11-07 19:17:35
+=======
+ * @LastEditTime: 2020-11-07 19:16:07
+>>>>>>> 60c491be623add2d220d9625c085b30f8654c781
 -->
 # 使用Vue.js写的网易云音乐播放器
 
@@ -23,7 +27,11 @@
 - ElementUi UI组件
 - VideoPlayer MV播放组件
 - Iconfont 字体图标库
+<<<<<<< HEAD
 - Flexible 自适应
+=======
+- flexible 自适应
+>>>>>>> 60c491be623add2d220d9625c085b30f8654c781
   
 ## 功能
 
