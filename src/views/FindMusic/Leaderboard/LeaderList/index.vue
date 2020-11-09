@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-26 12:56:07
+ * @LastEditTime: 2020-11-09 18:36:01
 -->
 <template>
   <div class="content">
@@ -267,7 +267,7 @@ export default {
   flex-direction: column;
   .content_detail {
     position: absolute;
-    height: 35vh;
+    height: 220rem;
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -299,9 +299,13 @@ export default {
         }
       }
       .btn {
+        .el-button {
+          font-size: 12rem !important;
+        }
         cursor: pointer;
         display: flex;
         align-items: center;
+
         .btn_item {
           padding: 0 20rem 0 0;
         }
@@ -324,7 +328,7 @@ export default {
 
   .content_list_item {
     position: absolute;
-    top: 35vh;
+    top: 310rem;
     width: 100%;
     span {
       cursor: pointer;

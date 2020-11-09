@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-11-07 18:52:32
+ * @LastEditTime: 2020-11-09 18:18:48
 -->
 <template>
   <div class="content">
@@ -19,7 +19,7 @@
     <div class="none"></div>
     <div v-if="!auth" class="register">
       <div><span @click="dialogVisible = !dialogVisible">登 录</span></div>
-      <div style="margin:auto 10rem;transform: rotate(10deg);width:1px;height:12px;background-color:#fff;"></div>
+      <div style="margin:auto 10rem;transform: rotate(10deg);width:1px;height:12rem;background-color:#fff;"></div>
       <div><span @click="dialogVisible = !dialogVisible">注 册</span></div>
     </div>
     <div v-if="auth" class="avt">
