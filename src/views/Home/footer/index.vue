@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-11-07 19:06:35
+ * @LastEditTime: 2020-11-16 19:11:36
 -->
 
 <template>
@@ -41,13 +41,13 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       ><span>
         <svg-icon
           v-if="showStart"
-          style="font-size: 30px"
+          style="font-size: 38px"
           @click="end"
           icon-class="暂停" />
         <svg-icon
           v-if="!showStart"
           @click="start"
-          style="font-size: 30px"
+          style="font-size: 38px"
           icon-class="开始 (1)" /></span
       ><span>
         <svg-icon
@@ -357,7 +357,7 @@ export default {
   .pic {
     flex: 1;
     display: flex;
-margin: 0 auto;
+    margin: 0 auto;
     align-items: center;
   }
   .border {

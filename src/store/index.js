@@ -1,8 +1,8 @@
 /*
- * @Descripttion: 
+ * @Descripttion: 全局函数变量
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-29 12:54:05
+ * @LastEditTime: 2020-11-16 19:10:21
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -38,7 +38,7 @@ export default new Vuex.Store({
     IndexSong: 0,
     BannerUrl: "",
     index: 1, //这个是添加音乐，插入播放
-    currentLyric:0
+    currentLyric: 0
   },
   mutations: {
     ST_PlaySong: (state, payload) => {
@@ -53,6 +53,7 @@ export default new Vuex.Store({
       localStorage.setItem("AllSongs", JSON.stringify(payload))
     },
     ST_IndexSong: (state, payload) => {
+
       (state.IndexSong) = payload
     },
 
@@ -74,7 +75,7 @@ export default new Vuex.Store({
       var oneSong = payload.oneSong
       var allSong = payload.allSong
       var indexSong = payload.indexSong
-      console.log(indexSong);
+
       commit('ST_AllSongs', allSong)
       commit('ST_PlaySong', oneSong)
       commit('ST_IndexSong', indexSong)
@@ -93,7 +94,7 @@ export default new Vuex.Store({
           dispatch("AuthSongId", state.PlaySong)
         }
       } catch (e) {
-        console.log(e);
+
         Message({
           message: "暂无播放资源",
           type: 'warning'
@@ -106,7 +107,7 @@ export default new Vuex.Store({
       state,
       dispatch
     }, payload) {
-      console.log(state.IndexSong);
+
       var nextSong = {}
       if (state.AllSongs.length == 0) {
         state.AllSongs = JSON.parse(localStorage.getItem("AllSongs"))
@@ -143,7 +144,7 @@ export default new Vuex.Store({
 
       } catch (e) {
         //TODO handle the exception
-        console.log(e);
+
         Message({
           message: "暂无播放资源",
           type: 'warning'

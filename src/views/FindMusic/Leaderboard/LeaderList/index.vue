@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-11-09 18:36:01
+ * @LastEditTime: 2020-11-14 10:01:16
 -->
 <template>
   <div class="content">
@@ -209,6 +209,7 @@ export default {
     async getPlaylistDetail(val) {
       var res = await playlistDetail({ id: val });
       this.playListDetails = res.playlist;
+
       this.playListsong = res.playlist.tracks;
     },
 
@@ -235,6 +236,7 @@ export default {
         indexSong: row.index,
       });
     },
+
 
     tableRowClassName({ row, rowIndex }) {
       // 把每一行的索引放进row

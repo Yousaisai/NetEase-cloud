@@ -2,7 +2,7 @@
  * @Descripttion: 播放列表
  * @Author: Mr.You
  * @Date: 2020-10-29 09:24:46
- * @LastEditTime: 2020-10-29 13:13:09
+ * @LastEditTime: 2020-11-16 19:14:05
 -->
 <template>
   <div class="rank">
@@ -114,7 +114,7 @@ export default {
       }
       .svghide {
         flex: 2;
-        color: #666666;
+       
         color: #1f1f1f;
         cursor: pointer;
         font-size: 14rem;
