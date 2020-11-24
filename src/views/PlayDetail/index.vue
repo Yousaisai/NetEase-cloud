@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-11-07 18:58:32
+ * @LastEditTime: 2020-11-24 22:40:56
 -->
 <template>
   <div class="content" v-if="songDetail.al">
@@ -65,14 +65,13 @@
             </el-button>
           </div>
           <div class="btn_item">
-            
             <el-button type="primary" size="mini" plain
               ><svg-icon icon-class="转发" /> 转发</el-button
             >
           </div>
           <div class="btn_item">
             <el-button type="primary" size="mini" plain>
-              <svg-icon icon-class="下载" /> 下载
+              <svg-icon icon-class="下载" @click="download"/> 下载
             </el-button>
           </div>
           <div class="btn_item">
@@ -91,7 +90,7 @@
         v-show="
           index > currentLyric - 5 && index < currentLyric + 5 && isShow <= 10
         "
-        :key="index+'1'"
+        :key="index + '1'"
       >
         {{ item[1] }}
       </li>
@@ -100,7 +99,7 @@
         v-for="(item, index) in lyric"
         :class="index == currentLyric ? 'corly' : 'none'"
         v-show="index <= isShow && isShow > 10"
-        :key="index+'2'"
+        :key="index + '2'"
       >
         {{ item[1] }}
       </li>
@@ -220,6 +219,9 @@ export default {
     async getComment() {
       var res = await MusicComment({ id: this.Id });
       this.commentData = res;
+    },
+    download(song) {
+      this.$store.dispatch("DownLoadMusic", this.Id);
     },
   },
 };

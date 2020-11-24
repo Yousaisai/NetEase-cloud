@@ -2,7 +2,7 @@
  * @Descripttion: 播放列表
  * @Author: Mr.You
  * @Date: 2020-10-29 09:24:46
- * @LastEditTime: 2020-11-16 19:14:05
+ * @LastEditTime: 2020-11-24 18:41:38
 -->
 <template>
   <div class="rank">
@@ -15,7 +15,9 @@
         :key="index"
         v-for="(item, index) in PlayList"
         :id="index"
+        :style="{'background-color':(PlayIndex == index)?' #2d2c2c':''}"
         class="cor"
+       
       >
         <div class="spanhide">
           <span v-show="PlayIndex != index" style="padding: 0 10rem 0 0">{{
@@ -23,6 +25,7 @@
           }}</span>
           <img
             style="color: #666666; padding: 0 5rem 0 0"
+           
             v-show="PlayIndex == index"
             src="@/icons/pic/wave.gif"
           />
@@ -38,7 +41,7 @@
           <svg-icon style="padding: 0 5rem" icon-class="下载 (1)" />
         </div>
         <div class="other">
-          <div class="name">{{ item.ar[0].name }}</div>
+          <div class="name">{{ item.ar?item.ar[0].name:item.artists[0].name }}</div>
           <div class="time">{{ milltosecond(item.dt) }}</div>
         </div>
       </li>
@@ -80,7 +83,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .rank {
+.active{
+    background-color: #100f0f;
 
+}
   .title {
     position: sticky;
     top: 0;
@@ -157,7 +163,7 @@ export default {
   }
 
   li:hover {
-    background-color: #100f0f;
+    background-color: #2d2c2c;
     .svghide {
       color: #666666;
       cursor: pointer;

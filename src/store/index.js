@@ -2,17 +2,19 @@
  * @Descripttion: 全局函数变量
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-11-16 19:10:21
+ * @LastEditTime: 2020-11-24 22:38:32
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-
+var FileSaver = require("file-saver");
 import {
   PlayOneSong,
   AuthSongId,
+  DownLoadMusic
 } from '@/api/index'
 
+import router from '@/router';
 import {
   Message
 } from 'element-ui'
@@ -172,10 +174,23 @@ export default new Vuex.Store({
     //往播放列表中加入歌曲
     AddMusic({
       commit,
+      dispatch,
       state
     }, payload) {
       state.AllSongs.splice(state.IndexSong + state.index, 0, payload)
       state.index++
+      dispatch("DownLoadMusic")
+    },
+    /* 下载歌曲
+    需要传入音乐Id
+     */
+    async DownLoadMusic({
+      state
+    }, payload) {
+      var res = await DownLoadMusic(payload)
+      console.log(res);
+      FileSaver.saveAs(
+        res.url, res.title+'-'+res.author);
     }
 
   },

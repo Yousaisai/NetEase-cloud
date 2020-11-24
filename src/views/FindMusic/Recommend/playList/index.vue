@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-10-29 10:25:23
+ * @LastEditTime: 2020-11-24 19:37:44
 -->
 <template>
   <div class="content">
@@ -281,7 +281,7 @@ export default {
         }
       }
     },
-    AddMusic(song) {
+    AddMusic(song) { 
       this.$store.dispatch("AddMusic", song);
       this.$message({
         message: "添加成功",

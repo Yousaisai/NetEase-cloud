@@ -163,7 +163,8 @@ export function AuthSongId(payload) {
         url: "/check/music",
         method: 'get',
         params: {
-            id: payload, auth: true
+            id: payload,
+            auth: true
         }
     })
 }
@@ -198,7 +199,8 @@ export function SongLyric(payload) {
         url: "/lyric",
         method: 'get',
         params: {
-            id: payload, auth: true
+            id: payload,
+            auth: true
         }
     })
 }
@@ -230,7 +232,8 @@ export function SingersOne(payload) {
         url: "/artists",
         method: 'get',
         params: {
-            ...payload, auth: true
+            ...payload,
+            auth: true
         }
     })
 }
@@ -515,6 +518,20 @@ export function LoveMusic(payload) {
         params: {
             ...payload,
             auth: true
+        }
+    })
+}
+
+
+
+
+//下载音乐  需要传入音乐ID
+export function DownLoadMusic(payload) {
+    return request({
+        url: "/download",
+        method: 'get',
+        params: {
+            "id": payload
         }
     })
 }

@@ -2,7 +2,7 @@
  * @Descripttion: 单曲列表
  * @Author: Mr.You
  * @Date: 2020-10-21 09:55:07
- * @LastEditTime: 2020-10-21 18:09:32
+ * @LastEditTime: 2020-11-24 22:38:08
 -->
 <template>
   <div class="content">
@@ -60,7 +60,11 @@
               <svg-icon style="font-size: 18rem" icon-class="播放 (6)" />
             </span>
             <span style="padding: 10rem">
-              <svg-icon style="font-size: 16rem" icon-class="加好 2-01" />
+              <svg-icon
+                @click="AddMusic(scope.row)"
+                style="font-size: 16rem"
+                icon-class="加好 2-01"
+              />
             </span>
             <span style="padding: 10rem">
               <svg-icon
@@ -69,7 +73,7 @@
               />
             </span>
             <span style="padding: 10rem">
-              <svg-icon style="font-size: 16rem" icon-class="下载 (1)" />
+              <svg-icon style="font-size: 16rem" @click="download(scope.row)" icon-class="下载 (1)" />
             </span>
           </div>
           <div v-if="!scope.row.play">
@@ -140,18 +144,29 @@ export default {
       this.currentPage = val;
     },
     PlaySong(song, index) {
+      console.log(this.Songs, index, song);
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.Songs,
         indexSong: index,
       });
     },
+    AddMusic(song) {
+      this.$store.dispatch("AddMusic", song);
+      this.$message({
+        message: "添加成功",
+        type: "success",
+      });
+    },
+    download(song) {
+      this.$store.dispatch("DownLoadMusic", song.id);
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 .content {
-    padding: 10rem 50rem;
+  padding: 10rem 50rem;
   span {
     cursor: pointer;
   }

@@ -2,7 +2,7 @@
  * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-10-28 16:12:58
+ * @LastEditTime: 2020-11-24 22:34:23
 -->
 
 <template>
@@ -91,7 +91,11 @@
               />
             </span>
             <span style="padding: 10rem">
-              <svg-icon style="font-size: 16rem" icon-class="下载 (1)" />
+              <svg-icon
+                @click="download(scope.row)"
+                style="font-size: 16rem"
+                icon-class="下载 (1)"
+              />
             </span>
           </div>
           <div v-if="!scope.row.play">
@@ -184,13 +188,15 @@ export default {
       });
     },
     AddMusic(song) {
-
-      this.$store.dispatch("AddMusic",song)
+      this.$store.dispatch("AddMusic", song);
       this.$message({
-      message: '添加成功',
-      type: 'success'
-       });
-    }
+        message: "添加成功",
+        type: "success",
+      });
+    },
+    download(song) {
+      this.$store.dispatch("DownLoadMusic", song.id);
+    },
   },
 };
 </script>
