@@ -31,6 +31,12 @@ const routes = [{
         meta: {
           title: '收藏歌单'
         },
+      }, , {
+        path: '/AllNetMusic',
+        component: () => import('../views/AllNetMusic/index.vue'),
+        meta: {
+          title: '全网搜索'
+        },
       },
       /*导航栏开始 */
       {

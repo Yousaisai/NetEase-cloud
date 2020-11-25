@@ -2,12 +2,13 @@
  * @Descripttion: 单曲列表
  * @Author: Mr.You
  * @Date: 2020-10-21 09:55:07
- * @LastEditTime: 2020-11-24 22:38:08
+ * @LastEditTime: 2020-11-25 09:35:41
 -->
 <template>
   <div class="content">
     <el-table
       stripe
+      @row-dblclick="dbclick"
       :data="Songs.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
       @cell-mouse-enter="cellenter"
       @cell-mouse-leave="cellleave"
@@ -57,23 +58,27 @@
               @click="PlaySong(scope.row, scope.$index)"
               style="padding: 10rem"
             >
-              <svg-icon style="font-size: 18rem" icon-class="播放 (6)" />
+              <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
             </span>
             <span style="padding: 10rem">
               <svg-icon
                 @click="AddMusic(scope.row)"
-                style="font-size: 16rem"
+                style="font-size: 16px"
                 icon-class="加好 2-01"
               />
             </span>
             <span style="padding: 10rem">
               <svg-icon
-                style="font-size: 16rem; color: #909399"
+                style="font-size: 16px; color: #909399"
                 icon-class="心 爱心 (2)"
               />
             </span>
             <span style="padding: 10rem">
-              <svg-icon style="font-size: 16rem" @click="download(scope.row)" icon-class="下载 (1)" />
+              <svg-icon
+                style="font-size: 16px"
+                @click="download(scope.row)"
+                icon-class="下载 (1)"
+              />
             </span>
           </div>
           <div v-if="!scope.row.play">
@@ -156,6 +161,13 @@ export default {
       this.$message({
         message: "添加成功",
         type: "success",
+      });
+    },
+    dbclick(row) {
+      this.$store.dispatch("PlaySongs", {
+        oneSong: row,
+        allSong: this.Songs,
+        indexSong: row.index,
       });
     },
     download(song) {

@@ -2,7 +2,7 @@
  * @Descripttion: 左侧导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 19:38:36
- * @LastEditTime: 2020-11-07 18:40:35
+ * @LastEditTime: 2020-11-25 09:43:37
 -->
 
 <template>
@@ -13,16 +13,11 @@
     @close="handleClose"
     :router="true"
   >
-    <el-menu-item index="/Recommend">
-      <span slot="title">发现音乐</span>
-    </el-menu-item>
-    <!-- <el-menu-item index="/MyCreateList">
-      <span slot="title">我的歌单</span>
-        <el-menu-item index="/MyCreateList">我的歌单</el-menu-item>
-    </el-menu-item> -->
+    <el-menu-item index="/Recommend"> 发现音乐 </el-menu-item>
     <el-menu-item v-show="!auth" index="/MyMuisc">我的音乐</el-menu-item>
     <el-menu-item v-show="auth" index="/MyCreateList">我的歌单</el-menu-item>
     <el-menu-item v-show="auth" index="/MyLoveList">收藏歌单</el-menu-item>
+     <el-menu-item index="/AllNetMusic"> 全网音乐 </el-menu-item>
   </el-menu>
 </template>
 
@@ -36,7 +31,7 @@ import { getToken, removeCookie } from "@/utils/cookie";
 export default {
   data() {
     return {
-      initMenu: ["/Recommend", "/MyMuisc", "/MyCreateList", "/MyLoveList"],
+      initMenu: ["/Recommend", "/MyMuisc", "/MyCreateList", "/MyLoveList",'/AllNetMusic'],
     };
   },
   computed: {
@@ -53,7 +48,7 @@ export default {
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
-   
+
       if (this.initMenu.includes(path)) {
         return path;
       }
@@ -68,18 +63,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 /deep/.el-submenu {
-  
   padding: 0 !important;
 }
-.el-menu-item { font-size: 14rem!important;
+.el-menu-item {
+  font-size: 14rem !important;
   padding-left: 0 !important;
 }
 /deep/.el-submenu__title {
   padding-left: 0 !important;
- 
 }
 /deep/.el-icon-arrow-down:before {
   content: none !important;
 }
-
 </style>

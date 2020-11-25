@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-11-16 19:11:36
+ * @LastEditTime: 2020-11-25 09:31:37
 -->
 
 <template>
@@ -142,6 +142,12 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
           </el-slider>
         </div>
       </div>
+      <div class="down">
+        <svg-icon
+          @click="download" 
+          icon-class="下载 (1)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -186,15 +192,6 @@ export default {
     this.TitleScrolling();
   },
   watch: {
-    // SongTime() {
-    //   //由于数据是毫秒级别监听不到，所以只需要监听到秒数相等就播放下一首
-    //   if (parseInt(this.time / 1000) == parseInt(this.SongTime / 1000)) {
-    //     this.SwitchSongs("next");
-    //     console.log(1);
-    //     return;
-    //   }
-    // },
-
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
@@ -292,6 +289,9 @@ export default {
     },
     getLikeMusic(val) {
       console.log(val);
+    },
+    download() {
+      this.$store.dispatch("DownLoadMusic", this.onesong.id);
     },
     async getLyric(id) {
       //获取歌词
@@ -470,6 +470,16 @@ export default {
       font-size: 22px;
       flex: 1;
       color: #666666;
+    }
+    .down {
+       padding: 0 10rem 0 10rem;
+      font-size: 20px;
+      flex: 1;
+      color: #666666;
+    }
+    .down:hover {
+      cursor: pointer;
+      color: #b7b4b4;
     }
     .love:hover {
       cursor: pointer;

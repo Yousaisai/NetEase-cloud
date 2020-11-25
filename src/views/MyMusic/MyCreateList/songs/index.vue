@@ -2,7 +2,7 @@
  * @Descripttion: 我创建的歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-10-26 15:12:02
+ * @LastEditTime: 2020-11-25 09:37:44
 -->
 <template>
   <div class="content">
@@ -83,7 +83,6 @@
           ></span
         >
       </div>
-      <el-divider></el-divider>
       <div class="item_table">
         <eltable :Songs="playListsong" />
       </div>

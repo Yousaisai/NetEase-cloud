@@ -535,3 +535,30 @@ export function DownLoadMusic(payload) {
         }
     })
 }
+
+
+
+
+// 全网搜索  
+//  payload: {
+//     input: "",
+//     filter: "",
+//     type: "",
+//     page: "",
+//   },
+/**
+ * 网易 netease
+ * QQ qq
+ * 酷狗  kugou
+ * 酷我 kuwo
+ * 虾米 xiami
+ * 百度 baidu
+ * 咪咕 migu
+ */
+export function AllNetMusic(payload) {
+    return request({
+        url: "/allNetMusic",
+        method: 'get',
+        params:payload
+    })
+}

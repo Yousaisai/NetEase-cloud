@@ -2,7 +2,7 @@
  * @Descripttion: 复用表格
  * @Author: Mr.You
  * @Date: 2020-10-14 16:23:34
- * @LastEditTime: 2020-11-24 22:34:23
+ * @LastEditTime: 2020-11-25 09:35:55
 -->
 
 <template>
@@ -75,25 +75,25 @@
               @click="PlaySong(scope.row, scope.$index)"
               style="padding: 10rem"
             >
-              <svg-icon style="font-size: 18rem" icon-class="播放 (6)" />
+              <svg-icon style="font-size: 18px" icon-class="播放 (6)" />
             </span>
             <span style="padding: 10rem">
               <svg-icon
-                style="font-size: 16rem"
+                style="font-size: 16px"
                 @click="AddMusic(scope.row)"
                 icon-class="加好 2-01"
               />
             </span>
             <span style="padding: 10rem">
               <svg-icon
-                style="font-size: 16rem; color: #909399"
+                style="font-size: 16px; color: #909399"
                 icon-class="心 爱心 (2)"
               />
             </span>
             <span style="padding: 10rem">
               <svg-icon
                 @click="download(scope.row)"
-                style="font-size: 16rem"
+                style="font-size: 16px"
                 icon-class="下载 (1)"
               />
             </span>
