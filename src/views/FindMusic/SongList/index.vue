@@ -2,7 +2,7 @@
  * @Descripttion: 歌单导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:11
- * @LastEditTime: 2020-10-25 14:52:09
+ * @LastEditTime: 2020-12-02 17:22:21
 -->
 <template>
   <div class="content">
@@ -51,11 +51,16 @@
             <img :src="item.coverImgUrl" :alt="item.name" />
             <div class="imglove">
               <div class="playcount">
-                <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
-                  item.playCount > 100000
-                    ? parseInt(item.playCount / 10000) + "W"
-                    : item.playCount
-                }}<svg-icon icon-class="播放" style="float: right" />
+                <div class="shouting">
+                  <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
+                    item.playCount > 100000
+                      ? parseInt(item.playCount / 10000) + "W"
+                      : item.playCount
+                  }}
+                </div>
+                <div class="bofang">
+                  <svg-icon icon-class="播放" style="float: right" />
+                </div>
               </div>
               <div class="player"></div>
             </div></div
@@ -169,18 +174,36 @@ export default {
         }
 
         .imglove {
-          height: 27rem;
+          height: 32rem;
           text-align: left;
           position: absolute;
           z-index: 10;
           width: 100%;
-          transform: translateY(-30rem);
+          top: 162rem;
+          // transform: translateY(-36rem);/*  */
           background-color: #3b4250;
           opacity: 0.5;
           color: #fff;
           backdrop-filter: 0.5;
+          display: flex;
+          font-size: 15rem;
+          align-items: center;
+
           .playcount {
-            margin: 4rem;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10rem;
+            .shouting {
+              display: flex;
+              align-items: center;
+              flex: 6;
+            }
+            .bofang {
+              display: flex;
+              align-items: center;
+              flex: 1;
+            }
           }
         }
       }

@@ -2,29 +2,24 @@
  * @Descripttion: 收藏歌单
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-10-26 15:21:51
+ * @LastEditTime: 2020-12-02 15:56:45
 -->
 <template>
   <div class="content1">
     <div class="content_menu">
-      <h3 style="padding-left: 12rem">我收藏的歌单</h3>
+      <h5 style="padding-left: 12rem">我收藏的歌单</h5>
       <el-menu :default-active="initMenu" @select="handleSelect">
         <el-menu-item
           v-for="(item, index) in userList"
           :key="index"
           :index="item.id.toString()"
           v-show="item.ordered"
+          class="el-menu-item"
         >
-          <el-image
-            :src="item.coverImgUrl"
-            style="width: 50rem; padding-right: 10rem"
-            :lazy="true"
-          ></el-image>
+          <el-image :src="item.coverImgUrl" :lazy="true"></el-image>
           <span slot="title"
             >{{ item.name.slice(0, 5) }}
-            <span v-show="item.name.length > 5" style="font-size: 15rem"
-              >...</span
-            >
+            <span v-show="item.name.length > 5">...</span>
           </span>
         </el-menu-item>
       </el-menu>
@@ -85,7 +80,10 @@ export default {
     },
 
     handleSelect(key, keyPath) {
-      this.$router.push({ path: "/MyLoveList", query: { id: key } });
+      if (this.$route.query.id == key) {
+        return;
+      }
+      this.$router.push({ query: { id: key } });
       this.NewId = key;
     },
   },
@@ -98,8 +96,17 @@ export default {
   .content_menu {
     flex: 1;
     text-align: left;
+    .el-menu-item {
+      display: flex;
+      align-items: center;
+    }
     .el-image {
-      border-radius: 5rem;
+      border-radius: 10rem;
+      display: flex;
+      margin: 0 10rem 0 0;
+      align-items: center;
+      width: 30rem;
+      height: 30rem;
     }
   }
   .content_detail {

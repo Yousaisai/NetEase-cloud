@@ -2,18 +2,22 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:07
- * @LastEditTime: 2020-10-21 10:22:57
+ * @LastEditTime: 2020-12-02 17:26:02
 -->
 <template>
   <div class="content">{{this.$store.state.BannerUrl}}
     <div class="content_carousel">
-      <el-carousel>
+      <el-carousel >
         <el-carousel-item
           v-for="(item, index) in bannerImgs"
           :key="index"
           :style="bannerStyle(item)"
         >
-          <img :src="item.imageUrl" />
+        <router-link
+        style="text-decoration: none"
+        :to="{ path: '/PlayDetail', query: { id: item.targetId } }"
+      >  <img style="width:1080rem" :src="item.imageUrl" /></router-link>
+        
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -52,6 +56,8 @@ export default {
     },
     async requireBanner() {
       var res = await banner();
+      console.log('res.targetId: ', res);
+      
       this.bannerImgs = res.banners;
     },
   },

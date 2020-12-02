@@ -2,27 +2,35 @@
  * @Descripttion: 歌单导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:11
- * @LastEditTime: 2020-10-21 20:09:39
+ * @LastEditTime: 2020-12-02 17:10:53
 -->
 <template>
   <div class="content">
-
-   
     <div class="content_item">
-      <div class="item_img" v-for="(item, index) in searchRe.playlists" :key="index">
+      <div
+        class="item_img"
+        v-for="(item, index) in searchRe.playlists"
+        :key="index"
+      >
         <router-link :to="{ name: 'Playlist', query: { id: item.id } }">
           <div class="image">
-            <img :src="item.coverImgUrl+ '?param=250y250'" :alt="item.name" />
-            <div class="imglove">
-              <div class="playcount">
-                <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
-                  item.playCount > 100000
-                    ? parseInt(item.playCount / 10000) + "W"
-                    : item.playCount
-                }}<svg-icon icon-class="播放" style="float: right" />
-              </div>
-              <div class="player"></div>
-            </div></div
+            <img :src="item.coverImgUrl + '?param=250y250'" :alt="item.name" />
+            <!-- <div class="imglove"> -->
+              <!-- <div class="playcount"> -->
+                <!-- <div class="shouting">
+                  <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
+                    item.playCount > 100000
+                      ? parseInt(item.playCount / 10000) + "W"
+                      : item.playCount
+                  }}
+                </div>
+                <div class="bofang">
+                  <svg-icon icon-class="播放" style="float: right" />
+                </div> -->
+              <!-- </div> -->
+              <!-- <div class="player"></div> -->
+            <!-- </div> -->
+            </div
         ></router-link>
 
         <div class="titledetail">
@@ -40,7 +48,7 @@
 <script>
 import { playlist, playListCat } from "@/api/index.js";
 export default {
-  props:["searchRe"],
+  props: ["searchRe"],
   data() {
     return {
       //全部歌单
@@ -60,7 +68,7 @@ export default {
   mounted() {
     var CAT = this.$route.query.cat;
     if (CAT) {
-     this.playlistPayload.cat = CAT;
+      this.playlistPayload.cat = CAT;
     }
     this.getPlayList();
     this.getPlayListCat();
@@ -87,7 +95,7 @@ export default {
   width: 1080rem;
   margin: 0 auto;
   background-color: #ffffff;
-  
+
   .content_item {
     display: flex;
     justify-content: center;
@@ -104,18 +112,27 @@ export default {
         }
 
         .imglove {
-          height: 27rem;
+          height: 32rem;
           text-align: left;
           position: absolute;
           z-index: 10;
           width: 100%;
-          transform: translateY(-30rem);
+          transform: translateY(-36rem);
           background-color: #3b4250;
           opacity: 0.5;
           color: #fff;
           backdrop-filter: 0.5;
           .playcount {
-            margin: 4rem;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10rem;
+            .shouting {
+              flex: 3;
+            }
+            .bofang {
+              flex: 1;
+            }
           }
         }
       }

@@ -2,12 +2,12 @@
  * @Descripttion: 排行榜导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-10-29 12:37:08
+ * @LastEditTime: 2020-12-02 17:11:26
 -->
 <template>
   <div class="content1">
     <div class="content_menu">
-      <h3 style="padding-left: 12rem">网易云音乐榜</h3>
+      <h5 style="padding-left: 12rem">网易云音乐榜</h5>
       <el-menu :default-active="initMenu" @select="handleSelect">
         <el-menu-item
           v-for="(item, index) in topList"

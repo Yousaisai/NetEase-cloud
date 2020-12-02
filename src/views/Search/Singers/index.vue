@@ -2,23 +2,25 @@
  * @Descripttion: 歌手导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:08
- * @LastEditTime: 2020-10-21 20:16:52
+ * @LastEditTime: 2020-12-02 17:05:28
 -->
 <template>
   <div class="content">
- 
     <div class="singers">
       <div class="leadersinger">
-        <div class="singer" v-for="(item, index) in searchRe.artists" :key="index">
-          <div class="img10" >
+        <div
+          class="singer"
+          v-for="(item, index) in searchRe.artists"
+          :key="index"
+        >
+          <div class="img10">
             <div class="img">
               <router-link
                 :to="{ path: '/SingerDetail/Music', query: { id: item.id } }"
               >
                 <el-image
-             
-                  style="border-radius: 50%"
-                  :src="item.picUrl + '?param=150y150'"
+                  style="border-radius: 50%; width: 150rem; height: 150rem"
+                  :src="item.picUrl"
                   fit="fill"
                   :lazy="true"
                 ></el-image
@@ -29,7 +31,6 @@
               <div class="num">{{ item.musicSize }} 首歌曲</div>
             </div>
           </div>
-         
         </div>
       </div>
       <div class="othersinger"></div>
@@ -44,8 +45,7 @@
 <script>
 import { CatSingers, SingerLeader } from "@/api/index";
 export default {
-  props:["searchRe"],
-
+  props: ["searchRe"],
 };
 </script>
 <style lang="scss" scoped>
@@ -124,6 +124,7 @@ export default {
           .detail {
             .title {
               color: black;
+              font-size: 15rem;
             }
             .num {
               font-size: 12rem;

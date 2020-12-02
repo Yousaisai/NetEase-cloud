@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-11-24 22:40:56
+ * @LastEditTime: 2020-12-02 17:30:15
 -->
 <template>
   <div class="content" v-if="songDetail.al">
@@ -17,10 +17,8 @@
       </div>
       <div class="detail_content">
         <div class="title">
-          <span style="padding-right: 2rem; color: #9b0909"
-            ><svg-icon icon-class="音乐"
-          /></span>
-          {{ songDetail.name }}
+          <span>歌曲： </span>
+          <span style="font-size: 15rem"> {{ songDetail.name }}</span>
         </div>
         <div class="name">
           <span>歌手： </span>
@@ -71,7 +69,7 @@
           </div>
           <div class="btn_item">
             <el-button type="primary" size="mini" plain>
-              <svg-icon icon-class="下载" @click="download"/> 下载
+              <svg-icon icon-class="下载" @click="download" /> 下载
             </el-button>
           </div>
           <div class="btn_item">
@@ -236,7 +234,6 @@ export default {
   flex-direction: column;
   right: 2rem;
   .detail {
-    // padding: 10rem;
     width: 1080rem;
     margin: 0 auto;
     background-color: #fff;
@@ -245,12 +242,13 @@ export default {
     .pic {
       padding: 30rem 20rem 20rem 20rem;
     }
-
     .detail_content {
+      span {
+        font-size: 18rem;
+      }
       padding: 10rem;
       .title {
         padding: 10rem;
-        font-size: 28rem;
       }
 
       .name {

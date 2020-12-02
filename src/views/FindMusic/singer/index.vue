@@ -2,7 +2,7 @@
  * @Descripttion: 歌手导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:08
- * @LastEditTime: 2020-12-02 15:15:21
+ * @LastEditTime: 2020-12-02 17:02:55
 -->
 <template>
   <div class="content">
@@ -46,8 +46,8 @@
               >
                 <el-image
                   @click="getOneSinger(item)"
-                  style="border-radius: 50%"
-                  :src="item.picUrl + '?param=150y150'"
+                  style="border-radius: 50%; width: 150rem; height: 150rem"
+                  :src="item.picUrl"
                   fit="fill"
                   :lazy="true"
                 ></el-image
@@ -209,8 +209,7 @@ export default {
       var res = await CatSingers(this.CatSingersPayload);
       this.singers = res.artists;
     },
-    async getOneSinger(item) {
-    },
+    async getOneSinger(item) {},
   },
 };
 </script>
@@ -225,17 +224,24 @@ export default {
   color: #939090;
   // margin: auto 0;
   .abcleader {
+    width: 1080rem;
     text-align: left;
+    font-size: 15rem;
     padding: 20rem 10rem;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+    line-height: 1.5;
     span {
       cursor: pointer;
       padding: 8rem 10rem;
       width: 10rem;
       height: 12rem;
+      // line-height: 20rem;
     }
+
     span:hover {
       color: #b7b4b4;
-      // transform: scale(1.2);
     }
     .active {
       background-color: #b21212;
@@ -266,7 +272,6 @@ export default {
     .leadersinger {
       display: flex;
       justify-content: space-around;
-      // text-align: center;
       flex-wrap: wrap;
       .singer {
         padding: 10rem;
@@ -290,6 +295,7 @@ export default {
           .detail {
             .title {
               color: black;
+              font-size: 18rem;
             }
             .num {
               font-size: 12rem;

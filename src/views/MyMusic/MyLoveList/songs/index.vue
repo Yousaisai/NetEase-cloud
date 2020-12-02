@@ -2,7 +2,7 @@
  * @Descripttion: 收藏歌单详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-11-25 09:37:27
+ * @LastEditTime: 2020-12-02 15:38:28
 -->
 <template>
   <div class="content">
@@ -125,7 +125,7 @@ export default {
   watch: {
     id(val) {
       this.getPlaylistDetail(val);
-   
+      this.getPlayListComment(val)
     },
   },
   mounted() {
@@ -140,6 +140,7 @@ export default {
     },
     async getPlayListComment(val) {
       var res = await PlayListComment({ id: val });
+      console.log('res: ', res);
       this.commentData = res;
     },
 

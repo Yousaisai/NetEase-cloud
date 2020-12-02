@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-11-24 19:37:44
+ * @LastEditTime: 2020-12-02 17:22:11
 -->
 <template>
   <div class="content">
@@ -20,15 +20,23 @@
               style="text-decoration: none"
               :to="{ path: '/SongList', query: { cat: item } }"
             >
-              <span class="more" style="color: #666; font-size: 13rem"
+              <span
+                class="more"
+                style="
+                  padding: 0 10rem 0 0;
+                  color: #666;
+                  border-right: 1.5px solid #666;
+                  font-size: 13rem;
+                "
                 >{{ item }}
-              </span> </router-link
-            ><span style="padding: 0 0 0 5rem">|</span>
+              </span>
+            </router-link>
           </span>
           <router-link to="/SongList">
             <span class="more" style="float: right; font-size: 12rem"
-              >更多 <svg-icon icon-class="前进" /></span
-          ></router-link>
+              >更多
+            </span></router-link
+          >
         </el-col>
       </el-row>
     </div>
@@ -47,11 +55,16 @@
             <img :src="item.picUrl" :alt="item.name" />
             <div class="imglove">
               <div class="playcount">
-                <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
-                  item.playCount > 100000
-                    ? parseInt(item.playCount / 10000) + "W"
-                    : item.playCount
-                }}<svg-icon icon-class="播放" style="float: right" />
+                <div class="shouting">
+                  <svg-icon icon-class="收听量" style="padding-right: 5rem" />{{
+                    item.playCount > 100000
+                      ? parseInt(item.playCount / 10000) + "W"
+                      : item.playCount
+                  }}
+                </div>
+                <div class="bofang">
+                  <svg-icon icon-class="播放" style="float: right" />
+                </div>
               </div>
               <div class="player"></div>
             </div></div
@@ -71,8 +84,9 @@
           <span style="font-size: 25rem; padding-right: 5rem">新碟上架</span>
           <router-link to="/AddedNewAlbum">
             <span class="more" style="float: right; font-size: 12rem"
-              >更多 <svg-icon icon-class="前进" /></span
-          ></router-link>
+              >更多
+            </span></router-link
+          >
         </el-col>
       </el-row>
     </div>
@@ -113,8 +127,9 @@
           <span style="font-size: 25rem; padding-right: 5rem">榜单</span>
           <router-link to="/Leaderboard">
             <span class="more" style="float: right; font-size: 12rem"
-              >更多 <svg-icon icon-class="前进" /></span
-          ></router-link>
+              >更多
+            </span></router-link
+          >
         </el-col>
       </el-row>
     </div>
@@ -138,7 +153,7 @@
             </div>
             <div class="svg">
               <span>
-                <svg-icon style="padding: 0 10rem" icon-class="收听量" />{{
+                <svg-icon style="padding-right: 5rem" icon-class="收听量" />{{
                   topList[TopItem].playCount > 10000
                     ? parseInt(topList[TopItem].playCount / 10000) + "万"
                     : "topList[TopItem].playCount"
@@ -191,8 +206,9 @@
                   color: #666;
                 "
               >
-                更多 <svg-icon icon-class="前进" /> </span
-            ></router-link>
+                更多
+              </span></router-link
+            >
           </ul>
         </div>
       </div>
@@ -281,7 +297,7 @@ export default {
         }
       }
     },
-    AddMusic(song) { 
+    AddMusic(song) {
       this.$store.dispatch("AddMusic", song);
       this.$message({
         message: "添加成功",
@@ -303,6 +319,10 @@ export default {
   .more:hover {
     font-weight: bold;
     cursor: pointer;
+    color: #666;
+  }
+  .more {
+    color: #666;
   }
   padding: 15rem;
   .content_sort {
@@ -338,18 +358,35 @@ export default {
         }
 
         .imglove {
-          height: 27rem;
+          height: 32rem;
           text-align: left;
           position: absolute;
           z-index: 10;
           width: 100%;
-          transform: translateY(-30rem);
+          top: 158rem;
           background-color: #3b4250;
           opacity: 0.5;
           color: #fff;
           backdrop-filter: 0.5;
+          display: flex;
+          font-size: 15rem;
+          align-items: center;
+
           .playcount {
-            margin: 4rem;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10rem;
+            .shouting {
+              display: flex;
+              align-items: center;
+              flex: 6;
+            }
+            .bofang {
+              display: flex;
+              align-items: center;
+              flex: 1;
+            }
           }
         }
       }
@@ -373,8 +410,8 @@ export default {
     justify-content: center;
     // overflow: scroll;
     .newitem_img {
-      width: 10.5vw;
-      height: 10.5vw;
+      width: 160rem;
+      height: 160rem;
       padding: 10rem 2rem;
 
       .image {
@@ -447,20 +484,15 @@ export default {
 
         .imgtitle {
           display: flex;
+          font-size: 12rem;
           flex-direction: column;
-          // position: relative;
-          //  align-items: end;
           justify-content: space-between;
-          align-items: center;
+          align-items: start;
+          padding: 0 10rem;
+          height: 100%;
           .span {
           }
           .svg {
-            align-items: end;
-            // position: absolute;
-            // top: 4em;
-            // left: 2em;
-            font-size: 12rem;
-            padding: 50rem 10rem;
           }
         }
         // flex-direction: column;
