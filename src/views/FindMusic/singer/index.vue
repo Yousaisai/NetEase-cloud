@@ -2,7 +2,7 @@
  * @Descripttion: 歌手导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:08
- * @LastEditTime: 2020-10-22 18:17:36
+ * @LastEditTime: 2020-12-02 15:15:21
 -->
 <template>
   <div class="content">
@@ -229,8 +229,8 @@ export default {
     padding: 20rem 10rem;
     span {
       cursor: pointer;
-      padding: 8rem 12rem;
-      width: 12rem;
+      padding: 8rem 10rem;
+      width: 10rem;
       height: 12rem;
     }
     span:hover {
