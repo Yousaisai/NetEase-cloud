@@ -17,7 +17,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
 // 语音元数据主要是语音的长度之类的数据
  * @Author: Mr.You
  * @Date: 2020-10-12 19:41:46
- * @LastEditTime: 2020-11-25 09:31:37
+ * @LastEditTime: 2020-12-02 14:07:22
 -->
 
 <template>
@@ -331,10 +331,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .content {
-  // font-size: 2em;
   width: 75%;
   height: 50px;
-
   margin: 0 auto;
   li {
     list-style: none;
