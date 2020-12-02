@@ -2,7 +2,7 @@
  * @Descripttion:全网音乐下载
  * @Author: Mr.You
  * @Date: 2020-11-25 09:40:58
- * @LastEditTime: 2020-11-25 11:43:09
+ * @LastEditTime: 2020-12-02 14:45:51
 -->
 <template>
   <div class="content">
@@ -18,7 +18,7 @@
           <el-select
             v-model="payload.filter"
             slot="prepend"
-            style="width: 100px; font-size: 13rem"
+            style="width: 100px; font-size: 12rem"
             placeholder="请选择"
           >
             <el-option label="音乐名称" value="name"></el-option>
@@ -52,13 +52,19 @@
         </el-table-column>
         <el-table-column prop="title" label="歌名"> </el-table-column>
         <el-table-column prop="author" label="歌手"> </el-table-column>
-        <el-table-column label="下载" width="80" align="center">
+        <el-table-column label="操作" width="80" align="center">
           <template slot-scope="scope">
-            <svg-icon
-              @click="download(scope.row)"
-              style="font-size: 16px; cursor: pointer"
-              icon-class="下载 (1)"
-            />
+            <span style="padding-right: 15rem">
+              <svg-icon
+                @click="palyMusic(scope.row)"
+                style="font-size: 16px; cursor: pointer"
+                icon-class="播放 (6)" /></span
+            ><span>
+              <svg-icon
+                @click="download(scope.row)"
+                style="font-size: 16px; cursor: pointer"
+                icon-class="下载 (1)"
+            /></span>
           </template>
         </el-table-column>
       </el-table>
@@ -87,12 +93,15 @@ export default {
   },
   computed: {},
   watch: {
-    payload: {
-      handler() {
-        this.getSearch();
-      },
-      deep: true,
-    },
+    // payload: {
+    //   handler(val) {
+    //     if (val.input.trim()=="") {
+    //      return
+    //     }
+    //     this.getSearch();
+    //   },
+    //   deep: true,
+    // },
   },
   mounted() {
     this.getDefSearch();
@@ -123,6 +132,9 @@ export default {
     },
     download(song) {
       this.$store.dispatch("DownLoadAllMusic", song);
+    },
+    palyMusic(song) {
+      window.open(song.url, "_blank");
     },
   },
 };

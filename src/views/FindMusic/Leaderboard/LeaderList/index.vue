@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-11-14 10:01:16
+ * @LastEditTime: 2020-12-02 14:01:44
 -->
 <template>
   <div class="content">
@@ -152,7 +152,11 @@
                   <svg-icon style="font-size: 18rem" icon-class="播放 (6)" />
                 </span>
                 <span style="padding: 10rem">
-                  <svg-icon style="font-size: 16rem" icon-class="加好 2-01" />
+                  <svg-icon
+                    @click="AddMusic(scope.row)"
+                    style="font-size: 16rem"
+                    icon-class="加好 2-01"
+                  />
                 </span>
                 <span style="padding: 10rem">
                   <svg-icon
@@ -237,7 +241,13 @@ export default {
       });
     },
 
-
+    AddMusic(song) {
+      this.$store.dispatch("AddMusic", song);
+      this.$message({
+        message: "添加成功",
+        type: "success",
+      });
+    },
     tableRowClassName({ row, rowIndex }) {
       // 把每一行的索引放进row
       row.index = rowIndex;
