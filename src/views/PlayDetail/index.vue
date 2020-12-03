@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲详情，需要接受一个路由参数，音乐ID
  * @Author: Mr.You
  * @Date: 2020-10-20 09:53:28
- * @LastEditTime: 2020-12-02 17:30:15
+ * @LastEditTime: 2020-12-03 12:23:44
 -->
 <template>
   <div class="content" v-if="songDetail.al">
@@ -74,7 +74,7 @@
           </div>
           <div class="btn_item">
             <el-button type="primary" size="mini" plain
-              ><svg-icon icon-class="评 论" /> 评论
+              ><svg-icon icon-class="评 论" /> 评论 ({{commentData.total}})
             </el-button>
           </div>
         </div>
@@ -179,6 +179,7 @@ export default {
     async getPlayOneSong() {
       var res = await SongDetail(this.Id);
       this.songDetail = res.songs[0];
+   
     },
     async getLyric(id) {
       //获取歌词
@@ -217,6 +218,7 @@ export default {
     async getComment() {
       var res = await MusicComment({ id: this.Id });
       this.commentData = res;
+
     },
     download(song) {
       this.$store.dispatch("DownLoadMusic", this.Id);
