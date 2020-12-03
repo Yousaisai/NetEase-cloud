@@ -2,7 +2,7 @@
  * @Descripttion: 排行榜详情
  * @Author: Mr.You
  * @Date: 2020-10-14 20:43:36
- * @LastEditTime: 2020-12-02 17:12:55
+ * @LastEditTime: 2020-12-03 11:53:28
 -->
 <template>
   <div class="content">
@@ -277,6 +277,8 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
+  overflow: auto;
+
   .content_detail {
     position: absolute;
     height: 220rem;
@@ -354,5 +356,8 @@ export default {
       padding: 0 20rem;
     }
   }
+}
+.content::-webkit-scrollbar {
+  width: 1rem;
 }
 </style>

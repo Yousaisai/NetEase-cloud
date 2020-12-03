@@ -2,13 +2,13 @@
  * @Descripttion: 歌曲评论，只需要传来评论参数
  * @Author: Mr.You
  * @Date: 2020-10-22 11:13:17
- * @LastEditTime: 2020-10-26 14:45:26
+ * @LastEditTime: 2020-12-03 11:28:51
 -->
 <template>
   <div class="comcontent">
     <div class="totle">
       <span style="font-size: 22rem; padding-right: 10rem">评论</span>
-      <span>共{{ commentdatas.total }}条评论</span>
+      <span>共 {{ commentdatas.total?commentdatas.total:"0" }} 条评论</span>
       <el-divider direction="horizontal" content-position="left"></el-divider>
       <div class="comment">
         <div class="avt">

@@ -2,12 +2,12 @@
  * @Descripttion: 我创建的歌单
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-12-02 15:57:25
+ * @LastEditTime: 2020-12-03 11:32:22
 -->
 <template>
   <div class="content1">
     <div class="content_menu">
-      <h5 style="padding-left: 12rem">我创建的歌单</h5>
+      <!-- <h5 style="padding-left: 12rem">我创建的歌单</h5> -->
       <el-menu :default-active="initMenu" @select="handleSelect">
         <el-menu-item
           v-for="(item, index) in userList"

@@ -2,12 +2,12 @@
  * @Descripttion: 排行榜导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-12-02 17:11:26
+ * @LastEditTime: 2020-12-03 11:37:54
 -->
 <template>
   <div class="content1">
     <div class="content_menu">
-      <h5 style="padding-left: 12rem">网易云音乐榜</h5>
+      <h5 style="padding-left: 12rem;font-size:15rem">网易云音乐榜</h5>
       <el-menu :default-active="initMenu" @select="handleSelect">
         <el-menu-item
           v-for="(item, index) in topList"
@@ -91,12 +91,10 @@ export default {
   width: 70vw;
   margin: 0 auto;
   padding: 0 10rem 0 0;
-
   background-color: #fff;
   display: flex;
   .content_menu {
     margin: 10rem;
-
     flex: 1;
     text-align: left;
     .el-image {

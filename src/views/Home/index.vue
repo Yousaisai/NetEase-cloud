@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-11-25 11:31:06
+ * @LastEditTime: 2020-12-03 12:04:45
 -->
 <template>
   <div class="home">
@@ -86,6 +86,23 @@ export default {
       position: sticky;
       top: 0;
     }
+  }
+  .el-main::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    height: 2rem;
+    background-color: #f5f5f5;
+  }
+
+  .el-main::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f5f5f5;
+  }
+
+  .el-main::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #e8e8e8;
   }
 }
 </style>
