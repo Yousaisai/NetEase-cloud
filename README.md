@@ -2,12 +2,12 @@
  * @Descripttion: 项目说明
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:49
- * @LastEditTime: 2021-03-04 13:54:12
 -->
 
 # 使用Vue.js写的网易云音乐播放器
 
 本人自学了Vue一年。当作练习，花了大概十天时间，参照网易云、QQ音乐、酷我音乐等音乐网站写了一个网易云音乐网站，支持搜索歌曲、MV、歌单等可以在线评论、回复点赞等功能。
+
 
 
 在线演示：[http://music.ahusmart.com](http://music.ahusmart.com)
