@@ -1,5 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: Mr.You
+ * @Date: 2020-10-12 14:47:41
+ * @LastEditTime: 2021-04-08 10:47:04
+ */
 const path = require('path');
-
 function resolve(dir) {
   // 路径可能与你的项目不同
   return path.join(__dirname, dir)
