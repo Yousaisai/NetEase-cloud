@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-23 09:29:55
- * @LastEditTime: 2020-10-25 17:17:51
+ * @LastEditTime: 2021-04-16 09:48:26
 -->
 <template>
   <div>
@@ -55,8 +55,8 @@ export default {
 
     return {
       ruleForm: {
-        password: "17775206686ys",
-        phone: "17775206686",
+        password: "",
+        phone: "",
       },
       rules: {
         phone: [{ validator: validatePhone, trigger: "blur" }],
