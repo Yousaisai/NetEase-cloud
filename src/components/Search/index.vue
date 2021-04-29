@@ -2,7 +2,7 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2020-10-22 18:19:04
+ * @LastEditTime: 2021-04-29 17:27:55
 -->
 <template>
   <el-popover
@@ -113,12 +113,16 @@
       v-on:keyup.enter="emitSearch"
       @change="emitSearch"
       v-model="search"
-      suffix-icon="el-icon-search"
       :placeholder="DefPlaceHoder"
       size="small"
       slot="reference"
       @input="querySearch"
     >
+      <i
+        slot="suffix"
+        class="el-input__icon el-icon-search"
+        @click="emitSearch"
+      ></i>
     </el-input>
   </el-popover>
 </template>
@@ -169,17 +173,18 @@ export default {
     async getDefSearch() {
       var res = await DefSearch();
       this.DefPlaceHoder = res.data.realkeyword;
+    this.$store.state.DefPlaceHoder=this.DefPlaceHoder
     },
 
     async getHotSearch() {
       var res = await HotSearch();
       res = res.result.hots;
-
       this.hotSearch = res;
     },
     async querySearch(val) {
-      // 调用 callback 返回建议列表的数据
+      val = this.search;
 
+      // 调用 callback 返回建议列表的数据
       if (val.trim() == "") {
         return;
       }
@@ -207,16 +212,21 @@ export default {
       this.emitSearch(val.first);
     },
     emitSearch(val) {
+      if (this.search == "") {
+        this.search = this.DefPlaceHoder;
+      }
       if (this.$route.path == "/Search/SongsList") {
+        this.querySearch(this.search);
         this.$router.push({
-          query: { keywords: val },
+          query: { keywords: this.search },
         });
         return;
+      } else {
+        this.$router.push({
+          path: "/Search/SongsList",
+          query: { keywords: this.search },
+        });
       }
-      this.$router.push({
-        path: "/Search/SongsList",
-        query: { keywords: val },
-      });
     },
   },
 };

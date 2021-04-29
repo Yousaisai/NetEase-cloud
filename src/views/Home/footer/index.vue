@@ -28,7 +28,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       @timeupdate="onTimeupdate"
       @loadedmetadata="onLoadedmetadata"
       preload="auto"
-      :autoplay="true"
+      :autoplay="false"
       :muted="false"
       :loop="false"
     ></audio>
@@ -143,17 +143,14 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
         </div>
       </div>
       <div class="down">
-        <svg-icon
-          @click="download" 
-          icon-class="下载 (1)"
-        />
+        <svg-icon @click="download" icon-class="下载 (1)" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { millisToMinutesAndSeconds, SongLyric } from "@/api/index";
+import { millisToMinutesAndSeconds, SongLyric, SearchSug } from "@/api/index";
 import playList from "./playList/index";
 export default {
   components: {
@@ -181,11 +178,17 @@ export default {
   },
   computed: {
     songDetail() {
-      //这里还没那带数据
-      if (this.$store.state.SongDetail.time != 0) {
-        this.showStart = true;
+      if (JSON.parse(localStorage.getItem("SongDetail"))) {
+        if (this.$store.state.SongDetail.time != 0) {
+          this.showStart = true;
+        }
+      } else {
+        this.firstSong();
       }
-      return JSON.parse(localStorage.getItem("SongDetail"));
+      return JSON.parse(localStorage.getItem("SongDetail"))
+        ? JSON.parse(localStorage.getItem("SongDetail"))
+        : this.$store.state.SongDetail;
+      //这里还没那带数据
     },
   },
   mounted() {
@@ -195,8 +198,11 @@ export default {
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
-        for (const key in this.songDetail) {
-          this[key] = this.songDetail[key];
+        
+        if (this.songDetail != null) {
+          for (const key in this.songDetail) {
+            this[key] = this.songDetail[key];
+          }
         }
       },
       deep: true,
@@ -204,6 +210,18 @@ export default {
     },
   },
   methods: {
+    async firstSong() {
+      let placehoder = this.$store.state.DefPlaceHoder;
+      if (placehoder != "") {
+        let res = await SearchSug(placehoder);
+        res = res.result ? res.result.songs : [];
+        this.$store.dispatch("PlaySongs", {
+          oneSong: res[0],
+          allSong: res,
+          indexSong: 0,
+        });
+      }
+    },
     //转换秒
     milltosecond(val) {
       return millisToMinutesAndSeconds(val);
@@ -288,7 +306,7 @@ export default {
       }, 800);
     },
     getLikeMusic(val) {
-      console.log(val);
+      
     },
     download() {
       this.$store.dispatch("DownLoadMusic", this.onesong.id);
@@ -470,7 +488,7 @@ export default {
       color: #666666;
     }
     .down {
-       padding: 0 10rem 0 10rem;
+      padding: 0 10rem 0 10rem;
       font-size: 20px;
       flex: 1;
       color: #666666;

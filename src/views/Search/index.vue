@@ -2,7 +2,7 @@
  * @Descripttion: 这里是搜索的界面
  * @Author: Mr.You
  * @Date: 2020-10-21 09:45:07
- * @LastEditTime: 2020-11-09 18:18:19
+ * @LastEditTime: 2021-04-29 17:11:57
 -->
 <template>
   <div class="content">
@@ -118,8 +118,10 @@ export default {
     flex-direction: column;
     align-items: center;
     .sousuo {
+      color: #909399;
       font-size: 22rem;
       padding: 20rem;
+      font-weight: 450;
     }
     .elsearch {
       padding: 20rem;

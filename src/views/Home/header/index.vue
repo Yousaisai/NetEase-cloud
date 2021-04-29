@@ -109,10 +109,6 @@ li:hover {
   align-items: center;
   align-content: center;
   height: 100%;
-  // span {
-  //   font-size: 12px;
-  //   cursor: pointer;
-  // }
   .nateasepic {
     flex: 1;
   }

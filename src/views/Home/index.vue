@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-12-03 12:04:45
+ * @LastEditTime: 2021-04-29 19:06:10
 -->
 <template>
   <div class="home">
@@ -22,7 +22,7 @@
             </transition></div
         ></el-main>
       </el-container>
-      <el-footer style="height: 50px"><elfooter /></el-footer>
+      <el-footer style="height: 50px"><elfooter></elfooter>" /></el-footer>
     </el-container>
   </div>
 </template>
@@ -38,6 +38,7 @@ export default {
   components: { elheader, elaside, elmain, elfooter },
   data() {
     return {
+      isShowFooter: false,
       path: [
         "/Recommend",
         "/Leaderboard",
@@ -57,6 +58,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+  overflow: hidden;
   .el-header {
     background-color: #9b0909;
     color: #333;
@@ -68,9 +70,10 @@ export default {
   .el-aside {
     background-color: #ffffff;
     color: #333;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 150px);
   }
   .el-main {
+    overflow-x: hidden;
     background-color: #f5f5f5;
     color: #333;
     padding: 0rem;

@@ -2,7 +2,7 @@
  * @Descripttion: 全局函数变量
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-29 16:16:25
+ * @LastEditTime: 2021-04-29 18:39:14
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -58,15 +58,15 @@ export default new Vuex.Store({
     IndexSong: 0,
     BannerUrl: "",
     index: 1, //这个是添加音乐，插入播放
-    currentLyric: 0
+    currentLyric: 0,
+    DefPlaceHoder: ""
   },
   mutations: {
-
     ST_PlaySong: (state, payload) => {
       state.PlaySong = payload
     },
     ST_SongDetail: (state, payload) => {
-      (state.SongDetail) = payload
+      state.SongDetail = payload
       localStorage.setItem("SongDetail", JSON.stringify(payload))
     },
     ST_AllSongs: (state, payload) => {
