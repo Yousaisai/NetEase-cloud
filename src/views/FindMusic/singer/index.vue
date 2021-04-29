@@ -2,7 +2,7 @@
  * @Descripttion: 歌手导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:08
- * @LastEditTime: 2020-12-02 17:02:55
+ * @LastEditTime: 2021-04-29 16:18:06
 -->
 <template>
   <div class="content">
@@ -150,13 +150,23 @@ export default {
     };
   },
   mounted() {
-    this.getSingerLeader();
+    let data = this.$store.state.cacheData.Singer;
+    let isFalse = data["isFalse"];
+    if (!isFalse) {
+      this.getSingerLeader();
+    } else {
+      this.singers = data.data["singers"];
+    }
   },
   methods: {
     async getSingerLeader() {
       var res = await SingerLeader();
       res = res.list.artists;
       this.singers = res;
+           this.$store.commit("ST_CacheData", {
+        key: "Si",
+        value: { key: "singers", value: this.singers },
+      });
     },
 
     async getCatSings(val) {

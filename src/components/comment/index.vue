@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲评论，只需要传来评论参数
  * @Author: Mr.You
  * @Date: 2020-10-22 11:13:17
- * @LastEditTime: 2020-12-03 11:28:51
+ * @LastEditTime: 2021-04-29 16:35:54
 -->
 <template>
   <div class="comcontent">
@@ -282,7 +282,7 @@ export default {
       }
     },
     isShowReply(val) {
-      console.log(val);
+      
       this.replyTextareaPlace = `回复${val.user.nickname}：`;
       this.$set(val, "reply", true);
     },
@@ -306,7 +306,7 @@ export default {
       });
     },
     async reply(val) {
-      console.log(val);
+      
       //回复t=2,评论t=1,删除t=0
       this.CommentLikePayload.id = this.typeId;
       this.CommentLikePayload.t = 2;

@@ -33,8 +33,8 @@ this.$refs.videoPlayer.player.src(src) // 重置进度条
 
   <script>
 export default {
-  props:["mvurl"],
-  
+  props: ["mvurl"],
+
   data() {
     return {
       playerOptions: {
@@ -49,8 +49,7 @@ export default {
         sources: [
           {
             type: "video/mp4", // 类型
-            src:
-              "",
+            src: "",
           },
         ],
         poster: "", // 封面地址
@@ -64,66 +63,44 @@ export default {
       },
     };
   },
-watch: {
-  mvurl(val){
-    this.playerOptions.sources[0].src=val
-  }
-},
+  watch: {
+    mvurl(val) {
+      this.playerOptions.sources[0].src = val;
+    },
+  },
   methods: {
     // 播放回调
-    onPlayerPlay(player) {
-    //   console.log("player play!", player);
-    },
+    onPlayerPlay(player) {},
 
     // 暂停回调
-    onPlayerPause(player) {
-    //   console.log("player pause!", player);
-    },
+    onPlayerPause(player) {},
 
     // 视频播完回调
-    onPlayerEnded($event) {
-    //   console.log(player);
-    },
+    onPlayerEnded($event) {},
 
     // DOM元素上的readyState更改导致播放停止
-    onPlayerWaiting($event) {
-    //   console.log(player);
-    },
+    onPlayerWaiting($event) {},
 
     // 已开始播放回调
-    onPlayerPlaying($event) {
-    //   console.log(player);
-    },
+    onPlayerPlaying($event) {},
 
     // 当播放器在当前播放位置下载数据时触发
-    onPlayerLoadeddata($event) {
-    //   console.log(player);
-    },
+    onPlayerLoadeddata($event) {},
 
     // 当前播放位置发生变化时触发。
-    onPlayerTimeupdate($event) {
-    //   console.log(player);
-    },
+    onPlayerTimeupdate($event) {},
 
     //媒体的readyState为HAVE_FUTURE_DATA或更高
-    onPlayerCanplay(player) {
-      // console.log('player Canplay!', player)
-    },
+    onPlayerCanplay(player) {},
 
     //媒体的readyState为HAVE_ENOUGH_DATA或更高。这意味着可以在不缓冲的情况下播放整个媒体文件。
-    onPlayerCanplaythrough(player) {
-      // console.log('player Canplaythrough!', player)
-    },
+    onPlayerCanplaythrough(player) {},
 
     //播放状态改变回调
-    playerStateChanged(playerCurrentState) {
-    //   console.log("player current update state", playerCurrentState);
-    },
+    playerStateChanged(playerCurrentState) {},
 
     //将侦听器绑定到组件的就绪状态。与事件监听器的不同之处在于，如果ready事件已经发生，它将立即触发该函数。。
-    playerReadied(player) {
-    //   console.log("example player 1 readied", player);
-    },
+    playerReadied(player) {},
   },
 };
 </script>

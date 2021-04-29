@@ -2,7 +2,7 @@
  * @Descripttion: 歌手详情
  * @Author: Mr.You
  * @Date: 2020-10-18 13:24:07
- * @LastEditTime: 2020-10-26 15:35:54
+ * @LastEditTime: 2021-04-29 16:39:01
 -->
 <template>
   <div class="content">
@@ -112,12 +112,10 @@ export default {
     async getSingersOne() {
       var id = this.$route.query;
       var res = await SingersOne(id);
-      console.log(res);
       this.artist = res.artist;
       this.hotSongs = res.hotSongs;
     },
     async getSubArtist(val) {
-
       if (!val.followed) {
         var res = await SubArtist({ id: this.singerId.id, t: 1 });
         if (res.code != 200) {

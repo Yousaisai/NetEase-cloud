@@ -140,7 +140,6 @@ export default {
     },
     async getPlayListComment(val) {
       var res = await PlayListComment({ id: val });
-      console.log('res: ', res);
       this.commentData = res;
     },
 

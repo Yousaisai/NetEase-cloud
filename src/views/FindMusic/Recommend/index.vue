@@ -42,7 +42,6 @@ export default {
       bannerImgs: [],
     };
   },
-  computed: {},
   mounted() {
     this.requireBanner();
   },

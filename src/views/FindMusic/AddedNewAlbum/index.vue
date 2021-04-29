@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:06:59
- * @LastEditTime: 2021-04-29 11:32:25
+ * @LastEditTime: 2021-04-29 15:59:33
 -->
 <template>
   <div class="content">
@@ -30,7 +30,11 @@
     <div class="all">
       <div class="title">
         <span style="padding-right: 20rem">全部新碟 </span>
-        <span @click="getnewAllAlbum(item)" class="span" v-for="(item, index) in area" :key="index"
+        <span
+          @click="getnewAllAlbum(item)"
+          class="span"
+          v-for="(item, index) in area"
+          :key="index"
           >{{ index }} <span class="line">|</span>
         </span>
       </div>
@@ -70,26 +74,40 @@ export default {
         type: "new",
         limit: 66,
       },
-      area: {"全部":"ALL", "华语":"ZH", "欧美":"", "韩国":"KR", "日本":"JP"},
+      area: { 全部: "ALL", 华语: "ZH", 欧美: "", 韩国: "KR", 日本: "JP" },
       allMonthData: [],
       hotMonthData: [],
     };
   },
   mounted() {
-    this.getnewAllAlbum(), this.getnewHotAlbum();
+    let data = this.$store.state.cacheData.AddedNewAlbum;
+    let isFalse = data["isFalse"];
+    if (!isFalse) {
+      this.getnewAllAlbum(), this.getnewHotAlbum();
+    } else {
+      this.allMonthData = data.data["allMonthData"];
+      this.hotMonthData = data.data["hotMonthData"];
+    }
   },
   methods: {
     async getnewAllAlbum(val) {
       if (val) {
-        this.newTopAlbumPapload.area=val
+        this.newTopAlbumPapload.area = val;
       }
       var res = await newTopAlbum(this.newTopAlbumPapload);
       this.allMonthData = res.monthData;
+      this.$store.commit("ST_CacheData", {
+        key: "Ad",
+        value: { key: "allMonthData", value: this.allMonthData },
+      });
     },
     async getnewHotAlbum() {
       var res = await newAlbum();
- 
       this.hotMonthData = res.albums;
+      this.$store.commit("ST_CacheData", {
+        key: "Ad",
+        value: { key: "hotMonthData", value: this.hotMonthData },
+      });
     },
   },
 };

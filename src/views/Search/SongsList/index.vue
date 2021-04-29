@@ -149,7 +149,6 @@ export default {
       this.currentPage = val;
     },
     PlaySong(song, index) {
-      console.log(this.Songs, index, song);
       this.$store.dispatch("PlaySongs", {
         oneSong: song,
         allSong: this.Songs,

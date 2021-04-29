@@ -2,7 +2,7 @@
  * @Descripttion: 主播电台导航
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:05
- * @LastEditTime: 2020-10-15 09:13:07
+ * @LastEditTime: 2021-04-29 16:09:33
 -->
 <template><div class="content">主播电台</div></template>
 
@@ -19,6 +19,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.content {
-}
 </style>

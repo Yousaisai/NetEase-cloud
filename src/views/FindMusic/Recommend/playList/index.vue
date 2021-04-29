@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2020-12-02 17:22:11
+ * @LastEditTime: 2021-04-29 16:35:33
 -->
 <template>
   <div class="content">
@@ -254,10 +254,19 @@ export default {
   },
 
   mounted() {
-    this.getPlayList();
-    // this.getResource();
-    this.getAlbum();
-    this.getTopList();
+    let data = this.$store.state.cacheData.AddedNewAlbum;
+    let isFalse = data["isFalse"];
+    if (!isFalse) {
+      this.getPlayList();
+      this.getAlbum();
+      this.getPlayListDetail();
+      this.getTopList();
+    } else {
+      this.topList = data.data["topList"];
+      this.newAlbums = data.data["newAlbums"];
+      this.individuation = data.data["individuation"];
+      this.playlists = data.data["playlists"];
+    }
   },
   methods: {
     albums(val) {
@@ -275,18 +284,34 @@ export default {
     async getPlayList() {
       var res = await Personal();
       this.playlists = res.result;
+      this.$store.commit("ST_CacheData", {
+        key: "Re",
+        value: { key: "playlists", value: this.playlists },
+      });
     },
     async getResource() {
       var res = await resource();
       this.individuation = res.recommend;
+      this.$store.commit("ST_CacheData", {
+        key: "Re",
+        value: { key: "individuation", value: this.individuation },
+      });
     },
     async getAlbum() {
       var res = await newAlbum();
       this.newAlbums = res.albums;
+      this.$store.commit("ST_CacheData", {
+        key: "Re",
+        value: { key: "newAlbums", value: this.newAlbums },
+      });
     },
     async getTopList() {
       var res = await topList();
       this.topList = res.list;
+      this.$store.commit("ST_CacheData", {
+        key: "Re",
+        value: { key: "topList", value: this.topList },
+      });
       this.getPlayListDetail();
     },
     async getPlayListDetail() {

@@ -2,12 +2,12 @@
  * @Descripttion: 排行榜导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:04
- * @LastEditTime: 2020-12-03 11:37:54
+ * @LastEditTime: 2021-04-29 16:15:40
 -->
 <template>
   <div class="content1">
     <div class="content_menu">
-      <h5 style="padding-left: 12rem;font-size:15rem">网易云音乐榜</h5>
+      <h5 style="padding-left: 12rem; font-size: 15rem">网易云音乐榜</h5>
       <el-menu :default-active="initMenu" @select="handleSelect">
         <el-menu-item
           v-for="(item, index) in topList"
@@ -69,8 +69,19 @@ export default {
   },
   methods: {
     async getTopList() {
-      var res = await topList();
-      this.topList = res.list;
+      let data = this.$store.state.cacheData.Leaderboard;
+      let isFalse = data["isFalse"];
+      if (!isFalse) {
+        var res = await topList();
+        this.topList = res.list;
+        this.$store.commit("ST_CacheData", {
+          key: "Le",
+          value: { key: "topList", value: this.topList },
+        });
+      } else {
+        this.topList = data.data["topList"];
+      }
+
       var ID = this.$route.query.id;
       if (ID) {
         this.NewId = ID;

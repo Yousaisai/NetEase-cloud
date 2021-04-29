@@ -2,7 +2,7 @@
  * @Descripttion: 全局函数变量
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-11-25 11:55:19
+ * @LastEditTime: 2021-04-29 16:16:25
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -22,12 +22,30 @@ import {
 
 export default new Vuex.Store({
   state: {
+    //最新添加的缓存页面，如果是切换标签页就不需要重新请求页面
+    cacheData: {
+      Leaderboard: {
+        isFalse: false,
+        data: {}
+      },
+      Singer: {
+        isFalse: false,
+        data: {}
+      },
+      SongList: {
+        isFalse: false,
+        data: {}
+      },
+      AddedNewAlbum: {
+        isFalse: false,
+        data: {}
+      }
+    },
     isLogin: false,
     //播放音乐的资源，里面只有音乐ID
     PlaySong: "",
     //需要传到播放界面的参数,包含音乐url、音乐名name、封面cover、时长time、专辑album
     SongDetail: {
-
       name: "",
       cover: "",
       time: 0,
@@ -43,6 +61,7 @@ export default new Vuex.Store({
     currentLyric: 0
   },
   mutations: {
+
     ST_PlaySong: (state, payload) => {
       state.PlaySong = payload
     },
@@ -58,7 +77,30 @@ export default new Vuex.Store({
 
       (state.IndexSong) = payload
     },
-
+    ST_CacheData: (state, payload) => {
+      let key = payload.value.key
+      let value = payload.value.value
+      switch (payload.key) {
+        case "Le":
+          state.cacheData.Leaderboard.data[key] = value
+          state.cacheData.Leaderboard.isFalse = true
+          break;
+        case "Si":
+          state.cacheData.Singer.data[key] = value
+          state.cacheData.Singer.isFalse = true
+          break;
+        case "So":
+          state.cacheData.SongList.data[key] = value
+          state.cacheData.SongList.isFalse = true
+          break;
+        case "Ad":
+          state.cacheData.AddedNewAlbum.data[key] = value
+          state.cacheData.AddedNewAlbum.isFalse = true
+          break;
+        default:
+          break;
+      }
+    },
   },
   actions: {
     //获取播放歌曲的相关信息
@@ -188,7 +230,6 @@ export default new Vuex.Store({
       state
     }, payload) {
       var res = await DownLoadMusic(payload)
-      console.log(res.url);
       FileSaver.saveAs(
         res.url, res.title + '-' + res.author);
     },
@@ -201,7 +242,8 @@ export default new Vuex.Store({
           type: 'warning'
         })
         return
-      } console.log( payload.url);
+      }
+
       FileSaver.saveAs(
         payload.url, payload.title + '-' + payload.author);
     }

@@ -2,7 +2,7 @@
  * @Descripttion: 歌单导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:11
- * @LastEditTime: 2020-12-02 17:22:21
+ * @LastEditTime: 2021-04-29 16:26:48
 -->
 <template>
   <div class="content">
@@ -34,6 +34,7 @@
                   :key="item.name"
                   v-show="item.category == index"
                   :label="item.name"
+                  :lazy="true"
                   >{{ item.name }}</el-radio
                 >
               </el-radio-group>
@@ -102,8 +103,16 @@ export default {
     if (CAT) {
       this.playlistPayload.cat = CAT;
     }
-    this.getPlayList();
-    this.getPlayListCat();
+    let data = this.$store.state.cacheData.SongList;
+    let isFalse = data["isFalse"];
+    if (!isFalse) {
+      this.getPlayList();
+      this.getPlayListCat();
+    } else {
+      this.playlists = data.data["playlists"];
+      this.categories = data.data["categories"];
+      this.detailCat = data.data["detailCat"];
+    }
   },
   methods: {
     checkCat(val) {
@@ -114,10 +123,19 @@ export default {
     async getPlayList() {
       var res = await playlist(this.playlistPayload);
       this.playlists = res.playlists;
+      this.$store.commit("ST_CacheData", {
+        key: "So",
+        value: { key: "playlists", value: this.playlists },
+      });
     },
     async getPlayListCat() {
       var res = await playListCat();
-      (this.categories = res.categories), (this.detailCat = res.sub);
+      this.categories = res.categories;
+      this.detailCat = res.sub;
+      this.$store.commit("ST_CacheData", {
+        key: "So",
+        value: { key: "categories", value: this.categories },
+      });
     },
   },
 };
