@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-13 09:53:41
- * @LastEditTime: 2021-04-29 16:35:33
+ * @LastEditTime: 2021-04-29 19:23:04
 -->
 <template>
   <div class="content">
@@ -254,18 +254,18 @@ export default {
   },
 
   mounted() {
-    let data = this.$store.state.cacheData.AddedNewAlbum;
+    let data = this.$store.state.cacheData.Recommend;
     let isFalse = data["isFalse"];
     if (!isFalse) {
       this.getPlayList();
       this.getAlbum();
-      this.getPlayListDetail();
       this.getTopList();
     } else {
       this.topList = data.data["topList"];
       this.newAlbums = data.data["newAlbums"];
       this.individuation = data.data["individuation"];
       this.playlists = data.data["playlists"];
+      this.getPlayListDetail();
     }
   },
   methods: {

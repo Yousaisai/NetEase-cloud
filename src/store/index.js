@@ -2,7 +2,7 @@
  * @Descripttion: 全局函数变量
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-29 18:39:14
+ * @LastEditTime: 2021-04-29 19:20:29
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -39,7 +39,11 @@ export default new Vuex.Store({
       AddedNewAlbum: {
         isFalse: false,
         data: {}
-      }
+      },
+      Recommend: {
+        isFalse: false,
+        data: {}
+      },
     },
     isLogin: false,
     //播放音乐的资源，里面只有音乐ID
@@ -96,6 +100,10 @@ export default new Vuex.Store({
         case "Ad":
           state.cacheData.AddedNewAlbum.data[key] = value
           state.cacheData.AddedNewAlbum.isFalse = true
+          break;
+        case "Re":
+          state.cacheData.Recommend.data[key] = value
+          state.cacheData.Recommend.isFalse = true
           break;
         default:
           break;
