@@ -2,7 +2,7 @@
  * @Descripttion: 新碟上架导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:06:59
- * @LastEditTime: 2020-10-25 14:57:42
+ * @LastEditTime: 2021-04-29 11:32:25
 -->
 <template>
   <div class="content">

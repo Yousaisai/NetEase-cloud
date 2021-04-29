@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-08 10:47:04
+ * @LastEditTime: 2021-04-29 11:33:09
  */
 const path = require('path');
 function resolve(dir) {
@@ -12,6 +12,7 @@ function resolve(dir) {
 
 module.exports = {
   chainWebpack: config => {
+    // config.plugins.delete('prefetch')  //关闭预加载
     config.module
       .rule('svg')
       .uses.clear()

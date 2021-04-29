@@ -2,7 +2,7 @@
  * @Descripttion: 推荐详情
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:07
- * @LastEditTime: 2020-12-02 17:26:02
+ * @LastEditTime: 2021-04-29 11:13:48
 -->
 <template>
   <div class="content">{{this.$store.state.BannerUrl}}
@@ -56,8 +56,6 @@ export default {
     },
     async requireBanner() {
       var res = await banner();
-      console.log('res.targetId: ', res);
-      
       this.bannerImgs = res.banners;
     },
   },
@@ -66,8 +64,6 @@ export default {
 <style lang="scss" scoped>
 .content {
   text-align: center;
-  .el-carousel {
-  }
   .content_song {
     margin: 0 auto;
     text-align: center;

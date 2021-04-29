@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2020-10-26 11:30:04
+ * @LastEditTime: 2021-04-16 10:16:02
 -->
 <template>
   <div class="home">
@@ -76,10 +76,14 @@ export default {
 <style lang="scss" scoped>
 .home {
   width: calc(100vw - 130rem);
-  height: calc(100vh - 180rem);
+  height: calc(100vh - 103rem);
+  position: relative;
   .main {
-    width: 100%;
-    height: calc(100vh - 110rem);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-image: url("../../icons/pic/hai.jpg");
     background-size: cover;
   }
