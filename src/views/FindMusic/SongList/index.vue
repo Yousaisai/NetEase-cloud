@@ -2,7 +2,7 @@
  * @Descripttion: 歌单导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:11
- * @LastEditTime: 2021-04-29 16:26:48
+ * @LastEditTime: 2021-04-30 09:49:12
 -->
 <template>
   <div class="content">
@@ -49,7 +49,11 @@
       <div class="item_img" v-for="(item, index) in playlists" :key="index">
         <router-link :to="{ name: 'Playlist', query: { id: item.id } }">
           <div class="image">
-            <img :src="item.coverImgUrl" :alt="item.name" />
+             <el-image
+                :src="item.coverImgUrl"
+                fit="fill"
+                :lazy="true"
+              ></el-image>
             <div class="imglove">
               <div class="playcount">
                 <div class="shouting">
@@ -93,7 +97,7 @@ export default {
       playlistPayload: {
         order: "",
         cat: "全部",
-        limit: "",
+        limit: "100",
       },
       checkList: "",
     };

@@ -2,7 +2,7 @@
  * @Descripttion: 全局函数变量
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-29 19:20:29
+ * @LastEditTime: 2021-04-30 09:55:07
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -182,7 +182,6 @@ export default new Vuex.Store({
       //首先判断音乐是否可用
       try {
         var auth = await AuthSongId(nextSong.id)
-
         auth = auth.message
         if (auth == "ok") {
           dispatch("AuthSongId", nextSong)

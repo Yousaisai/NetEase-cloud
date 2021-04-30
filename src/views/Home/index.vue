@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-29 19:06:10
+ * @LastEditTime: 2021-04-30 09:43:39
 -->
 <template>
   <div class="home">
@@ -73,7 +73,7 @@ export default {
     height: calc(100vh - 150px);
   }
   .el-main {
-    overflow-x: hidden;
+    overflow: auto;
     background-color: #f5f5f5;
     color: #333;
     padding: 0rem;

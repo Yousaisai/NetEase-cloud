@@ -29,7 +29,7 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       @loadedmetadata="onLoadedmetadata"
       preload="auto"
       :autoplay="false"
-      :muted="false"
+      :muted="true"
       :loop="false"
     ></audio>
     <div class="btn">
@@ -78,7 +78,6 @@ audio.paused是一个只读属性，表示当前音频是否处于暂停状态�
       <div class="slider">
         <div class="songer">
           <span>歌曲：{{ name }}</span>
-
           <router-link
             style="text-decoration: none"
             :to="{
@@ -180,7 +179,7 @@ export default {
     songDetail() {
       if (JSON.parse(localStorage.getItem("SongDetail"))) {
         if (this.$store.state.SongDetail.time != 0) {
-          this.showStart = true;
+
         }
       } else {
         this.firstSong();
@@ -198,10 +197,10 @@ export default {
     songDetail: {
       //如果想打开就有缓存就要立即监听
       handler() {
-        
         if (this.songDetail != null) {
           for (const key in this.songDetail) {
             this[key] = this.songDetail[key];
+            
           }
         }
       },
@@ -228,14 +227,16 @@ export default {
     },
     //暂停
     end() {
-      this.showStart = !this.showStart;
-      this.playing = true;
+      this.showStart = false;
+      this.playing = false;
       this.$refs.audio.pause();
+      
     },
     //播放
     start() {
-      this.showStart = !this.showStart;
-      this.playing = false;
+      
+      this.showStart = true;
+      this.playing = true;
       this.$refs.audio.play();
     },
     // 快进，快退
@@ -274,12 +275,9 @@ export default {
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
       this.time = parseInt(res.target.duration * 1000);
-      // this.showStart=true
-      if (!this.$refs.audio.paused) {
-        this.showStart = true;
+      if (this.playing) {
+        this.start();
       }
-
-      this.playing = true;
       this.tit = ` 正在播放：${this.name} - ${
         this.onesong.ar ? this.onesong.ar[0].name : this.onesong.artists[0].name
       }  `;
@@ -305,9 +303,7 @@ export default {
         document.title = this.tit;
       }, 800);
     },
-    getLikeMusic(val) {
-      
-    },
+    getLikeMusic(val) {},
     download() {
       this.$store.dispatch("DownLoadMusic", this.onesong.id);
     },

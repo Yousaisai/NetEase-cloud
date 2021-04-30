@@ -2,7 +2,7 @@
  * @Descripttion: 歌手导航栏
  * @Author: Mr.You
  * @Date: 2020-10-12 16:07:08
- * @LastEditTime: 2021-04-29 16:18:06
+ * @LastEditTime: 2021-04-30 09:44:42
 -->
 <template>
   <div class="content">

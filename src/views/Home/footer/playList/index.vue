@@ -2,7 +2,7 @@
  * @Descripttion: 播放列表
  * @Author: Mr.You
  * @Date: 2020-10-29 09:24:46
- * @LastEditTime: 2020-11-24 18:41:38
+ * @LastEditTime: 2021-04-30 10:34:18
 -->
 <template>
   <div class="rank">
@@ -42,7 +42,7 @@
         </div>
         <div class="other">
           <div class="name">{{ item.ar?item.ar[0].name:item.artists[0].name }}</div>
-          <div class="time">{{ milltosecond(item.dt) }}</div>
+          <div class="time">{{ milltosecond(item) }}</div>
         </div>
       </li>
     </ul>
@@ -69,7 +69,8 @@ export default {
   methods: {
     //转换秒
     milltosecond(val) {
-      return millisToMinutesAndSeconds(val);
+    var time=val.dt?val.dt:val.duration
+      return millisToMinutesAndSeconds(time);
     },
     PlaySong(song, allsong, index) {
       this.$store.dispatch("PlaySongs", {
