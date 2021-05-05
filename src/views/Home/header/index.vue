@@ -2,13 +2,13 @@
  * @Descripttion: 页面上面的部分
  * @Author: Mr.You
  * @Date: 2020-10-12 19:34:01
- * @LastEditTime: 2021-04-16 09:48:08
+ * @LastEditTime: 2021-05-05 19:39:32
 -->
 <template>
   <div class="content">
     <div class="nateasepic">
       <svg-icon
-        icon-class="听歌"
+        icon-class="音乐 (10)"
         style="font-size: 40rem; line-height: 40rem"
       />
     </div>

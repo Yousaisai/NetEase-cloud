@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-30 09:43:39
+ * @LastEditTime: 2021-05-05 19:23:46
 -->
 <template>
   <div class="home">
@@ -11,7 +11,7 @@
         <elheader />
       </el-header>
       <el-container>
-        <el-aside width="130rem"><elaside /></el-aside>
+        <el-aside><elaside /></el-aside>
         <el-main
           ><div class="header" v-if="isShow">
             <elmain />
@@ -58,9 +58,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+   
   overflow: hidden;
   .el-header {
-    background-color: #9b0909;
+    // background-color: #9b0909;
+   background-color: #2d2c2c;
     color: #333;
   }
   .el-footer {
@@ -71,6 +73,8 @@ export default {
     background-color: #ffffff;
     color: #333;
     height: calc(100vh - 150px);
+    width: 130rem  !important;
+    
   }
   .el-main {
     overflow: auto;

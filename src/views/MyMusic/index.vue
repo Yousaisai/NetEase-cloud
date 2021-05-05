@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-16 10:16:02
+ * @LastEditTime: 2021-05-05 19:17:33
 -->
 <template>
   <div class="home">
@@ -30,7 +30,8 @@
       <!-- </el-container>
       <el-footer style="height: 50rem"><elfooter /></el-footer> -->
     </el-container>
-    <el-dialog :modal="false"
+    <el-dialog
+      :modal="false"
       title="登录网易云音乐"
       :visible.sync="dialogVisible"
       width="30%"
@@ -75,16 +76,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-  width: calc(100vw - 130rem);
-  height: calc(100vh - 103rem);
-  position: relative;
   .main {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url("../../icons/pic/hai.jpg");
+    height: calc(100vh - 110px);
+    background-image: url("../../icons/pic/lan.jpg");
     background-size: cover;
   }
   .animate {
