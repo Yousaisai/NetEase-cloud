@@ -2,7 +2,7 @@
  * @Descripttion: 歌曲评论，只需要传来评论参数
  * @Author: Mr.You
  * @Date: 2020-10-22 11:13:17
- * @LastEditTime: 2021-04-29 16:35:54
+ * @LastEditTime: 2021-05-05 19:49:22
 -->
 <template>
   <div class="comcontent">
@@ -63,11 +63,10 @@
             <div class="title">
               <span style="color: #409eff"
                 >{{ item.user.nickname }}
-
                 <svg-icon
                   v-show="item.user.vipType > 10"
                   style="font-size: 1.2em"
-                  icon-class="vip (1)"
+                  icon-class="VIP"
                 />
                 ：</span
               ><span>{{ item.content }}</span>
@@ -80,7 +79,7 @@
                   <svg-icon
                     v-show="item1.user.vipType > 10"
                     style="font-size: 1.2em"
-                    icon-class="vip (1)"
+                    icon-class="VIP"
                   />
                   ：</span
                 ><span>{{ item1.content }}</span>
@@ -158,7 +157,7 @@
                 <svg-icon
                   v-show="item.user.vipType > 10"
                   style="font-size: 1.2em"
-                  icon-class="vip (1)"
+                  icon-class="VIP"
                 />
                 ：</span
               ><span>{{ item.content }}</span>
@@ -171,7 +170,7 @@
                   <svg-icon
                     v-show="item1.user.vipType > 10"
                     style="font-size: 1.2em"
-                    icon-class="vip (1)"
+                    icon-class="VIP"
                   />
                   ：</span
                 ><span>{{ item1.content }}</span>
