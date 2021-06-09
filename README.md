@@ -63,8 +63,6 @@
 
 ## 项目运行
 
-
-```
 # clone the project
 git clone https://git.ahusmart.com/Mr.You/netease-cloud.git
 
