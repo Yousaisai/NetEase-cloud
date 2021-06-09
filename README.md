@@ -77,9 +77,5 @@ npm install
 # develop
 npm run serve
 
-# waring
-由于最后临时决定使用flexible布局，所以在npm i后，需要修改下node_modules中的amfe-flexible的24行改为1600才可正常显示。
-```
-
 ## 总结
 这个项目还有很多不足之处，希望大家多提意见，多多指教。衷心感谢提供后台接口的大佬。
