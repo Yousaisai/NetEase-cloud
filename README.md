@@ -69,7 +69,7 @@ git clone https://git.ahusmart.com/Mr.You/netease-cloud.git
 ### 打开项目根目录
 cd NetEase cloud
 
-### i安装依赖
+### 安装依赖
 npm install
 
 ### 运行
