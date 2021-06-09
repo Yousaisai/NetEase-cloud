@@ -63,16 +63,16 @@
 
 ## 项目运行
 
-# clone the project
+### 克隆项目
 git clone https://git.ahusmart.com/Mr.You/netease-cloud.git
 
-# enter the project directory
+### 打开项目根目录
 cd NetEase cloud
 
-# install dependency
+### i安装依赖
 npm install
 
-# develop
+### 运行
 npm run serve
 
 ## 总结
