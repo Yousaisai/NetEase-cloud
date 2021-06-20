@@ -193,7 +193,7 @@ export default {
         return;
       }
 
-      res = res.lrc.lyric.split("\n");
+      res = res.lrc&&res.lrc.lyric.split("\n");
       var lyric = {};
       let pattern = /\[\d{2}:\d{2}.\d{2,3}\]/g;
       res.map((val, index) => {
@@ -271,16 +271,50 @@ export default {
   }
   .lyc {
     .corly {
-      color: #00a4ff;
+      color: #31c27c;
+      transform: scale(1.2);
+      transition: transform 2s;
+      animation: cor 2s infinite;
     }
-    // padding: 0 10rem;
-    width: 1080rem;
-    margin: 0 auto;
     background-color: #fff;
     li {
       padding: 5rem;
       font-size: 13rem;
+    }  li:hover {
+      color: #fff;
+      animation: horcor 2s;
     }
+      @keyframes horcor {
+    0% {
+      color: #31c27c;
+      transform: scale(1);
+    }
+    50% {
+      color: #419afb;
+      transform: scale(1.2);
+    }
+    100% {
+      color: #31c27c;
+      transform: scale(1);
+    }
+  }
+  @keyframes cor {
+    0% {
+      color: #31c27c;
+    }
+    25% {
+      color: #419afb;
+    }
+    50% {
+      color: #31c27c;
+    }
+    75% {
+      color: #419afb;
+    }
+    100% {
+      color: #31c27c;
+    }
+  }
   }
   .comment {
     width: 1080rem;

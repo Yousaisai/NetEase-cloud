@@ -91,6 +91,7 @@
             <div class="time">{{ formData(item.time) }}</div>
             <div class="likenum">
               <svg-icon
+              class="icon"
                 @click="like(item)"
                 :icon-class="item.liked ? '点赞' : '点赞 (1)'"
                 style="color: #409eff"
@@ -182,6 +183,7 @@
             <div class="time">{{ formData(item.time) }}</div>
             <div class="likenum">
               <svg-icon
+              class="icon"
                 @click="like(item)"
                 :icon-class="item.liked ? '点赞' : '点赞 (1)'"
                 style="color: #409eff"
@@ -446,6 +448,8 @@ export default {
             cursor: pointer;
             flex: 1;
             text-align: right;
+            .icon{
+            font-size: 28rem;}
           }
         }
       }

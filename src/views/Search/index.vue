@@ -38,9 +38,11 @@
         </el-menu>
       </div>
       <div class="search_item">
-        <keep-alive>
-          <router-view :searchRe="searchRe"></router-view>
-        </keep-alive>
+        <transition name="slide-left" mode="out-in">
+          <keep-alive>
+            <router-view :searchRe="searchRe"></router-view>
+          </keep-alive>
+        </transition>
       </div>
     </div>
   </div>
@@ -133,6 +135,24 @@ export default {
   .search_content {
     background-color: #ffffff;
     width: 100%;
+    .search_item {
+      .slide-left-enter {
+        opacity: 0;
+        -webkit-transform: translate(50rem, 0);
+        transform: translate(50rem, 0);
+      }
+      .slide-left-enter-active {
+        transition: all 0.5s ease;
+      }
+      .slide-left-leave-to {
+        opacity: 0;
+        -webkit-transform: translate(-50rem, 0);
+        transform: translate(-50rem, 0);
+      }
+      .slide-left-leave-active {
+        transition: all 0.5s ease;
+      }
+    }
   }
 }
 </style>
