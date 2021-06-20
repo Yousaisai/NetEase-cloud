@@ -30,7 +30,11 @@
           </div>
 
           <div class="btn_item">
-            <el-button type="primary" size="mini" plain    @click="getSubArtist(artist)"
+            <el-button
+              type="primary"
+              size="mini"
+              plain
+              @click="getSubArtist(artist)"
               ><svg-icon icon-class="收 藏 (1)" />
               <span v-show="artist.followed">已收藏</span>
               <span v-show="!artist.followed">收藏</span>
@@ -70,7 +74,11 @@
       </div>
       <div class="menuItem">
         <div class="item_table">
-          <router-view :id="singerId" :hotSongs="hotSongs"></router-view>
+          <transition name="slide-left" mode="out-in">
+            <keep-alive>
+              <router-view :id="singerId" :hotSongs="hotSongs"></router-view>
+            </keep-alive>
+          </transition>
         </div>
       </div>
     </div>
@@ -219,6 +227,22 @@ export default {
     .menuItem {
       margin: 20rem 0;
       .item_table {
+        .slide-left-enter {
+          opacity: 0;
+          -webkit-transform: translate(50rem, 0);
+          transform: translate(50rem, 0);
+        }
+        .slide-left-enter-active {
+          transition: all 0.5s ease;
+        }
+        .slide-left-leave-to {
+          opacity: 0;
+          -webkit-transform: translate(-50rem, 0);
+          transform: translate(-50rem, 0);
+        }
+        .slide-left-leave-active {
+          transition: all 0.5s ease;
+        }
       }
     }
   }

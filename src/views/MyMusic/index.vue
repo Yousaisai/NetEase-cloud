@@ -22,9 +22,11 @@
             </span>
           </div>
         </div>
-        <div v-if="auth">
-          <transition name="fade-transform" mode="out-in">
-            <router-view></router-view>
+        <div v-if="auth" class="au">
+          <transition name="slide-left" mode="out-in">
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
           </transition></div
       ></el-main>
       <!-- </el-container>
@@ -76,6 +78,22 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
+  .slide-left-enter {
+    opacity: 0;
+    -webkit-transform: translate(50rem, 0);
+    transform: translate(50rem, 0);
+  }
+  .slide-left-enter-active {
+    transition: all 0.5s ease;
+  }
+  .slide-left-leave-to {
+    opacity: 0;
+    -webkit-transform: translate(-50rem, 0);
+    transform: translate(-50rem, 0);
+  }
+  .slide-left-leave-active {
+    transition: all 0.5s ease;
+  }
   .main {
     height: calc(100vh - 110px);
     background-image: url("../../icons/pic/lan.jpg");

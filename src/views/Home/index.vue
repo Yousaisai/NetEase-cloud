@@ -17,8 +17,10 @@
             <elmain />
           </div>
           <div class="main">
-            <transition name="fade-transform" mode="out-in">
-              <router-view></router-view>
+            <transition name="slide-left" mode="out-in">
+              <keep-alive>
+                <router-view></router-view>
+              </keep-alive>
             </transition></div
         ></el-main>
       </el-container>
@@ -58,11 +60,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .home {
-   
   overflow: hidden;
   .el-header {
     // background-color: #9b0909;
-   background-color: #2d2c2c;
+    background-color: #2d2c2c;
     color: #333;
   }
   .el-footer {
@@ -73,8 +74,7 @@ export default {
     background-color: #ffffff;
     color: #333;
     height: calc(100vh - 150px);
-    width: 130rem  !important;
-    
+    width: 130rem !important;
   }
   .el-main {
     overflow: auto;
@@ -92,6 +92,24 @@ export default {
       z-index: 100;
       position: sticky;
       top: 0;
+    }
+    .main {
+      .slide-left-enter {
+        opacity: 0;
+        -webkit-transform: translate(50rem, 0);
+        transform: translate(50rem, 0);
+      }
+      .slide-left-enter-active {
+        transition: all 0.5s ease;
+      }
+      .slide-left-leave-to {
+        opacity: 0;
+        -webkit-transform: translate(-50rem, 0);
+        transform: translate(-50rem, 0);
+      }
+      .slide-left-leave-active {
+        transition: all 0.5s ease;
+      }
     }
   }
   .el-main::-webkit-scrollbar-track {

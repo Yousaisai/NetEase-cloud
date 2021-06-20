@@ -576,6 +576,9 @@ export default {
         }
         li:hover {
           .svghide {
+          font-size: 16rem;
+    display: flex;
+    align-items: center;
             display: flex;
           }
           .spanhide {
