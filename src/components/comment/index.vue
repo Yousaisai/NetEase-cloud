@@ -449,7 +449,7 @@ export default {
             flex: 1;
             text-align: right;
             .icon{
-            font-size: 28rem;}
+            font-size: 14rem;}
           }
         }
       }

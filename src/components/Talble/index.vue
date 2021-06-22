@@ -14,7 +14,7 @@
       :data="Songs.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
       @cell-mouse-enter="cellenter"
       @cell-mouse-leave="cellleave"
-      style="width: 100%"
+      style="width: 100%; cursor: pointer;"
     >
       <el-table-column label="序号" align="center" min-width="80">
         <template slot-scope="scope">
@@ -204,4 +204,5 @@ export default {
 span {
   cursor: pointer;
 }
+
 </style>

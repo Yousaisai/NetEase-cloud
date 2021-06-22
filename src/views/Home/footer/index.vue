@@ -262,7 +262,7 @@ export default {
           }
         }
       }
-      if (this.$refs.audio.currentTime) {
+      if (this.$refs.audio&&this.$refs.audio.currentTime) {
         if (
           parseInt(this.time) == parseInt(this.$refs.audio.currentTime * 1000)
         ) {
@@ -274,7 +274,8 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     async onLoadedmetadata(res) {
-      this.time = parseInt(res.target.duration * 1000);
+    let res1 = res.srcElement ? res.srcElement : res.target;
+      this.time = parseInt(res1.duration * 1000) || this.songDetail.time; //有的浏览器是没有duration的只能使用接口返回的歌曲信息。之所以使用原生返回的，是因为上面的切歌是使用的audio原生的对比。
       if (this.playing) {
         this.start();
       }

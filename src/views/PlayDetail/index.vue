@@ -269,7 +269,8 @@ export default {
       }
     }
   }
-  .lyc {
+  .lyc {    width: 1080rem;
+    margin: 0 auto;
     .corly {
       color: #31c27c;
       transform: scale(1.2);
