@@ -2,7 +2,7 @@
  * @Descripttion: 
  * @Author: Mr.You
  * @Date: 2020-10-12 21:34:39
- * @LastEditTime: 2021-03-04 13:47:22
+ * @LastEditTime: 2021-09-29 15:53:22
  */
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
@@ -11,8 +11,8 @@ import { getToken } from '@/utils/cookie'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://117.78.27.178:18100', // url = base url + request url
-  // baseURL: "https://autumnfish.cn/", //这个是官方的接口
+  // baseURL: 'http://49.4.1.72:3000', // url = base url + request url
+  baseURL: "https://autumnfish.cn/", //这个是官方的接口
   // baseURL: 'http://49.4.79.236:3000', // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 50000 // request timeout

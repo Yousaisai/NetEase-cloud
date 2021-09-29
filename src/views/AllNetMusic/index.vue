@@ -2,7 +2,7 @@
  * @Descripttion:全网音乐下载
  * @Author: Mr.You
  * @Date: 2020-11-25 09:40:58
- * @LastEditTime: 2021-05-05 19:34:15
+ * @LastEditTime: 2021-09-29 15:52:36
 -->
 <template>
   <div class="content">
@@ -117,7 +117,7 @@ export default {
         type: "netease",
         page: "2",
       });
-      this.MusicData = res1.data;
+      this.MusicData = res1.data.data;
     },
     async getSearch() {
       var res = await AllNetMusic(this.payload);
@@ -128,7 +128,7 @@ export default {
         });
         return;
       }
-      this.MusicData = res.data;
+      this.MusicData = res.data.data;
     },
     download(song) {
       this.$store.dispatch("DownLoadAllMusic", song);

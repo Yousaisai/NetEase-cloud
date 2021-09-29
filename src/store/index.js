@@ -2,7 +2,7 @@
  * @Descripttion: 全局函数变量
  * @Author: Mr.You
  * @Date: 2020-10-12 14:47:41
- * @LastEditTime: 2021-04-30 09:55:07
+ * @LastEditTime: 2021-09-29 15:53:07
  */
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -236,7 +236,9 @@ export default new Vuex.Store({
     async DownLoadMusic({
       state
     }, payload) {
-      var res = await DownLoadMusic(payload)
+      var {
+        data: res
+      } = await DownLoadMusic(payload)
       FileSaver.saveAs(
         res.url, res.title + '-' + res.author);
     },

@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+import axios from 'axios'
 //   注意：这里需要登陆的接口都需加上参数auth:true
 
 
@@ -525,18 +525,6 @@ export function LoveMusic(payload) {
 
 
 
-//下载音乐  需要传入音乐ID
-export function DownLoadMusic(payload) {
-    return request({
-        url: "/download",
-        method: 'get',
-        params: {
-            "id": payload
-        }
-    })
-}
-
-
 
 
 // 全网搜索  
@@ -556,9 +544,19 @@ export function DownLoadMusic(payload) {
  * 咪咕 migu
  */
 export function AllNetMusic(payload) {
-    return request({
-        url: "/allNetMusic",
+    return axios({
+        url: "http://49.4.1.72:3000/allNetMusic",
         method: 'get',
         params:payload
+    })
+}
+//下载音乐  需要传入音乐ID
+export function DownLoadMusic(payload) {
+    return axios({
+        url: "http://49.4.1.72:3000/download",
+        method: 'get',
+        params: {
+            "id": payload
+        }
     })
 }
